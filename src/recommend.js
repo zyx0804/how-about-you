@@ -51,28 +51,27 @@ function pickWeighted(entries, random) {
   return entries[entries.length - 1];
 }
 
-// Returns five picks, { brand, item }, one per outfit category.
-function pickOutfit(brands, positionInRange, seedText) {
-  const random = seededRandom(hashText(seedText));
+// How many times to redraw when the brands left can't fill every category.
+const OUTFIT_ATTEMPTS = 30;
+
+// One draw: each category from a brand not used yet, or null if some
+// category has no unused brand left.
+function drawOutfit(brands, positionInRange, random, allowRepeats) {
   const usedBrands = new Set();
   const picks = [];
   for (const category of OUTFIT_CATEGORIES) {
     const candidates = [];
     for (const brand of brands) {
       const items = brand.items.filter((item) => item.category === category);
-      if (items.length === 0) {
+      if (items.length === 0 || (!allowRepeats && usedBrands.has(brand.brand))) {
         continue;
       }
       const distance = brand.intensity - positionInRange;
-      let weight = Math.exp(-(distance * distance) / (2 * INTENSITY_SPREAD * INTENSITY_SPREAD));
-      // Prefer a new brand for each piece so the outfit mixes labels.
-      if (usedBrands.has(brand.brand)) {
-        weight *= 0.15;
-      }
+      const weight = Math.exp(-(distance * distance) / (2 * INTENSITY_SPREAD * INTENSITY_SPREAD));
       candidates.push({ brand, items, weight });
     }
     if (candidates.length === 0) {
-      continue;
+      return null;
     }
     const chosen = pickWeighted(candidates, random);
     const item = chosen.items[Math.floor(random() * chosen.items.length)];
@@ -80,6 +79,21 @@ function pickOutfit(brands, positionInRange, seedText) {
     picks.push({ brand: chosen.brand, item });
   }
   return picks;
+}
+
+// Returns five picks, { brand, item }, one per outfit category, each from a
+// different brand. If a draw gets stuck (say only shoe brands are left for
+// the accessory), it draws again; only if that keeps failing may a brand
+// repeat, so an outfit always comes back.
+function pickOutfit(brands, positionInRange, seedText) {
+  const random = seededRandom(hashText(seedText));
+  for (let attempt = 0; attempt < OUTFIT_ATTEMPTS; attempt++) {
+    const picks = drawOutfit(brands, positionInRange, random, false);
+    if (picks) {
+      return picks;
+    }
+  }
+  return drawOutfit(brands, positionInRange, random, true) || [];
 }
 
 // Lets tests load this file in Node; browsers ignore it.
