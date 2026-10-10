@@ -128,11 +128,11 @@ MOOD_BRANDS.sad = [
       {
         category: "shoes",
         shape: "combat",
-        name: { zh: "磨损皮质短靴", en: "Scuffed leather ankle boots" },
-        colors: ["#1a1717", "#4a4040"],
+        name: { zh: "做旧灰色厚底德比鞋", en: "Worn gray platform derby shoes" },
+        colors: ["#8f8a84", "#2a2826"],
         why: {
-          zh: "旧旧的靴子配一个不想出门的日子。",
-          en: "Scuffed boots for a day you'd rather stay in.",
+          zh: "灰扑扑的做旧皮面，像下过雨的阴天。",
+          en: "Worn gray leather, like an overcast day after rain.",
         },
       },
       {
@@ -194,11 +194,11 @@ MOOD_BRANDS.sad = [
       {
         category: "shoes",
         shape: "boots",
-        name: { zh: "黑色系带长靴", en: "Black lace-up tall boots" },
-        colors: ["#0e0e0e", "#4a4a4a"],
+        name: { zh: "黑色多搭扣长靴", en: "Black multi-buckle tall boots" },
+        colors: ["#0e0e0e", "#b8b8b8"],
         why: {
-          zh: "她最有代表性的长靴，像摇滚诗人一样。",
-          en: "Her signature tall boots, rock poet to the core.",
+          zh: "一排银扣从脚踝扣到膝下，像一首慢歌里的重音。",
+          en: "A row of silver buckles from ankle to knee, like the accents in a slow song.",
         },
       },
       {
@@ -260,11 +260,11 @@ MOOD_BRANDS.sad = [
       {
         category: "shoes",
         shape: "combat",
-        name: { zh: "黑色德比短靴", en: "Black derby boots" },
-        colors: ["#141414", "#3a3a3a"],
+        name: { zh: "金属包头黑色德比鞋", en: "Metal-toe black derby shoes" },
+        colors: ["#141414", "#c9c9c9"],
         why: {
-          zh: "低调结实，陪你慢慢走。",
-          en: "Low-key and solid for a slow walk.",
+          zh: "鞋头一点冷冷的金属，极简里带着锋利。",
+          en: "A cold metal toe cap: minimal, with an edge.",
         },
       },
       {
@@ -392,11 +392,11 @@ MOOD_BRANDS.sad = [
       {
         category: "shoes",
         shape: "boots",
-        name: { zh: "手工皮靴", en: "Handmade leather boots" },
-        colors: ["#1f1a17", "#5a4f45"],
+        name: { zh: "做旧银灰手工皮靴", en: "Aged silver-gray handmade boots" },
+        colors: ["#a8a196", "#5a4f45"],
         why: {
-          zh: "他最著名的就是皮靴，穿得越久越好看。",
-          en: "His boots are famous, better the longer they're worn.",
+          zh: "皱褶和磨损都是时间留下的，穿得越久越像你。",
+          en: "Every crease and scuff is time's mark; the longer you wear them, the more they're yours.",
         },
       },
       {
@@ -428,11 +428,11 @@ MOOD_BRANDS.sad = [
       {
         category: "shoes",
         shape: "boots",
-        name: { zh: "后拉链马皮靴", en: "Back-zip horse-leather boots" },
-        colors: ["#2a2420", "#6a5a4a"],
+        name: { zh: "黑色麂皮后拉链靴", en: "Black suede back-zip boots" },
+        colors: ["#141414", "#3a3a3a"],
         why: {
-          zh: "最经典的 Guidi，越穿越有你的形状。",
-          en: "Classic Guidi that takes your shape over time.",
+          zh: "后拉链的经典款，麂皮会随着穿着慢慢塌出你的形状。",
+          en: "The back-zip classic; the suede slowly settles into your shape.",
         },
       },
       {
@@ -504,11 +504,11 @@ MOOD_BRANDS.sad = [
       {
         category: "shoes",
         shape: "runner",
-        name: { zh: "与 Salomon 合作的越野鞋", en: "Salomon collaboration trail shoes" },
-        colors: ["#2b2927", "#9a948c"],
+        name: { zh: "深紫色越野跑鞋", en: "Dark purple trail runners" },
+        colors: ["#3a2a4a", "#c8b49a"],
         why: {
-          zh: "低落也要继续走。",
-          en: "Keep walking, even when low.",
+          zh: "低落也要继续走，深紫色陪你走慢一点。",
+          en: "Keep walking even when low; dark purple keeps you company at a slower pace.",
         },
       },
       {

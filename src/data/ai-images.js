@@ -1,5 +1,39 @@
-// AI product images made by tools/generate_ai_images.py (Doubao Seedream).
-// Keys are "brand|English item name"; items not listed show a flat sketch.
+// Reference images for items: Doubao AI images or buyer-shop photos, imported
+// by tools/generate_ai_images.py. Keys are "brand|English item name";
+// items not listed show a flat sketch.
 
 const AI_IMAGES = {
+  "AURALEE|Suede loafers": "assets/items/auralee-suede-loafers.webp",
+  "Ann Demeulemeester|Black multi-buckle tall boots": "assets/items/ann-demeulemeester-black-multi-buckle-tall-boots.webp",
+  "BIRKENSTOCK|Boston suede clogs": "assets/items/birkenstock-boston-suede-clogs.webp",
+  "BODE|Black strap vintage-style shoes": "assets/items/bode-black-strap-vintage-style-shoes.webp",
+  "Boris Bidjan Saberi|Dark purple trail runners": "assets/items/boris-bidjan-saberi-dark-purple-trail-runners.webp",
+  "Carol Christian Poell|Aged silver-gray handmade boots": "assets/items/carol-christian-poell-aged-silver-gray-handmade-boots.webp",
+  "Chrome Hearts|Silver-buckle engineer boots": "assets/items/chrome-hearts-silver-buckle-engineer-boots.webp",
+  "Dr. Martens|Gray suede 2976 Chelsea boots": "assets/items/dr-martens-gray-suede-2976-chelsea-boots.webp",
+  "Dr. Martens|Jadon platform boots": "assets/items/dr-martens-jadon-platform-boots.webp",
+  "Enfants Riches Déprimés|Black-and-white leather shoes": "assets/items/enfants-riches-d-prim-s-black-and-white-leather-shoes.webp",
+  "Enfants Riches Déprimés|Worn gray platform derby shoes": "assets/items/enfants-riches-d-prim-s-worn-gray-platform-derby-shoes.webp",
+  "Fear of God ESSENTIALS|White retro running sneakers": "assets/items/fear-of-god-essentials-white-retro-running-sneakers.webp",
+  "GUIDI|Black suede back-zip boots": "assets/items/guidi-black-suede-back-zip-boots.webp",
+  "GUIDI|Horse-leather derby boots": "assets/items/guidi-horse-leather-derby-boots.webp",
+  "HERMÈS|Oran sandals": "assets/items/herm-s-oran-sandals.webp",
+  "HYSTERIC GLAMOUR|Worn cowboy boots": "assets/items/hysteric-glamour-worn-cowboy-boots.webp",
+  "Helmut Lang|Metal-toe black derby shoes": "assets/items/helmut-lang-metal-toe-black-derby-shoes.webp",
+  "Homme Plissé Issey Miyake|Crossover soft-sole slides": "assets/items/homme-pliss-issey-miyake-crossover-soft-sole-slides.webp",
+  "JIL SANDER|Black penny loafers": "assets/items/jil-sander-black-penny-loafers.webp",
+  "LEMAIRE|Soft leather loafers": "assets/items/lemaire-soft-leather-loafers.webp",
+  "MARGARET HOWELL|Navy derby shoes": "assets/items/margaret-howell-navy-derby-shoes.webp",
+  "Number (N)ine|Worn canvas high-tops": "assets/items/number-n-ine-worn-canvas-high-tops.webp",
+  "OUR LEGACY|Leather mules": "assets/items/our-legacy-leather-mules.webp",
+  "Raf Simons|Pink-and-red adidas Ozweego": "assets/items/raf-simons-pink-and-red-adidas-ozweego.webp",
+  "Rick Owens DRKSHDW|Ramones high-top sneakers": "assets/items/rick-owens-drkshdw-ramones-high-top-sneakers.webp",
+  "STUDIO NICHOLSON|White slip-on leather shoes": "assets/items/studio-nicholson-white-slip-on-leather-shoes.webp",
+  "Supreme|Nike SB collaboration Dunk": "assets/items/supreme-nike-sb-collaboration-dunk.webp",
+  "THE ROW|Soft loafers": "assets/items/the-row-soft-loafers.webp",
+  "UNDERCOVER|Blue GYAKUSOU running shoes": "assets/items/undercover-blue-gyakusou-running-shoes.webp",
+  "VETEMENTS|Western two-tone pointed boots": "assets/items/vetements-western-two-tone-pointed-boots.webp",
+  "Vivienne Westwood|Wooden-platform Rocking Horse boots": "assets/items/vivienne-westwood-wooden-platform-rocking-horse-boots.webp",
+  "Yohji Yamamoto|Burgundy suede Y-3 sneakers": "assets/items/yohji-yamamoto-burgundy-suede-y-3-sneakers.webp",
+  "visvim|Silver-gray FBT moccasins": "assets/items/visvim-silver-gray-fbt-moccasins.webp",
 };

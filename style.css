@@ -959,7 +959,7 @@ body:not([data-mood="happy"]) .dandelion {
   font-size: 0.7rem;
 }
 
-.item-ai {
+.item-reference {
   position: absolute;
   top: 16px;
   right: 16px;

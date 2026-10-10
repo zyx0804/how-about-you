@@ -138,28 +138,28 @@ function itemCard(brand, item, isPick) {
   card.className = isPick ? "item-card picked" : "item-card";
   const picture = document.createElement("div");
   picture.className = "item-picture";
-  // A licensed photo first, then an AI illustration, then a flat sketch.
-  const aiImage = item.photo ? null : AI_IMAGES[`${brand.brand}|${item.name.en}`];
-  const aiLabel = document.createElement("span");
-  aiLabel.className = "item-ai";
-  aiLabel.textContent = text.aiImage;
-  if (item.photo || aiImage) {
+  // A licensed photo first, then a reference image, then a flat sketch.
+  const referenceImage = item.photo ? null : AI_IMAGES[`${brand.brand}|${item.name.en}`];
+  const referenceLabel = document.createElement("span");
+  referenceLabel.className = "item-reference";
+  referenceLabel.textContent = text.referenceImage;
+  if (item.photo || referenceImage) {
     const image = document.createElement("img");
-    image.src = item.photo ? item.photo.src : aiImage;
+    image.src = item.photo ? item.photo.src : referenceImage;
     image.alt = item.name[language];
     image.loading = "lazy";
-    // A missing image falls back to the sketch, without the AI label.
+    // A missing image falls back to the sketch, without the label.
     image.addEventListener("error", () => {
       picture.innerHTML = drawFlat(item.shape, item.colors) || "";
-      aiLabel.remove();
+      referenceLabel.remove();
     });
     picture.append(image);
   } else {
     picture.innerHTML = drawFlat(item.shape, item.colors) || "";
   }
   card.append(picture);
-  if (aiImage) {
-    card.append(aiLabel);
+  if (referenceImage) {
+    card.append(referenceLabel);
   }
   if (isPick) {
     const badge = document.createElement("span");

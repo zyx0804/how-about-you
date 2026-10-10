@@ -67,11 +67,11 @@ MOOD_BRANDS.calm = [
       {
         category: "shoes",
         shape: "sneakers",
-        name: { zh: "Y-3 黑色球鞋", en: "Black Y-3 sneakers" },
-        colors: ["#151515", "#e9e6df"],
+        name: { zh: "Y-3 酒红色麂皮球鞋", en: "Burgundy suede Y-3 sneakers" },
+        colors: ["#6a1a2a", "#e9e6df"],
         why: {
-          zh: "山本耀司与 adidas 合作的 Y-3 线。",
-          en: "Y-3, Yohji Yamamoto's line with adidas.",
+          zh: "山本耀司与 adidas 的 Y-3，深沉的酒红色依然安静。",
+          en: "Y-3, Yohji Yamamoto with adidas; the deep burgundy stays quiet.",
         },
       },
       {
@@ -218,11 +218,11 @@ MOOD_BRANDS.calm = [
       {
         category: "shoes",
         shape: "loafers",
-        name: { zh: "复古皮鞋", en: "Vintage-style leather shoes" },
-        colors: ["#5a3d2b", "#a3573f"],
+        name: { zh: "黑色搭带复古皮鞋", en: "Black strap vintage-style shoes" },
+        colors: ["#141414", "#5a3d2b"],
         why: {
-          zh: "旧旧的皮鞋，安稳的心情。",
-          en: "Old-style leather for a steady mood.",
+          zh: "一根搭带的复古皮鞋，像从旧时光里走出来。",
+          en: "A one-strap vintage shoe, as if it walked out of the past.",
         },
       },
       {
@@ -301,11 +301,11 @@ MOOD_BRANDS.calm = [
       {
         category: "shoes",
         shape: "loafers",
-        name: { zh: "皮质乐福鞋", en: "Leather loafers" },
-        colors: ["#1f1d1a", "#5a5650"],
+        name: { zh: "黑色便士乐福鞋", en: "Black penny loafers" },
+        colors: ["#141414", "#3a3a3a"],
         why: {
-          zh: "安静的经典。",
-          en: "A quiet classic.",
+          zh: "最安静的经典款，什么都不用多想。",
+          en: "The quietest classic; nothing to overthink.",
         },
       },
       {
@@ -457,11 +457,11 @@ MOOD_BRANDS.calm = [
       {
         category: "shoes",
         shape: "loafers",
-        name: { zh: "皮质德比鞋", en: "Leather derby shoes" },
-        colors: ["#4a3a2a", "#8a7a62"],
+        name: { zh: "藏青色德比鞋", en: "Navy derby shoes" },
+        colors: ["#1f2a44", "#8a7a62"],
         why: {
-          zh: "安静地走。",
-          en: "Walk quietly.",
+          zh: "英式的藏青，安静又耐看。",
+          en: "British navy: quiet and lasting.",
         },
       },
       {
@@ -523,11 +523,11 @@ MOOD_BRANDS.calm = [
       {
         category: "shoes",
         shape: "loafers",
-        name: { zh: "简约皮鞋", en: "Simple leather shoes" },
-        colors: ["#2a2a28", "#5a5a52"],
+        name: { zh: "白色一脚蹬皮鞋", en: "White slip-on leather shoes" },
+        colors: ["#f4f2ee", "#c8402a"],
         why: {
-          zh: "不抢戏。",
-          en: "Doesn't steal the show.",
+          zh: "一脚就能穿上，干净又从容。",
+          en: "Slip them on: clean and unhurried.",
         },
       },
       {

@@ -62,11 +62,11 @@ MOOD_BRANDS.excited = [
       {
         category: "shoes",
         shape: "runner",
-        name: { zh: "adidas Ozweego", en: "adidas Ozweego" },
-        colors: ["#e2e2e2", "#c8102e"],
+        name: { zh: "粉红配色 adidas Ozweego", en: "Pink-and-red adidas Ozweego" },
+        colors: ["#e84a6a", "#c84aa8"],
         why: {
-          zh: "他和 adidas 合作带红的厚底跑鞋。",
-          en: "The chunky runner he made famous with adidas.",
+          zh: "厚底跑鞋配上大胆的粉红色，能量全开。",
+          en: "A chunky runner in bold pink and red: full energy.",
         },
       },
       {

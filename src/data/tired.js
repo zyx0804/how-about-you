@@ -69,11 +69,11 @@ MOOD_BRANDS.tired = [
       {
         category: "shoes",
         shape: "sandals",
-        name: { zh: "软底凉鞋", en: "Soft-sole sandals" },
-        colors: ["#3a3a40", "#c9c4b8"],
+        name: { zh: "交叉带软底拖鞋", en: "Crossover soft-sole slides" },
+        colors: ["#141414", "#3a3a40"],
         why: {
-          zh: "脚也需要休息。",
-          en: "Your feet need a rest too.",
+          zh: "交叉的宽带子，一脚就能穿上，让脚也休息一下。",
+          en: "Wide crossed straps you just step into; let your feet rest too.",
         },
       },
       {
@@ -274,11 +274,11 @@ MOOD_BRANDS.tired = [
       {
         category: "shoes",
         shape: "runner",
-        name: { zh: "低饱和跑鞋", en: "Muted running sneakers" },
-        colors: ["#d8d0c2", "#8e877b"],
+        name: { zh: "白色复古跑鞋", en: "White retro running sneakers" },
+        colors: ["#efefef", "#b8b8b8"],
         why: {
-          zh: "舒服、好走，颜色好配。",
-          en: "Comfortable, easy, and easy to match.",
+          zh: "白色的厚底跑鞋，舒服又好配。",
+          en: "Thick-soled white runners: comfortable and easy to match.",
         },
       },
       {
@@ -524,11 +524,11 @@ MOOD_BRANDS.tired = [
       {
         category: "shoes",
         shape: "loafers",
-        name: { zh: "FBT 莫卡辛鞋", en: "FBT moccasins" },
-        colors: ["#a8957a", "#5a4a3a"],
+        name: { zh: "银灰色 FBT 莫卡辛鞋", en: "Silver-gray FBT moccasins" },
+        colors: ["#9a9a9a", "#5a5a5a"],
         why: {
-          zh: "像拖鞋一样舒服的鞋。",
-          en: "As comfortable as slippers.",
+          zh: "像拖鞋一样舒服的莫卡辛鞋，这一双是少见的银灰色。",
+          en: "Moccasins as comfortable as slippers, here in a rare silver-gray.",
         },
       },
       {

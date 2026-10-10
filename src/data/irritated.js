@@ -55,11 +55,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "runner",
-        name: { zh: "Nike GYAKUSOU 跑鞋", en: "Nike GYAKUSOU running shoes" },
-        colors: ["#1c1c1c", "#c23b22"],
+        name: { zh: "蓝色 GYAKUSOU 跑鞋", en: "Blue GYAKUSOU running shoes" },
+        colors: ["#5fa8e8", "#e9e4da"],
         why: {
-          zh: "高桥盾和 Nike 合作的跑步线，跑掉火气。",
-          en: "Jun Takahashi's running line with Nike: run it off.",
+          zh: "一抹冷静的蓝，跑掉火气。",
+          en: "A cool blue to run the anger off.",
         },
       },
       {
@@ -121,11 +121,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "combat",
-        name: { zh: "磨损马丁短靴", en: "Scuffed combat boots" },
-        colors: ["#1a1a1a", "#8a1f1f"],
+        name: { zh: "黑白拼色皮鞋", en: "Black-and-white leather shoes" },
+        colors: ["#1a1a1a", "#f2efe8"],
         why: {
-          zh: "重重地踩下去。",
-          en: "Stomp it out.",
+          zh: "黑白对撞，就像今天心里两种情绪在打架。",
+          en: "Black against white, like two feelings fighting today.",
         },
       },
       {
@@ -187,11 +187,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "combat",
-        name: { zh: "厚底短靴", en: "Platform ankle boots" },
-        colors: ["#151515", "#3a3a3a"],
+        name: { zh: "西部风拼色尖头靴", en: "Western two-tone pointed boots" },
+        colors: ["#151515", "#c46a2a"],
         why: {
-          zh: "高一点，硬一点。",
-          en: "Taller and tougher.",
+          zh: "尖头、斜跟、拼色，够冲也够不服气。",
+          en: "Pointed toe, slanted heel, two tones: loud and defiant.",
         },
       },
       {
@@ -265,11 +265,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "boots",
-        name: { zh: "Rocking Horse 摇摇马鞋", en: "Rocking Horse shoes" },
-        colors: ["#1c1c1c", "#d9b44a"],
+        name: { zh: "木质厚底摇摇马靴", en: "Wooden-platform Rocking Horse boots" },
+        colors: ["#1c1c1c", "#c8925a"],
         why: {
-          zh: "1985 年推出的厚木底鞋，怪诞又经典。",
-          en: "The 1985 wooden-platform shoe: odd and iconic.",
+          zh: "厚厚的木底是 1985 年摇摇马鞋的标志，走路都带着朋克的节奏。",
+          en: "The thick wooden sole of the 1985 Rocking Horse: every step has a punk beat.",
         },
       },
       {
@@ -331,11 +331,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "boots",
-        name: { zh: "尖头短靴", en: "Pointed ankle boots" },
-        colors: ["#1a1a1a", "#d6262f"],
+        name: { zh: "做旧牛仔靴", en: "Worn cowboy boots" },
+        colors: ["#6a4a32", "#2a1f18"],
         why: {
-          zh: "踩着节拍走。",
-          en: "Walk to the beat.",
+          zh: "磨旧的皮面和摇滚气质，踩着节拍走。",
+          en: "Worn leather with a rock-and-roll swagger; walk to the beat.",
         },
       },
       {
@@ -397,11 +397,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "combat",
-        name: { zh: "银扣皮靴", en: "Silver-hardware leather boots" },
+        name: { zh: "银扣工程靴", en: "Silver-buckle engineer boots" },
         colors: ["#141414", "#c9c9c9"],
         why: {
-          zh: "每一步都带着金属声。",
-          en: "Every step sounds of metal.",
+          zh: "银扣和厚皮，每一步都带着金属声。",
+          en: "Silver buckles and thick leather: every step rings.",
         },
       },
       {
@@ -499,11 +499,11 @@ MOOD_BRANDS.irritated = [
       {
         category: "shoes",
         shape: "combat",
-        name: { zh: "2976 切尔西靴", en: "2976 Chelsea boots" },
-        colors: ["#1a1a1a", "#4a1c1c"],
+        name: { zh: "灰色麂皮 2976 切尔西靴", en: "Gray suede 2976 Chelsea boots" },
+        colors: ["#7d7a72", "#1a1a1a"],
         why: {
-          zh: "一脚蹬，说走就走。",
-          en: "Pull on and go.",
+          zh: "一脚蹬，说走就走，灰色比黑色多一点温和。",
+          en: "Pull on and go; gray is a little gentler than black.",
         },
       },
     ],
