@@ -114,6 +114,27 @@ function scoreForMood(moodId) {
 // answers sit decides the score inside that mood's range.
 const CALCULATOR_QUESTIONS = ["energy", "stress", "sleep", "social", "good"];
 
+// Each question is answered with one of five faces, from the low end of the
+// question (left) to the high end (right). For stress, right is worse.
+const CALCULATOR_FACES = {
+  energy: ["😫", "😕", "😐", "🙂", "🤩"],
+  stress: ["😌", "🙂", "😐", "😣", "🤯"],
+  sleep: ["😫", "😪", "😐", "🙂", "😊"],
+  social: ["🙈", "😶", "😐", "🙂", "🥳"],
+  good: ["😞", "😕", "😐", "🙂", "🥰"],
+};
+
+// Turns a face choice (1 to 5) into an answer on the 0 to 10 scale.
+function answerFromLevel(level) {
+  return (level - 1) * 2.5;
+}
+
+// Points out of 25 for showing the user: higher is a better day, so the
+// stress question counts backward.
+function totalPoints(levels) {
+  return CALCULATOR_QUESTIONS.reduce((sum, id) => sum + (id === "stress" ? 6 - levels[id] : levels[id]), 0);
+}
+
 function clamp01(value) {
   return Math.min(1, Math.max(0, value));
 }
@@ -186,6 +207,8 @@ if (typeof module !== "undefined") {
     moodForScore,
     scoreForMood,
     scoreFromAnswers,
+    answerFromLevel,
+    totalPoints,
     imageSearchUrl,
   };
 }

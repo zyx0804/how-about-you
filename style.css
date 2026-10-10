@@ -401,9 +401,35 @@ button:active,
   font-weight: 400;
 }
 
-.calc-row input {
-  width: 100%;
-  accent-color: var(--accent);
+.calc-faces {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.calc-face {
+  flex: 1;
+  padding: 6px 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  filter: grayscale(0.7);
+  opacity: 0.55;
+  transition: transform 0.15s ease, opacity 0.15s ease, filter 0.15s ease;
+}
+
+.calc-face:hover {
+  opacity: 0.85;
+}
+
+.calc-face[aria-checked="true"] {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.25);
+  filter: none;
+  opacity: 1;
+  transform: scale(1.12);
 }
 
 .calc-ends {

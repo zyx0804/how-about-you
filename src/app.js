@@ -228,36 +228,59 @@ function renderMeterValue() {
   meterValue.textContent = text.meterValue(moodMeter.value, `${mood.emoji} ${mood.label[language]}`);
 }
 
-// Mood calculator answers, 0 to 10, starting in the middle.
-const calculatorAnswers = Object.fromEntries(CALCULATOR_QUESTIONS.map((id) => [id, 5]));
+// Mood calculator choices, 1 to 5 per question, starting on the middle face.
+const calculatorLevels = Object.fromEntries(CALCULATOR_QUESTIONS.map((id) => [id, 3]));
 
-function renderCalculatorScore() {
-  const score = scoreFromAnswers(calculatorAnswers);
-  const mood = MOODS[moodForScore(score)];
-  calcScore.textContent = UI_TEXT[language].calcScore(score, `${mood.emoji} ${mood.label[language]}`);
+function calculatorAnswers() {
+  return Object.fromEntries(CALCULATOR_QUESTIONS.map((id) => [id, answerFromLevel(calculatorLevels[id])]));
 }
 
-// Builds one slider per question; its labels come from renderCalculatorText.
+function renderCalculatorScore() {
+  const score = scoreFromAnswers(calculatorAnswers());
+  const mood = MOODS[moodForScore(score)];
+  calcScore.textContent = UI_TEXT[language].calcScore(
+    totalPoints(calculatorLevels),
+    score,
+    `${mood.emoji} ${mood.label[language]}`,
+  );
+}
+
+// Builds a row of five face buttons per question; labels come from
+// renderCalculatorText.
 function buildCalculator() {
   for (const id of CALCULATOR_QUESTIONS) {
-    const row = document.createElement("label");
+    const row = document.createElement("div");
     row.className = "calc-row";
     row.dataset.question = id;
     const title = document.createElement("span");
     title.className = "calc-question";
-    const slider = document.createElement("input");
-    slider.type = "range";
-    slider.min = "0";
-    slider.max = "10";
-    slider.value = String(calculatorAnswers[id]);
-    slider.addEventListener("input", () => {
-      calculatorAnswers[id] = Number(slider.value);
-      renderCalculatorScore();
+    title.id = `calc-${id}`;
+    const faces = document.createElement("div");
+    faces.className = "calc-faces";
+    faces.setAttribute("role", "radiogroup");
+    faces.setAttribute("aria-labelledby", title.id);
+    CALCULATOR_FACES[id].forEach((face, index) => {
+      const level = index + 1;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "calc-face";
+      button.textContent = face;
+      button.setAttribute("role", "radio");
+      button.setAttribute("aria-label", `${level} / 5`);
+      button.addEventListener("click", () => {
+        calculatorLevels[id] = level;
+        for (const other of faces.children) {
+          other.setAttribute("aria-checked", String(other === button));
+        }
+        renderCalculatorScore();
+      });
+      button.setAttribute("aria-checked", String(level === calculatorLevels[id]));
+      faces.append(button);
     });
     const ends = document.createElement("span");
     ends.className = "calc-ends";
     ends.append(document.createElement("span"), document.createElement("span"));
-    row.append(title, slider, ends);
+    row.append(title, faces, ends);
     calcQuestions.append(row);
   }
 }
@@ -409,7 +432,7 @@ buildCalculator();
 
 // Applying the calculator's score works like dragging the meter there.
 calcApply.addEventListener("click", () => {
-  moodMeter.value = scoreFromAnswers(calculatorAnswers);
+  moodMeter.value = scoreFromAnswers(calculatorAnswers());
   selectMood(moodForScore(Number(moodMeter.value)), true);
   todaySection.scrollIntoView({ behavior: "smooth", block: "start" });
 });
