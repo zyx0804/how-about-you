@@ -96,7 +96,22 @@ function pickOutfit(brands, positionInRange, seedText) {
   return drawOutfit(brands, positionInRange, random, true) || [];
 }
 
+// The set a brand page shows: one item per category, with today's pick in
+// its category and the others drawn by the seed, so the set changes daily.
+function pickBrandSet(brand, pickedItem, seedText) {
+  const random = seededRandom(hashText(seedText));
+  const set = [];
+  for (const category of OUTFIT_CATEGORIES) {
+    const items = brand.items.filter((item) => item.category === category);
+    if (items.length === 0) {
+      continue;
+    }
+    set.push(pickedItem.category === category ? pickedItem : items[Math.floor(random() * items.length)]);
+  }
+  return set;
+}
+
 // Lets tests load this file in Node; browsers ignore it.
 if (typeof module !== "undefined") {
-  module.exports = { OUTFIT_CATEGORIES, seededRandom, hashText, todayKey, pickOutfit };
+  module.exports = { OUTFIT_CATEGORIES, seededRandom, hashText, todayKey, pickOutfit, pickBrandSet };
 }

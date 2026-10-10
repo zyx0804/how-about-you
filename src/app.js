@@ -211,7 +211,9 @@ function renderBrandPage() {
   askSection.hidden = !aiEnabled();
   renderAskSuggestions();
   itemGrid.innerHTML = "";
-  const items = [pickedItem, ...brand.items.filter((item) => item !== pickedItem)];
+  // Only today's set from this brand, today's pick first; it changes daily.
+  const set = pickBrandSet(brand, pickedItem, `${todayKey()}|${brand.brand}`);
+  const items = [pickedItem, ...set.filter((item) => item !== pickedItem)];
   for (const item of items) {
     itemGrid.append(itemCard(brand, item, item === pickedItem));
   }
