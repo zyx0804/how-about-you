@@ -339,7 +339,8 @@ function pickAndShowOutfit() {
   const score = Number(moodMeter.value);
   const rangeStart = MOOD_ORDER.indexOf(currentMoodId) * MOOD_RANGE;
   const position = Math.min(1, Math.max(0, (score - rangeStart) / MOOD_RANGE));
-  currentPicks = pickOutfit(MOOD_BRANDS[currentMoodId], position, `${todayKey()}|${currentMoodId}|${score}`);
+  // Only pictured items are on the shelf; items still waiting for a picture stay hidden.
+  currentPicks = pickOutfit(onShelf(MOOD_BRANDS[currentMoodId]), position, `${todayKey()}|${currentMoodId}|${score}`);
   pickedScore = score;
   result.hidden = true;
   showFloaters(

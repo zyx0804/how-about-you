@@ -1,8 +1,8 @@
-// Picks today's outfit: one outerwear, top, bottom, pair of shoes, and
-// accessory from the brands of the current mood. Brands whose intensity is
-// close to where the score sits inside the mood's range are more likely, and
-// the choice is seeded by the date and score, so the same day and score give
-// the same outfit while a new day brings a different one.
+// Picks today's recommendation: up to five pictured items from different
+// brands of the current mood. Brands whose intensity is close to where the
+// score sits inside the mood's range are more likely, and the choice is
+// seeded by the date and score, so the same day and score give the same
+// picks while a new day brings different ones.
 
 const OUTFIT_CATEGORIES = ["outerwear", "top", "bottom", "shoes", "accessory"];
 
@@ -51,49 +51,58 @@ function pickWeighted(entries, random) {
   return entries[entries.length - 1];
 }
 
-// How many times to redraw when the brands left can't fill every category.
-const OUTFIT_ATTEMPTS = 30;
+// How many items today's recommendation holds at most.
+const OUTFIT_SIZE = 5;
 
-// One draw: each category from a brand not used yet, or null if some
-// category has no unused brand left.
-function drawOutfit(brands, positionInRange, random, allowRepeats) {
+// Only items with a picture (a licensed photo or a reference image) are on
+// the shelf; the rest stay in the data and return once they get a picture.
+function hasPicture(brand, item) {
+  const images = typeof AI_IMAGES === "undefined" ? {} : AI_IMAGES;
+  return Boolean(item.photo || images[`${brand.brand}|${item.name.en}`]);
+}
+
+// The brands of a mood with only their pictured items; brands left with
+// nothing are dropped.
+function onShelf(brands) {
+  return brands
+    .map((brand) => ({ ...brand, items: brand.items.filter((item) => hasPicture(brand, item)) }))
+    .filter((brand) => brand.items.length > 0);
+}
+
+function intensityWeight(brand, positionInRange) {
+  const distance = brand.intensity - positionInRange;
+  return Math.exp(-(distance * distance) / (2 * INTENSITY_SPREAD * INTENSITY_SPREAD));
+}
+
+// Returns up to five picks, { brand, item }, each from a different brand.
+// Brands near the score are likelier, and categories not used yet are
+// preferred, so the picks mix clothes and shoes when the shelf allows.
+function pickOutfit(brands, positionInRange, seedText) {
+  const random = seededRandom(hashText(seedText));
   const usedBrands = new Set();
+  const usedCategories = new Set();
   const picks = [];
-  for (const category of OUTFIT_CATEGORIES) {
+  while (picks.length < OUTFIT_SIZE) {
     const candidates = [];
     for (const brand of brands) {
-      const items = brand.items.filter((item) => item.category === category);
-      if (items.length === 0 || (!allowRepeats && usedBrands.has(brand.brand))) {
+      if (usedBrands.has(brand.brand)) {
         continue;
       }
-      const distance = brand.intensity - positionInRange;
-      const weight = Math.exp(-(distance * distance) / (2 * INTENSITY_SPREAD * INTENSITY_SPREAD));
-      candidates.push({ brand, items, weight });
+      const fresh = brand.items.filter((item) => !usedCategories.has(item.category));
+      const weight = intensityWeight(brand, positionInRange) * (fresh.length > 0 ? 1 : 0.3);
+      candidates.push({ brand, items: fresh.length > 0 ? fresh : brand.items, weight });
     }
     if (candidates.length === 0) {
-      return null;
+      break;
     }
     const chosen = pickWeighted(candidates, random);
     const item = chosen.items[Math.floor(random() * chosen.items.length)];
     usedBrands.add(chosen.brand.brand);
+    usedCategories.add(item.category);
     picks.push({ brand: chosen.brand, item });
   }
-  return picks;
-}
-
-// Returns five picks, { brand, item }, one per outfit category, each from a
-// different brand. If a draw gets stuck (say only shoe brands are left for
-// the accessory), it draws again; only if that keeps failing may a brand
-// repeat, so an outfit always comes back.
-function pickOutfit(brands, positionInRange, seedText) {
-  const random = seededRandom(hashText(seedText));
-  for (let attempt = 0; attempt < OUTFIT_ATTEMPTS; attempt++) {
-    const picks = drawOutfit(brands, positionInRange, random, false);
-    if (picks) {
-      return picks;
-    }
-  }
-  return drawOutfit(brands, positionInRange, random, true) || [];
+  // Show them in the usual order: outerwear, top, bottoms, shoes, accessory.
+  return picks.sort((a, b) => OUTFIT_CATEGORIES.indexOf(a.item.category) - OUTFIT_CATEGORIES.indexOf(b.item.category));
 }
 
 // The set a brand page shows: one item per category, with today's pick in
@@ -113,5 +122,5 @@ function pickBrandSet(brand, pickedItem, seedText) {
 
 // Lets tests load this file in Node; browsers ignore it.
 if (typeof module !== "undefined") {
-  module.exports = { OUTFIT_CATEGORIES, seededRandom, hashText, todayKey, pickOutfit, pickBrandSet };
+  module.exports = { OUTFIT_CATEGORIES, seededRandom, hashText, todayKey, hasPicture, onShelf, pickOutfit, pickBrandSet };
 }
