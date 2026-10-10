@@ -1,0 +1,1013 @@
+:root {
+  --font-display: "Syne", "Noto Sans SC", system-ui, sans-serif;
+  --font-brand: "Syne", "Noto Sans SC", system-ui, sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --background: #f3f1ec;
+  --card: rgba(255, 255, 255, 0.75);
+  --accent: #6b6258;
+  --text: #24211d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Keeps the hidden attribute working on elements that set their own display. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: background 1.2s ease, color 1.2s ease;
+}
+
+/* Mood backgrounds are gradients, which CSS can't animate, so two layers
+   swap places with a crossfade instead. */
+.sky-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.sky-layer.shown {
+  opacity: 1;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 16px 56px;
+}
+
+/* Each mood has its own type: a display face for the title, a face for
+   brand names, and a Chinese body face, plus a small title effect. */
+body[data-mood="sad"] {
+  --font-display: "Cormorant Garamond", "Noto Serif SC", serif;
+  --font-brand: "Cormorant Garamond", "Noto Serif SC", serif;
+  --font-body: "Noto Serif SC", serif;
+}
+
+body[data-mood="sad"] h1 {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.6rem;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+body[data-mood="irritated"] {
+  --font-display: "Permanent Marker", "Ma Shan Zheng", cursive;
+  --font-brand: "Permanent Marker", "Ma Shan Zheng", cursive;
+  --font-body: "Noto Sans SC", sans-serif;
+}
+
+body[data-mood="irritated"] h1 {
+  font-weight: 400;
+  font-size: 2.5rem;
+  letter-spacing: 0.02em;
+  color: #ff8a5c;
+}
+
+body[data-mood="irritated"] .subtitle,
+body[data-mood="irritated"] label {
+  font-family: "Ma Shan Zheng", var(--font-body);
+  font-size: 1.15em;
+}
+
+body[data-mood="tired"] {
+  --font-display: "Caveat", "Long Cang", cursive;
+  --font-brand: "Caveat", "Long Cang", cursive;
+  --font-body: "Noto Sans SC", sans-serif;
+}
+
+body[data-mood="tired"] h1 {
+  font-weight: 600;
+  font-size: 3rem;
+  letter-spacing: 0.02em;
+  transform: rotate(-2deg);
+  transform-origin: left center;
+}
+
+body[data-mood="tired"] .subtitle,
+body[data-mood="tired"] label {
+  font-family: "Long Cang", var(--font-body);
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+body[data-mood="tired"] main {
+  font-weight: 300;
+}
+
+body[data-mood="calm"] {
+  --font-display: "EB Garamond", "ZCOOL XiaoWei", serif;
+  --font-brand: "EB Garamond", "ZCOOL XiaoWei", serif;
+  --font-body: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+}
+
+body[data-mood="calm"] h1 {
+  font-weight: 400;
+  font-size: 2.5rem;
+  letter-spacing: 0.22em;
+}
+
+body[data-mood="excited"] {
+  --font-display: "Monoton", "ZCOOL QingKe HuangYou", cursive;
+  --font-brand: "Syne", "ZCOOL QingKe HuangYou", sans-serif;
+  --font-body: "Noto Sans SC", sans-serif;
+}
+
+body[data-mood="excited"] h1 {
+  font-weight: 400;
+  font-size: 2.3rem;
+  letter-spacing: 0.04em;
+  color: #ffd6ec;
+  text-shadow:
+    0 0 6px #ff4fa0,
+    0 0 18px #ff4fa0,
+    0 0 36px rgba(255, 79, 160, 0.6);
+}
+
+body[data-mood="excited"] .subtitle,
+body[data-mood="excited"] label {
+  font-family: "ZCOOL QingKe HuangYou", var(--font-body);
+  font-size: 1.1em;
+}
+
+body[data-mood="happy"] {
+  --font-display: "Fredoka", "ZCOOL KuaiLe", sans-serif;
+  --font-brand: "Fredoka", "ZCOOL KuaiLe", sans-serif;
+  --font-body: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
+}
+
+body[data-mood="happy"] h1 {
+  font-weight: 700;
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-shadow: 0 2px 0 #2f7fc0, 0 4px 14px rgba(20, 70, 120, 0.35);
+}
+
+/* Title effects move only for people who have not asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  body[data-mood="irritated"] h1 {
+    animation: title-jitter 3.2s infinite;
+  }
+
+  body[data-mood="tired"] h1 {
+    animation: title-doze 6s ease-in-out infinite;
+  }
+
+  body[data-mood="excited"] h1 {
+    animation: title-neon 4s infinite;
+  }
+
+  body[data-mood="happy"] h1 {
+    animation: title-bounce 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes title-jitter {
+  0%,
+  88%,
+  100% {
+    transform: translate(0, 0);
+  }
+  90% {
+    transform: translate(-2px, 1px) rotate(-1deg);
+  }
+  92% {
+    transform: translate(2px, -1px) rotate(1deg);
+  }
+  94% {
+    transform: translate(-1px, 0) rotate(-0.5deg);
+  }
+  96% {
+    transform: translate(1px, 1px);
+  }
+}
+
+@keyframes title-doze {
+  0%,
+  100% {
+    opacity: 1;
+    transform: rotate(-2deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: rotate(-3.5deg) translateY(2px);
+  }
+}
+
+@keyframes title-neon {
+  0%,
+  47%,
+  51%,
+  53%,
+  100% {
+    opacity: 1;
+  }
+  49%,
+  52% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes title-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.language-button {
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  background: transparent;
+  color: var(--text);
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.subtitle {
+  margin: 0 0 32px;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--text);
+}
+
+button,
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--background);
+  cursor: pointer;
+  transition: transform 0.1s ease, background 1.2s ease;
+}
+
+button:active,
+.button:active {
+  transform: scale(0.97);
+}
+
+.meter {
+  margin-top: 22px;
+}
+
+.meter-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.meter-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* The track runs through each mood's color, lowest on the left. */
+#mood-meter {
+  width: 100%;
+  height: 10px;
+  margin: 6px 0 4px;
+  border: none;
+  border-radius: 999px;
+  padding: 0;
+  appearance: none;
+  background: linear-gradient(to right, #8e9bc4, #e0623c, #a99ad6, #4f7d74, #ff4fa0, #2f9be0);
+  cursor: pointer;
+}
+
+#mood-meter::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  appearance: none;
+  background: var(--accent);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+#mood-meter::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.meter-labels {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  font-size: 0.72rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.calculator {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: var(--card);
+}
+
+.calculator summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.calc-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px 20px;
+  margin-top: 12px;
+}
+
+.calc-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.calc-row input {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.calc-ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  opacity: 0.65;
+}
+
+.calc-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.calc-score {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.message {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 4px;
+  background: var(--card);
+}
+
+.today {
+  margin-top: 28px;
+}
+
+.hint {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  opacity: 0.65;
+}
+
+.floater-stage {
+  position: relative;
+  height: min(60vh, 460px);
+  overflow: hidden;
+}
+
+/* Shared by every floater: a button positioned by JS transforms. Only
+   opacity is transitioned (for fading in and out); a transform transition
+   would make a floater that wraps from one edge to the other slide back
+   across the stage. */
+.floater {
+  position: absolute;
+  transition: opacity 0.6s ease;
+  animation: floater-in 0.9s ease;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text);
+  text-align: center;
+  will-change: transform;
+}
+
+.floater.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes floater-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.floater-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  max-width: 76%;
+}
+
+.floater-brand {
+  font-family: var(--font-brand);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.floater-item {
+  font-size: 0.56rem;
+  opacity: 0.85;
+}
+
+/* Bubble: a glassy sphere with a soft tint from the piece's palette, a
+   bright highlight at the top left, and a rim that darkens toward the edge. */
+.bubble {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0) 22%),
+    radial-gradient(circle at 70% 80%, color-mix(in srgb, var(--tint) 45%, transparent) 0, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 55%, rgba(255, 255, 255, 0.35) 100%);
+  box-shadow:
+    inset -6px -10px 18px rgba(0, 0, 0, 0.12),
+    inset 5px 6px 14px rgba(255, 255, 255, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.bubble.active {
+  border-color: var(--accent);
+  box-shadow:
+    inset -6px -10px 18px rgba(0, 0, 0, 0.12),
+    0 0 0 3px var(--accent),
+    0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+/* Clouds: three soft ellipses distorted by SVG noise filters (see
+   index.html) into an underside, a body, and a lit top, kept thin and
+   translucent so they look far away. */
+.cloud-layer {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cloud-shadow {
+  inset: 30% 4% 4% 6%;
+}
+
+.cloud-body {
+  inset: 10% 8% 14% 4%;
+}
+
+.cloud-light {
+  inset: 4% 22% 42% 16%;
+}
+
+.mist {
+  color: #eef1f8;
+  text-shadow: 0 1px 4px rgba(10, 14, 24, 0.9);
+}
+
+.mist .cloud-shadow {
+  background: rgba(110, 120, 148, 0.32);
+}
+
+.mist .cloud-body {
+  background: rgba(188, 196, 214, 0.36);
+}
+
+.mist .cloud-light {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mist.active .cloud-body {
+  background: color-mix(in srgb, var(--accent) 50%, rgba(200, 206, 222, 0.5));
+}
+
+/* Fire clouds: sunset colors, gold where the light hits. */
+.fire {
+  color: #fff4ea;
+  text-shadow: 0 1px 4px rgba(60, 10, 10, 0.9);
+}
+
+.fire .cloud-shadow {
+  background: rgba(120, 30, 60, 0.42);
+}
+
+.fire .cloud-body {
+  background: linear-gradient(to bottom, rgba(255, 150, 90, 0.5), rgba(214, 64, 72, 0.45));
+}
+
+.fire .cloud-light {
+  background: rgba(255, 210, 130, 0.5);
+}
+
+.fire.active .cloud-body {
+  background: linear-gradient(to bottom, rgba(255, 180, 110, 0.75), rgba(230, 80, 80, 0.7));
+}
+
+/* Calm: brand names blown along by the wind, nothing else around them. */
+.drift {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
+}
+
+.drift .floater-brand {
+  font-size: 0.66rem;
+}
+
+.drift .floater-item {
+  font-size: 0.56rem;
+}
+
+.drift.active .floater-brand {
+  color: var(--accent);
+}
+
+/* Tired: brand names streaking across the night with a faint trail,
+   flashing once on the way. */
+.streak {
+  color: #ece8ff;
+  text-shadow:
+    0 0 6px rgba(150, 130, 255, 0.6),
+    8px -2px 6px rgba(200, 190, 255, 0.25),
+    16px -4px 10px rgba(200, 190, 255, 0.12);
+}
+
+.streak .floater-brand {
+  font-size: 0.62rem;
+}
+
+.streak .floater-item {
+  font-size: 0.52rem;
+}
+
+.streak.flash .floater.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes floater-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.floater-text {
+  animation: streak-flash 0.6s ease-out;
+}
+
+.streak.active .floater-brand {
+  color: var(--accent);
+}
+
+@keyframes streak-flash {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  15% {
+    transform: scale(1.25);
+    filter: brightness(2.2) drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 22px rgba(170, 150, 255, 0.9));
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Dandelion seed: a turning 3D umbrella of fine, glowing hairs on a thin
+   stalk, the label hanging below. */
+.seed {
+  flex-direction: column;
+  justify-content: flex-start;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.95);
+}
+
+.seed-shape {
+  width: 80%;
+  height: 62%;
+  overflow: visible;
+  filter: drop-shadow(0 1px 1px rgba(30, 70, 110, 0.35));
+}
+
+.fluff-hair {
+  stroke: #ffffff;
+}
+
+.fluff-tuft {
+  fill: #ffffff;
+}
+
+.seed-stalk {
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 0.5;
+}
+
+.seed-body {
+  fill: #8a6a48;
+}
+
+.seed .floater.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes floater-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.floater-text {
+  max-width: 130%;
+}
+
+.seed.active .fluff-hair {
+  stroke: var(--accent);
+}
+
+/* The small dandelion in the bottom-left corner on happy days, swaying in
+   the wind. Its head is missing the seeds that flew away. */
+.dandelion {
+  position: fixed;
+  left: 10px;
+  bottom: 0;
+  width: 130px;
+  height: 216px;
+  pointer-events: none;
+}
+
+body:not([data-mood="happy"]) .dandelion {
+  display: none;
+}
+
+.dandelion-sway {
+  transform-origin: 45px 150px;
+  animation: dandelion-sway 5s ease-in-out infinite;
+}
+
+@keyframes dandelion-sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.filter-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.result {
+  position: relative;
+  overflow: hidden;
+  margin-top: 24px;
+  padding: 32px 28px;
+  border-radius: 6px;
+  background: var(--card);
+  backdrop-filter: blur(6px);
+}
+
+.photo {
+  margin: 0 -28px 24px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.photo figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 16px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.photo-kind {
+  align-self: flex-start;
+  padding: 1px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.photo-credit {
+  opacity: 0.7;
+}
+
+.photo-credit a {
+  color: inherit;
+}
+
+/* The brand's own motifs, faint behind the page content. */
+.result::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--brand-pattern, none);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.result > * {
+  position: relative;
+}
+
+.result.appear {
+  animation: fade-in 0.7s ease;
+}
+
+.mood-title {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--font-brand);
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.brand-header {
+  margin-bottom: 18px;
+}
+
+.brand-logo img {
+  display: block;
+  max-width: min(320px, 80%);
+  max-height: 80px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.designer-line {
+  margin: 10px 0 0;
+  opacity: 0.85;
+}
+
+.logo-credit {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  opacity: 0.6;
+}
+
+/* Item cards sit on a light, neutral backdrop like product photos, so the
+   sketches and photos read the same in every mood. */
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.item-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 10px 12px;
+  border-radius: 6px;
+  background: #f6f4f0;
+  color: #23211d;
+  font-family: "Noto Sans SC", system-ui, sans-serif;
+}
+
+.item-card.picked {
+  outline: 3px solid var(--accent);
+}
+
+.item-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  background: linear-gradient(#ffffff, #ebe8e2);
+  overflow: hidden;
+}
+
+.item-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.flat {
+  width: 86%;
+  height: 86%;
+}
+
+.flat .body {
+  stroke: rgba(20, 20, 20, 0.6);
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+}
+
+.flat .seam {
+  fill: none;
+  stroke: rgba(20, 20, 20, 0.35);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+}
+
+.flat .trim {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.item-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.7rem;
+}
+
+.item-ai {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 0.62rem;
+}
+
+.item-category {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+}
+
+.item-name {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.result .item-why {
+  flex: 1;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.item-credit {
+  margin: 0;
+  font-size: 0.68rem;
+  opacity: 0.65;
+}
+
+.item-credit a,
+.item-link {
+  color: inherit;
+}
+
+.item-link {
+  align-self: flex-start;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.result section {
+  padding: 14px 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+.result h3 {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.result section p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.note {
+  margin: 16px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.55;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
