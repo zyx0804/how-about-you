@@ -12,7 +12,7 @@ const UI_TEXT = {
     meterLabel: "或者拖动心情指数（0 最低落，100 最开心）：",
     meterValue: (score, label) => `${score} · ${label}`,
     meterUnset: "拖动试试",
-    calcTitle: "🧮 心情计算器：给 5 个问题选个表情，算出你的心情指数",
+    calcTitle: "🌤️ 今天过得如何？给 5 个问题选个表情，算出你的心情指数",
     calcQuestions: {
       energy: ["今天的精力", "没电了", "满格"],
       stress: ["心里的压力或烦躁", "很轻松", "快爆了"],
@@ -60,7 +60,7 @@ const UI_TEXT = {
     meterLabel: "Or drag the mood meter (0 is lowest, 100 is happiest):",
     meterValue: (score, label) => `${score} · ${label}`,
     meterUnset: "Give it a drag",
-    calcTitle: "🧮 Mood calculator: pick a face for 5 questions to get your score",
+    calcTitle: "🌤️ How was your day? Pick a face for 5 questions to get your mood score",
     calcQuestions: {
       energy: ["Your energy today", "Drained", "Full"],
       stress: ["Stress or irritation", "Relaxed", "About to burst"],
