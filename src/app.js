@@ -16,6 +16,14 @@ const storyText = document.getElementById("story");
 const moodLinkText = document.getElementById("mood-link");
 const itemGrid = document.getElementById("item-grid");
 const languageButton = document.getElementById("language-button");
+const feelingSubmit = document.getElementById("feeling-submit");
+const aiNote = document.getElementById("ai-note");
+const aiReply = document.getElementById("ai-reply");
+const askSection = document.getElementById("ask-section");
+const askSuggestions = document.getElementById("ask-suggestions");
+const askForm = document.getElementById("ask-form");
+const askInput = document.getElementById("ask-input");
+const askAnswer = document.getElementById("ask-answer");
 const moodMeter = document.getElementById("mood-meter");
 const meterValue = document.getElementById("mood-meter-value");
 const meterLabels = document.getElementById("meter-labels");
@@ -200,6 +208,8 @@ function renderBrandPage() {
   renderBrandPhoto(brand);
   storyText.textContent = brand.story[language];
   moodLinkText.textContent = brand.moodLink[language];
+  askSection.hidden = !aiEnabled();
+  renderAskSuggestions();
   itemGrid.innerHTML = "";
   const items = [pickedItem, ...brand.items.filter((item) => item !== pickedItem)];
   for (const item of items) {
@@ -209,6 +219,8 @@ function renderBrandPage() {
 
 function showPick(pickIndex) {
   openPick = currentPicks[pickIndex];
+  askAnswer.hidden = true;
+  askInput.value = "";
   renderBrandPage();
   result.hidden = false;
   // Restart the fade-in so switching brands is visible.
@@ -388,12 +400,34 @@ function setLanguage(newLanguage) {
   }
 }
 
-feelingForm.addEventListener("submit", (event) => {
+function showAiReply(text) {
+  aiReply.textContent = text;
+  aiReply.hidden = text === "";
+}
+
+// The AI reads the mood when it is available; keywords take over if it
+// isn't, or if it doesn't answer in time.
+feelingForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const text = feelingInput.value;
+  showAiReply("");
   if (text.trim() === "") {
     showMessage("emptyInput");
     return;
+  }
+  if (aiEnabled()) {
+    feelingSubmit.disabled = true;
+    showMessage(null);
+    showAiReply(UI_TEXT[language].aiReading);
+    const reading = await aiReadMood(text.trim());
+    feelingSubmit.disabled = false;
+    showAiReply("");
+    if (reading) {
+      moodMeter.value = reading.score;
+      selectMood(reading.mood, true);
+      showAiReply(reading.reply);
+      return;
+    }
   }
   const moodId = detectMood(text);
   if (moodId === null) {
@@ -401,6 +435,39 @@ feelingForm.addEventListener("submit", (event) => {
     return;
   }
   selectMood(moodId);
+});
+
+function renderAskSuggestions() {
+  askSuggestions.innerHTML = "";
+  for (const suggestion of UI_TEXT[language].askSuggestions) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "ask-chip";
+    chip.textContent = suggestion;
+    chip.addEventListener("click", () => {
+      askInput.value = suggestion;
+      askForm.requestSubmit();
+    });
+    askSuggestions.append(chip);
+  }
+}
+
+askForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const question = askInput.value.trim();
+  if (question === "" || openPick === null) {
+    return;
+  }
+  const { brand, item } = openPick;
+  const askButton = askForm.querySelector("button");
+  askButton.disabled = true;
+  askAnswer.hidden = false;
+  askAnswer.classList.add("thinking");
+  askAnswer.textContent = UI_TEXT[language].askThinking;
+  const reply = await aiAskStylist(question, brand.brand, item.name[language], language);
+  askButton.disabled = false;
+  askAnswer.classList.remove("thinking");
+  askAnswer.textContent = reply ? reply.answer : UI_TEXT[language].askError;
 });
 
 languageButton.addEventListener("click", () => setLanguage(language === "zh" ? "en" : "zh"));
@@ -443,6 +510,7 @@ photoImage.addEventListener("error", () => {
   photoFigure.hidden = true;
 });
 
+aiNote.hidden = !aiEnabled();
 setLanguage(language);
 fitTitleWhenFontsReady();
 window.addEventListener("resize", fitTitle);
