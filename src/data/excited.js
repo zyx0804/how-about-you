@@ -79,6 +79,306 @@ MOOD_BRANDS.excited = [
           en: "With a hint of the underground.",
         },
       },
+      {
+        category: "accessory",
+        shape: "tote",
+        name: { zh: "D 环双肩包", en: "D-ring backpack" },
+        colors: ["#2a2a2a", "#5a5a5a"],
+        why: {
+          zh: "和 Eastpak 合作的那种双肩包，挂满 D 环，背上就有态度。",
+          en: "The Eastpak-style pack covered in D-rings: attitude you can carry.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "黑色微喇长裤", en: "Black flared trousers" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "长长的微喇线条，走起路来更有节奏。",
+          en: "A long, slight flare that puts rhythm in your walk.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "渐变色眼睛图案毛衣", en: "Gradient knit with an eye motif" },
+        colors: ["#f0902a", "#e0306a"],
+        why: {
+          zh: "橙到粉的渐变，胸前一只眼睛，兴奋都写在身上。",
+          en: "Orange melting into pink, an eye on the chest: excitement you wear.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "粉色人像印花衬衫", en: "Pink portrait-print shirt" },
+        colors: ["#f4d4dc", "#2a2a2a"],
+        why: {
+          zh: "背后印着人像和“BE PURE BE VIGILANT BEHAVE”，青年文化的味道。",
+          en: "Portraits and “BE PURE BE VIGILANT BEHAVE” across the back: pure youth culture.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "scarf",
+        name: { zh: "红色毛绒长手套", en: "Long red fuzzy gloves" },
+        colors: ["#b8202a", "#e8d4c4"],
+        why: {
+          zh: "夸张的长手套，一抹红就把整套穿搭点燃。",
+          en: "Dramatic long gloves; one flash of red sets the outfit alight.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "卡其色直筒西裤", en: "Khaki straight tailored trousers" },
+        colors: ["#8a8270", "#5a5446"],
+        why: {
+          zh: "利落的中缝，把躁动收得刚刚好。",
+          en: "A sharp crease that keeps the energy just in check.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "hightop",
+        name: { zh: "黑色绑带高帮鞋", en: "Black strap high-tops" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "宽绑带包住脚踝，像随时准备出发。",
+          en: "A wide strap around the ankle, ready to go.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "宝蓝色麻花毛衣", en: "Royal blue cable knit" },
+        colors: ["#2a5ab8", "#141414"],
+        why: {
+          zh: "饱满的宝蓝色，经典的麻花纹也能很张扬。",
+          en: "Saturated royal blue: even a classic cable can be loud.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "sandals",
+        name: { zh: "撞色运动拖鞋", en: "Color-clash sport slides" },
+        colors: ["#3a6ab8", "#f0f0f0"],
+        why: {
+          zh: "彩色鞋底配撞色鞋面，轻快又好玩。",
+          en: "A rainbow sole under a contrast strap: light and playful.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "coat",
+        name: { zh: "米白色拉链口袋大衣", en: "Cream coat with zip pockets" },
+        colors: ["#ecdcc0", "#2a2a2a"],
+        why: {
+          zh: "干净的米白配上一排拉链，利落又有细节。",
+          en: "Clean cream with rows of zips: sharp, with details.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "黑色亮面皮西装外套", en: "Glossy black leather blazer" },
+        colors: ["#141414", "#4a4a4a"],
+        why: {
+          zh: "亮面皮革的西装，正式里带着反叛。",
+          en: "A blazer in glossy leather: formal, with a rebel streak.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "sneakers",
+        name: { zh: "米色低帮球鞋", en: "Beige low-top sneakers" },
+        colors: ["#e0c4a8", "#f4ece2"],
+        why: {
+          zh: "和 adidas 合作的那种干净低帮鞋，配什么都轻松。",
+          en: "A clean low-top like his adidas pairs; easy with anything.",
+        },
+      },
+      {
+        category: "top",
+        shape: "hoodie",
+        name: { zh: "酒红色宽松连帽卫衣", en: "Burgundy oversized hoodie" },
+        colors: ["#5a1a2a", "#3a1018"],
+        why: {
+          zh: "宽大的廓形和深酒红，低调地兴奋着。",
+          en: "An oversized cut in deep burgundy: excited, quietly.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "做旧黄色镂空毛衣", en: "Distressed yellow open-knit sweater" },
+        colors: ["#e0c030", "#d8d4cc"],
+        why: {
+          zh: "叠穿的破洞针织，地下乐队的味道。",
+          en: "Layered, holey knits with an underground-band feel.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "千鸟格 V 领毛衣", en: "Houndstooth V-neck sweater" },
+        colors: ["#e8762a", "#b8202a"],
+        why: {
+          zh: "放大的橙红千鸟格，复古又大胆。",
+          en: "Blown-up orange and red houndstooth: retro and bold.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "白色拇指孔长袖", en: "White thumbhole long sleeve" },
+        colors: ["#f4f4f4", "#141414"],
+        why: {
+          zh: "长长的袖子留出拇指孔，细节里的小心思。",
+          en: "Long sleeves with thumbholes: a small detail with intent.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "条纹印字长袖", en: "Striped long sleeve with a text patch" },
+        colors: ["#f2efe8", "#141414"],
+        why: {
+          zh: "黑白条纹加一大块印字，像一张贴满海报的墙。",
+          en: "Black-and-white stripes with a big text patch, like a poster-covered wall.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "combat",
+        name: { zh: "黄色鞋跟切尔西靴", en: "Chelsea boots with a yellow heel" },
+        colors: ["#141414", "#e8c42a"],
+        why: {
+          zh: "黑色切尔西靴藏着一截亮黄鞋跟，走路时才会被看见。",
+          en: "Black Chelsea boots hiding a bright yellow heel, seen only as you walk.",
+        },
+      },
+      {
+        category: "top",
+        shape: "hoodie",
+        name: { zh: "GRANDE FÊTE DE NUIT 连帽卫衣", en: "GRANDE FÊTE DE NUIT hoodie" },
+        colors: ["#1a1a2a", "#a87ac8"],
+        why: {
+          zh: "印着“GRANDE FÊTE DE NUIT”，一件为夜晚派对准备的卫衣。",
+          en: "Printed “GRANDE FÊTE DE NUIT”: a hoodie made for the night party.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "冰蓝色光泽高领上衣", en: "Icy blue shiny turtleneck" },
+        colors: ["#9ac8e8", "#5a8aa8"],
+        why: {
+          zh: "金属光泽的冰蓝色，在灯光下最好看。",
+          en: "Metallic icy blue that looks best under the lights.",
+        },
+      },
+      {
+        category: "top",
+        shape: "hoodie",
+        name: { zh: "墨绿色连帽针织衫", en: "Dark green hooded knit" },
+        colors: ["#1e3a2a", "#3a3a3a"],
+        why: {
+          zh: "墨绿的针织连帽衫，兴奋里带一点克制。",
+          en: "A dark green hooded knit: excitement with some restraint.",
+        },
+      },
+      {
+        category: "top",
+        shape: "hoodie",
+        name: { zh: "红色印花连帽卫衣", en: "Red photo-print hoodie" },
+        colors: ["#e0302a", "#8a5a9a"],
+        why: {
+          zh: "大红色配上照片印花，整个人都亮起来。",
+          en: "Bright red with a photo print: you light up.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "sneakers",
+        name: { zh: "灰色厚底帆布鞋", en: "Gray platform canvas sneakers" },
+        colors: ["#9a9a9a", "#f2efe8"],
+        why: {
+          zh: "厚厚的白色鞋底，走路都带着弹性。",
+          en: "A thick white sole that puts bounce in every step.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "白色印花 T 恤", en: "White graphic T-shirt" },
+        colors: ["#f4f4f4", "#141414"],
+        why: {
+          zh: "简单的白 T 加一张黑白印花，随时都能穿。",
+          en: "A plain white tee with a black-and-white print, for any day.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "黑色修身西裤", en: "Black slim tailored trousers" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "窄窄的西裤，配卫衣也配皮鞋。",
+          en: "Narrow tailored trousers for hoodies or leather shoes.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "黑色修身短袖", en: "Black fitted T-shirt" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "最基础的黑色短袖，Raf 的线条感都在剪裁里。",
+          en: "The most basic black tee, with Raf's lines in the cut.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "jeans",
+        name: { zh: "浅色破洞牛仔裤", en: "Light ripped jeans" },
+        colors: ["#8aa8c8", "#f2efe8"],
+        why: {
+          zh: "磨白和破洞，年轻的躁动感。",
+          en: "Faded and ripped: restless and young.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "tote",
+        name: { zh: "黑色极简双肩包", en: "Black minimal backpack" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "没有多余装饰的黑色双肩包，装下今天的冲劲。",
+          en: "A black backpack with nothing extra, holding today's drive.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "jeans",
+        name: { zh: "深蓝色修身牛仔裤", en: "Dark blue slim jeans" },
+        colors: ["#1e2a44", "#3a4a6a"],
+        why: {
+          zh: "深色修身牛仔，怎么搭都利落。",
+          en: "Dark slim denim, sharp however you wear it.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "hightop",
+        name: { zh: "黑色帆布高帮鞋", en: "Black canvas high-tops" },
+        colors: ["#141414", "#f2efe8"],
+        why: {
+          zh: "黑色帆布配白色鞋带，鞋侧一个大大的 R。",
+          en: "Black canvas, white laces, and a big R on the side.",
+        },
+      },
     ],
   },
   {
