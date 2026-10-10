@@ -325,8 +325,29 @@ function selectMood(moodId, fromMeter = false) {
   applyTheme(mood.theme);
   setScene(mood.scene);
   document.body.dataset.mood = moodId;
+  fitTitleWhenFontsReady();
   todaySection.hidden = false;
   pickAndShowOutfit();
+}
+
+const pageTitle = document.querySelector("h1");
+
+// Keeps the title on one line: if it is wider than its space (phones, or a
+// wide mood typeface), shrink the font just enough to fit.
+function fitTitle() {
+  pageTitle.style.fontSize = "";
+  const available = pageTitle.clientWidth;
+  const needed = pageTitle.scrollWidth;
+  if (needed > available) {
+    const current = parseFloat(getComputedStyle(pageTitle).fontSize);
+    pageTitle.style.fontSize = `${Math.floor(current * (available / needed) * 0.98)}px`;
+  }
+}
+
+// Mood typefaces load over the network, so fit again once they arrive.
+function fitTitleWhenFontsReady() {
+  fitTitle();
+  document.fonts.ready.then(fitTitle);
 }
 
 function setLanguage(newLanguage) {
@@ -400,3 +421,5 @@ photoImage.addEventListener("error", () => {
 });
 
 setLanguage(language);
+fitTitleWhenFontsReady();
+window.addEventListener("resize", fitTitle);

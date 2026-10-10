@@ -256,7 +256,11 @@ body[data-mood="happy"] h1 {
 }
 
 h1 {
+  flex: 1;
+  min-width: 0;
   margin: 0 0 6px;
+  /* One line always; app.js shrinks the size to fit narrow screens. */
+  white-space: nowrap;
   font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 800;
