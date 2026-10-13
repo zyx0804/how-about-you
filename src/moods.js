@@ -109,19 +109,19 @@ function scoreForMood(moodId) {
 }
 
 // The mood calculator: five answers from 0 to 10 become a meter score.
-// "Feeling" mixes good things, low stress, and sleep; "energy" mixes energy
+// "Feeling" mixes a light day, low stress, and sleep; "energy" mixes energy
 // and wanting to see people. Together they choose a mood, and where the
 // answers sit decides the score inside that mood's range.
-const CALCULATOR_QUESTIONS = ["energy", "stress", "sleep", "social", "good"];
+const CALCULATOR_QUESTIONS = ["energy", "stress", "sleep", "social", "busy"];
 
 // Each question is answered with one of five faces, from the low end of the
-// question (left) to the high end (right). For stress, right is worse.
+// question (left) to the high end (right). For stress and busy, right is worse.
 const CALCULATOR_FACES = {
   energy: ["😫", "😕", "😐", "🙂", "🤩"],
   stress: ["😌", "🙂", "😐", "😣", "🤯"],
   sleep: ["😫", "😪", "😐", "🙂", "😊"],
   social: ["🙈", "😶", "😐", "🙂", "🥳"],
-  good: ["😞", "😕", "😐", "🙂", "🥰"],
+  busy: ["😊", "🙂", "😐", "😣", "😭"],
 };
 
 // Turns a face choice (1 to 5) into an answer on the 0 to 10 scale.
@@ -129,10 +129,16 @@ function answerFromLevel(level) {
   return (level - 1) * 2.5;
 }
 
+// Questions where a higher answer means a harder day.
+const REVERSED_QUESTIONS = ["stress", "busy"];
+
 // Points out of 25 for showing the user: higher is a better day, so the
-// stress question counts backward.
+// stress and busy questions count backward.
 function totalPoints(levels) {
-  return CALCULATOR_QUESTIONS.reduce((sum, id) => sum + (id === "stress" ? 6 - levels[id] : levels[id]), 0);
+  return CALCULATOR_QUESTIONS.reduce(
+    (sum, id) => sum + (REVERSED_QUESTIONS.includes(id) ? 6 - levels[id] : levels[id]),
+    0,
+  );
 }
 
 function clamp01(value) {
@@ -140,7 +146,7 @@ function clamp01(value) {
 }
 
 function scoreFromAnswers(answers) {
-  const feeling = (answers.good + (10 - answers.stress) + answers.sleep) / 30;
+  const feeling = ((10 - answers.busy) + (10 - answers.stress) + answers.sleep) / 30;
   const energy = (answers.energy + answers.social) / 20;
   let moodId;
   if (feeling < 0.4) {
