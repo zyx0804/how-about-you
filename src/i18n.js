@@ -118,14 +118,15 @@ const UI_TEXT = {
 
 const LANGUAGE_KEY = "how-about-you-language";
 
-// Remembers the chosen language in this browser. Storage can be blocked
-// (private windows, strict settings), so failures fall back to Chinese.
+// Remembers the chosen language in this browser. English is the default;
+// storage can be blocked (private windows, strict settings), so failures
+// fall back to English too.
 function loadLanguage() {
   try {
     const saved = localStorage.getItem(LANGUAGE_KEY);
-    return saved === "en" ? "en" : "zh";
+    return saved === "zh" ? "zh" : "en";
   } catch {
-    return "zh";
+    return "en";
   }
 }
 

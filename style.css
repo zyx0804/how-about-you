@@ -59,8 +59,8 @@ main {
 
 /* Each mood has its own type: a display face for the title, a face for
    brand names, and a Chinese body face, plus a small title effect. */
-/* Low, irritated, and tired get cartoon titles: rain-soaked letters, a
-   comic-book shout, and a sleepy rounded face. */
+/* Low, irritated, and tired get cartoon titles: rain-soaked letters,
+   scorched letters, and a sleepy rounded face. */
 body[data-mood="sad"] {
   --font-display: "Rubik Puddles", "Noto Serif SC", cursive;
   --font-brand: "Cormorant Garamond", "Noto Serif SC", serif;
@@ -75,17 +75,17 @@ body[data-mood="sad"] h1 {
 }
 
 body[data-mood="irritated"] {
-  --font-display: "Bangers", "Ma Shan Zheng", cursive;
+  --font-display: "Rubik Burned", "Ma Shan Zheng", cursive;
   --font-brand: "Permanent Marker", "Ma Shan Zheng", cursive;
   --font-body: "Noto Sans SC", sans-serif;
 }
 
 body[data-mood="irritated"] h1 {
   font-weight: 400;
-  font-size: 2.9rem;
-  letter-spacing: 0.06em;
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
   color: #ff8a5c;
-  text-shadow: 3px 3px 0 #3a0e08;
+  text-shadow: 0 0 14px rgba(255, 90, 30, 0.55);
 }
 
 body[data-mood="irritated"] .subtitle,
