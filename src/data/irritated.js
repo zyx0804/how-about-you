@@ -448,6 +448,256 @@ MOOD_BRANDS.irritated = [
           en: "A heavy silver chain, like clenching a fist.",
         },
       },
+      {
+        category: "accessory",
+        shape: "cap",
+        name: { zh: "红蓝网帽", en: "Red and blue trucker cap" },
+        colors: ["#d42027", "#2a5ab8"],
+        why: {
+          zh: "红蓝撞色加哥特字母，一戴上就很冲。",
+          en: "Red-and-blue with gothic letters: loud the moment it's on.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "彩色十字印花白 T", en: "White tee with multicolor crosses" },
+        colors: ["#f4f4f4", "#e0302a"],
+        why: {
+          zh: "满满一背的彩色十字架，把火气变成颜色。",
+          en: "A back full of colored crosses, turning the heat into color.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "necklace",
+        name: { zh: "绿色十字吊坠项链", en: "Green cross pendant necklace" },
+        colors: ["#2a7a3a", "#1a3a1a"],
+        why: {
+          zh: "一抹绿色十字，冷静一下。",
+          en: "A green cross to cool things down.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "necklace",
+        name: { zh: "紫色匕首吊坠项链", en: "Purple dagger pendant necklace" },
+        colors: ["#6a3ab8", "#e8e2d6"],
+        why: {
+          zh: "匕首吊坠配紫色珠链，锋利但不张扬。",
+          en: "A dagger on a purple bead chain: sharp without shouting.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "beanie",
+        name: { zh: "粉色十字针织帽", en: "Pink knit beanie with a cross patch" },
+        colors: ["#d42a6a", "#8a5a2a"],
+        why: {
+          zh: "亮粉色毛线帽配豹纹十字，烦的时候也要可爱一点。",
+          en: "Hot pink with a leopard cross: a little cute even when cross.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "scarf",
+        name: { zh: "绿白棋盘格袜子", en: "Green and white checker socks" },
+        colors: ["#1e4a2a", "#f2efe8"],
+        why: {
+          zh: "藏在鞋里的小态度。",
+          en: "A bit of attitude hidden in your shoes.",
+        },
+      },
+      {
+        category: "top",
+        shape: "hoodie",
+        name: { zh: "粉色字母白色连帽卫衣", en: "White hoodie with pink lettering" },
+        colors: ["#f4f4f4", "#e05a9a"],
+        why: {
+          zh: "袖子上一长串粉色哥特字母，硬朗里带点甜。",
+          en: "Pink gothic letters down the sleeves: tough with some sweetness.",
+        },
+      },
+      {
+        category: "top",
+        shape: "hoodie",
+        name: { zh: "黑色字母白色连帽卫衣", en: "White hoodie with black lettering" },
+        colors: ["#f4f4f4", "#141414"],
+        why: {
+          zh: "经典的黑白哥特字体，最好认的 Chrome Hearts。",
+          en: "Classic black gothic letters on white: Chrome Hearts at a glance.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "cap",
+        name: { zh: "黑白网帽", en: "Black and white trucker cap" },
+        colors: ["#f4f4f4", "#d42027"],
+        why: {
+          zh: "白色帽身印满红色字母，压低帽檐别惹我。",
+          en: "Red letters all over white; cap down, leave me alone.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "十字补丁黑色运动裤", en: "Black sweatpants with a cross patch" },
+        colors: ["#1a1a1a", "#e8c42a"],
+        why: {
+          zh: "舒服的运动裤，十字补丁和黄色字母让它不普通。",
+          en: "Comfortable sweats made special by a cross patch and yellow letters.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "jeans",
+        name: { zh: "十字补丁做旧黑色喇叭牛仔裤", en: "Washed black flared jeans with a cross patch" },
+        colors: ["#2a2a2e", "#c9c9c9"],
+        why: {
+          zh: "做旧的黑色牛仔配上银色十字，摇滚味十足。",
+          en: "Washed black denim with a silver cross: pure rock.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "jeans",
+        name: { zh: "皮质十字补丁白色牛仔裤", en: "White jeans with leather cross patches" },
+        colors: ["#f2efe8", "#5a3a2a"],
+        why: {
+          zh: "白色牛仔上缝满皮质十字，最有代表性的一条。",
+          en: "White denim covered in leather crosses: the signature pair.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "补丁黑色运动裤", en: "Black sweatpants with patches" },
+        colors: ["#141414", "#d42a6a"],
+        why: {
+          zh: "黑色运动裤上贴着几块图案补丁，随便穿也有态度。",
+          en: "Black sweats with graphic patches: casual, still with attitude.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "cargo",
+        name: { zh: "十字补丁黑色工装裤", en: "Black work pants with a cross patch" },
+        colors: ["#1e1e1e", "#c9c9c9"],
+        why: {
+          zh: "耐磨的工装裤，后袋上一个银色十字。",
+          en: "Tough work pants with a silver cross on the back pocket.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "jeans",
+        name: { zh: "涂鸦十字白色牛仔裤", en: "White jeans with painted crosses" },
+        colors: ["#f2efe8", "#c8402a"],
+        why: {
+          zh: "手绘涂鸦和十字补丁，把烦躁画在裤子上。",
+          en: "Hand-painted scrawls and cross patches: draw the irritation out.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "hightop",
+        name: { zh: "手绘涂鸦高帮帆布鞋", en: "Hand-painted high-top canvas sneakers" },
+        colors: ["#f2efe8", "#c8402a"],
+        why: {
+          zh: "帆布鞋上手写的字和涂鸦，每一双都不一样。",
+          en: "Handwritten words and doodles on canvas; no two pairs alike.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "loafers",
+        name: { zh: "红唇图案丝绒便鞋", en: "Velvet slippers with red lips" },
+        colors: ["#141414", "#d42027"],
+        why: {
+          zh: "黑色丝绒上一张红唇，挑衅又好玩。",
+          en: "Red lips on black velvet: cheeky and fun.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "sandals",
+        name: { zh: "红唇棋盘格拖鞋", en: "Checkered slides with red lips" },
+        colors: ["#1a1a1a", "#d42027"],
+        why: {
+          zh: "棋盘格配红唇，最吵的一双拖鞋。",
+          en: "Checkerboard and red lips: the loudest slides around.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "boots",
+        name: { zh: "十字扣羊皮雪地靴", en: "Sheepskin boots with cross buttons" },
+        colors: ["#141414", "#c9c9c9"],
+        why: {
+          zh: "暖和的雪地靴配上银色十字扣，冬天也不服软。",
+          en: "Warm sheepskin with silver cross buttons: no softening in winter.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "belt",
+        name: { zh: "圆形十字扣皮带", en: "Leather belt with a round cross buckle" },
+        colors: ["#141414", "#c9c9c9"],
+        why: {
+          zh: "一枚厚重的十字银扣，把散掉的情绪系紧。",
+          en: "A heavy silver cross buckle to pull yourself together.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "belt",
+        name: { zh: "雕花十字扣皮带", en: "Leather belt with an ornate cross buckle" },
+        colors: ["#141414", "#9a9a9a"],
+        why: {
+          zh: "雕花的银扣，像一件小雕塑。",
+          en: "A carved silver buckle, like a small sculpture.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "ring",
+        name: { zh: "刻字银戒指", en: "Engraved silver band ring" },
+        colors: ["#c9c9c9", "#3a3a3a"],
+        why: {
+          zh: "细细的刻字银戒，天天戴也不腻。",
+          en: "A slim engraved silver band you can wear every day.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "necklace",
+        name: { zh: "金色镶绿钻十字吊坠", en: "Gold cross pendant with green stones" },
+        colors: ["#d4a83a", "#2a8a4a"],
+        why: {
+          zh: "金色十字镶满绿钻，最华丽的一件。",
+          en: "A gold cross set with green stones: the most lavish piece.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "necklace",
+        name: { zh: "玫瑰金链条项链", en: "Rose gold chain necklace" },
+        colors: ["#d8a08a", "#f2e4d8"],
+        why: {
+          zh: "细细的玫瑰金链，和银饰叠戴更有层次。",
+          en: "A fine rose gold chain that layers well with silver.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "necklace",
+        name: { zh: "玫瑰金匕首吊坠", en: "Rose gold dagger charm" },
+        colors: ["#d8a08a", "#f2e4d8"],
+        why: {
+          zh: "小小一把玫瑰金匕首，锋利得很温柔。",
+          en: "A tiny rose gold dagger: sharp, gently.",
+        },
+      },
     ],
   },
   {
