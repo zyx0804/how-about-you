@@ -185,10 +185,29 @@ body[data-mood="happy"] h1 {
     0 6px 14px rgba(20, 70, 120, 0.35);
 }
 
-/* Title effects move only for people who have not asked for less motion. */
+/* The title's letters are separate spans (see splitTitleIntoLetters in
+   app.js), so each mood can move them one after another. */
+.title-letter {
+  display: inline-block;
+}
+
+/* Title effects move only for people who have not asked for less motion.
+   Every mood keeps its letters moving: raindrops sliding down (low), shaking
+   and flaring (irritated), nodding off one by one (tired), floating like a
+   slow breath (calm), popping neon (excited), and a bouncing wave (happy). */
 @media (prefers-reduced-motion: no-preference) {
+  body[data-mood="sad"] .title-letter {
+    animation: letter-drip 4.5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.22s);
+  }
+
   body[data-mood="irritated"] h1 {
-    animation: title-jitter 3.2s infinite;
+    animation: title-flare 1.8s ease-in-out infinite;
+  }
+
+  body[data-mood="irritated"] .title-letter {
+    animation: letter-shake 0.45s linear infinite;
+    animation-delay: calc(var(--i) * -0.07s);
   }
 
   body[data-mood="tired"] h1 {
@@ -199,32 +218,68 @@ body[data-mood="happy"] h1 {
     animation: snore 3s ease-in-out infinite;
   }
 
+  body[data-mood="tired"] .title-letter {
+    animation: letter-nod 5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.3s);
+  }
+
+  body[data-mood="calm"] .title-letter {
+    animation: letter-float 5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.35s);
+  }
+
   body[data-mood="excited"] h1 {
     animation: title-neon 4s infinite;
   }
 
-  body[data-mood="happy"] h1 {
-    animation: title-bounce 2.4s ease-in-out infinite;
+  body[data-mood="excited"] .title-letter {
+    animation: letter-pop 1.8s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+
+  body[data-mood="happy"] .title-letter {
+    animation: letter-bounce 1.6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.1s);
   }
 }
 
-@keyframes title-jitter {
+@keyframes letter-drip {
   0%,
-  88%,
   100% {
-    transform: translate(0, 0);
+    transform: translateY(0);
+    opacity: 1;
   }
-  90% {
-    transform: translate(-2px, 1px) rotate(-1deg);
+  45% {
+    transform: translateY(6px) scaleY(1.08);
+    opacity: 0.55;
   }
-  92% {
-    transform: translate(2px, -1px) rotate(1deg);
+}
+
+@keyframes title-flare {
+  0%,
+  100% {
+    text-shadow: 0 0 14px rgba(255, 90, 30, 0.55);
   }
-  94% {
-    transform: translate(-1px, 0) rotate(-0.5deg);
+  50% {
+    text-shadow:
+      0 0 22px rgba(255, 90, 30, 0.9),
+      0 -4px 30px rgba(255, 160, 40, 0.6);
   }
-  96% {
-    transform: translate(1px, 1px);
+}
+
+@keyframes letter-shake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  25% {
+    transform: translate(-1.5px, 1px) rotate(-3deg);
+  }
+  50% {
+    transform: translate(1px, -1.5px) rotate(2deg);
+  }
+  75% {
+    transform: translate(1.5px, 1px) rotate(-1deg);
   }
 }
 
@@ -235,8 +290,41 @@ body[data-mood="happy"] h1 {
     transform: rotate(-2deg);
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.6;
     transform: rotate(-3.5deg) translateY(2px);
+  }
+}
+
+@keyframes letter-nod {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  30% {
+    transform: translateY(5px) rotate(10deg);
+  }
+}
+
+@keyframes snore {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 0.85;
+  }
+}
+
+@keyframes letter-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
   }
 }
 
@@ -254,25 +342,26 @@ body[data-mood="happy"] h1 {
   }
 }
 
-@keyframes snore {
+@keyframes letter-pop {
   0%,
+  70%,
   100% {
-    transform: translateY(0);
-    opacity: 0.4;
+    transform: scale(1) rotate(0);
   }
-  50% {
-    transform: translateY(-8px);
-    opacity: 0.85;
+  35% {
+    transform: scale(1.25) rotate(-6deg);
+    color: #fff3a8;
   }
 }
 
-@keyframes title-bounce {
+@keyframes letter-bounce {
   0%,
+  60%,
   100% {
     transform: translateY(0);
   }
-  50% {
-    transform: translateY(-5px);
+  30% {
+    transform: translateY(-12px);
   }
 }
 

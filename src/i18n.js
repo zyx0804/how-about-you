@@ -4,7 +4,6 @@
 const UI_TEXT = {
   zh: {
     pageTitle: "How about you",
-    title: "How about you",
     subtitle: "说说你现在的感受，我从真实的设计师作品里，为你挑出和此刻情绪相通的今日单品。",
     feelingLabel: "你现在感觉怎么样？",
     feelingQuestions: {
@@ -68,7 +67,6 @@ const UI_TEXT = {
   },
   en: {
     pageTitle: "How about you",
-    title: "How about you",
     subtitle: "Tell me how you feel, and I'll pick today's pieces from real designers' work that share your mood.",
     feelingLabel: "How are you feeling right now?",
     feelingQuestions: {

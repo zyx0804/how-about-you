@@ -830,6 +830,226 @@ MOOD_BRANDS.calm = [
           en: "Quiet and useful.",
         },
       },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "藏青色打褶阔腿裤", en: "Navy pleated wide trousers" },
+        colors: ["#1e2440", "#141828"],
+        why: {
+          zh: "品牌最有名的就是阔腿裤，打褶让线条更舒展。",
+          en: "Wide trousers are the brand's signature; the pleats let the line breathe.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "格纹衬衫外套", en: "Check overshirt" },
+        colors: ["#8a7a6a", "#5a4a3a"],
+        why: {
+          zh: "介于衬衫和外套之间，随手一披就很从容。",
+          en: "Between a shirt and a jacket; throw it on and feel at ease.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "深棕色直筒裤", en: "Dark brown straight trousers" },
+        colors: ["#3a2a22", "#241a14"],
+        why: {
+          zh: "深棕色比黑色更柔和，安静又耐看。",
+          en: "Dark brown is softer than black: quiet and lasting.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "黑色牛仔夹克", en: "Black denim jacket" },
+        colors: ["#1e1e22", "#c9c4b8"],
+        why: {
+          zh: "干净的黑色牛仔，白色明线是唯一的装饰。",
+          en: "Clean black denim; the white topstitching is its only ornament.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "黑色宽直筒裤", en: "Black wide straight trousers" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "宽松垂坠的黑裤，走路时会轻轻摆动。",
+          en: "Loose, draping black trousers that sway as you walk.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "灰色条纹衬衫", en: "Gray striped shirt" },
+        colors: ["#8a8a8a", "#2a2a2a"],
+        why: {
+          zh: "细细的条纹，安静又有一点精神。",
+          en: "Fine stripes: quiet, with a little spark.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "奶油色弧形阔腿裤", en: "Cream curved wide trousers" },
+        colors: ["#f0e8d4", "#c8bca4"],
+        why: {
+          zh: "弧形的裤腿像一道柔和的线条，适合慢慢走。",
+          en: "Curved legs like a soft line, made for a slow walk.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "橄榄绿阔腿裤", en: "Olive wide trousers" },
+        colors: ["#6a6a4a", "#4a4a32"],
+        why: {
+          zh: "低饱和的橄榄绿，像一个平静的下午。",
+          en: "Muted olive, like a calm afternoon.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "combat",
+        name: { zh: "黑色厚底切尔西靴", en: "Black chunky Chelsea boots" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "厚实的鞋底，稳稳地踩在地上。",
+          en: "A thick sole that keeps you steady on the ground.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "灰色短袖针织衫", en: "Gray short-sleeve knit" },
+        colors: ["#b8b8b4", "#8a8a86"],
+        why: {
+          zh: "柔软的灰色短袖针织，春秋都能穿。",
+          en: "A soft gray short-sleeve knit for spring and fall.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "黑色衬衫夹克", en: "Black shirt jacket" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "利落的方正廓形，没有多余的东西。",
+          en: "A neat, boxy shape with nothing extra.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "黑色亨利领针织衫", en: "Black henley knit" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "领口几颗扣子，简单里有一点细节。",
+          en: "A few buttons at the neck: simple, with a detail.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "beanie",
+        name: { zh: "黑色罗纹毛线帽", en: "Black ribbed beanie" },
+        colors: ["#1a1a1e", "#3a3a3e"],
+        why: {
+          zh: "最基础的毛线帽，戴上就安心。",
+          en: "The most basic beanie; put it on and settle in.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "puffer",
+        name: { zh: "黑色短款羽绒服", en: "Black cropped puffer" },
+        colors: ["#141414", "#c9c9c9"],
+        why: {
+          zh: "短款的蓬松羽绒服，暖和又不臃肿。",
+          en: "A cropped, puffy down jacket: warm without bulk.",
+        },
+      },
+      {
+        category: "top",
+        shape: "cardigan",
+        name: { zh: "黑色拉链针织开衫", en: "Black zip knit jacket" },
+        colors: ["#141414", "#c9c9c9"],
+        why: {
+          zh: "拉链针织开衫，比外套轻，比毛衣利落。",
+          en: "A zip knit: lighter than a jacket, sharper than a sweater.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "棕色皮革飞行员夹克", en: "Brown leather bomber" },
+        colors: ["#4a2e22", "#2a1a14"],
+        why: {
+          zh: "柔软的棕色皮革，越穿越有味道。",
+          en: "Soft brown leather that gets better with wear.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "卡其色拉链夹克", en: "Tan zip jacket" },
+        colors: ["#c4a070", "#8a6a44"],
+        why: {
+          zh: "暖暖的卡其色，适合一个晴朗的平静日子。",
+          en: "A warm tan for a clear, calm day.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "翠绿色半拉链针织衫", en: "Green half-zip knit" },
+        colors: ["#2ab07a", "#1e7a54"],
+        why: {
+          zh: "一抹翠绿，平静里带点生气。",
+          en: "A splash of green: calm, with some life in it.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "黑色不对称上衣", en: "Black asymmetric top" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "不对称的下摆，安静的线条感。",
+          en: "An asymmetric hem with quiet lines.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "灰褐色宽松西装外套", en: "Taupe oversized blazer" },
+        colors: ["#8a8270", "#5a5446"],
+        why: {
+          zh: "宽松的西装，正式又不拘束。",
+          en: "A relaxed blazer: polished, never stiff.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "coat",
+        name: { zh: "白色长大衣", en: "White long coat" },
+        colors: ["#f4f2ee", "#c8c4bc"],
+        why: {
+          zh: "干净的白色长大衣，像一张没写字的纸。",
+          en: "A clean white coat, like a blank page.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "深棕色纽扣九分阔腿裤", en: "Dark brown cropped wide trousers with buttons" },
+        colors: ["#2a1e18", "#5a4a3a"],
+        why: {
+          zh: "九分长度露出脚踝，纽扣门襟是小细节。",
+          en: "Cropped to show the ankle, with a button fly as the small detail.",
+        },
+      },
     ],
   },
   {

@@ -374,6 +374,27 @@ function selectMood(moodId, fromMeter = false) {
 
 const pageTitle = document.querySelector("h1");
 
+// Wraps each letter of the title in its own span so every mood can move the
+// letters one after another. Spaces stay plain text so words keep their gaps.
+function splitTitleIntoLetters() {
+  const letters = [...pageTitle.textContent];
+  pageTitle.textContent = "";
+  letters.forEach((character, index) => {
+    if (character === " ") {
+      pageTitle.append(" ");
+      return;
+    }
+    const letter = document.createElement("span");
+    letter.className = "title-letter";
+    letter.setAttribute("aria-hidden", "true");
+    letter.style.setProperty("--i", index);
+    letter.textContent = character;
+    pageTitle.append(letter);
+  });
+}
+
+splitTitleIntoLetters();
+
 // Keeps the title on one line: if it is wider than its space (phones, or a
 // wide mood typeface), shrink the font just enough to fit.
 function fitTitle() {
