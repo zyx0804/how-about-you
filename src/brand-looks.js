@@ -5,7 +5,13 @@
 
 const BRAND_LOOKS = {
   "Rick Owens DRKSHDW": { font: "Cormorant SC", pattern: "drape" },
-  "Enfants Riches Déprimés": { font: "Pirata One", pattern: "distressed" },
+  "Enfants Riches Déprimés": {
+    font: "Noto Serif Display",
+    query: "Noto Serif Display:wdth,wght@62.5..100,700",
+    weight: 700,
+    stretch: "62.5%",
+    pattern: "distressed",
+  },
   "Ann Demeulemeester": { font: "Josefin Sans", pattern: "drape" },
   "Helmut Lang": { font: "Archivo", pattern: "grid" },
   "Number (N)ine": { font: "Special Elite", pattern: "tartan" },
@@ -84,6 +90,7 @@ function applyBrandFont(element, brandName) {
   element.style.fontFamily = `"${look.font}", var(--font-brand)`;
   element.style.fontStyle = look.style || "";
   element.style.fontWeight = look.weight ? String(look.weight) : "";
+  element.style.fontStretch = look.stretch || "";
 }
 
 // Each pattern is a small SVG tile, given the brand's colors a, b, c.
