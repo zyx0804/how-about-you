@@ -59,31 +59,33 @@ main {
 
 /* Each mood has its own type: a display face for the title, a face for
    brand names, and a Chinese body face, plus a small title effect. */
+/* Low, irritated, and tired get cartoon titles: rain-soaked letters, a
+   comic-book shout, and a sleepy rounded face. */
 body[data-mood="sad"] {
-  --font-display: "Cormorant Garamond", "Noto Serif SC", serif;
+  --font-display: "Rubik Puddles", "Noto Serif SC", cursive;
   --font-brand: "Cormorant Garamond", "Noto Serif SC", serif;
   --font-body: "Noto Serif SC", serif;
 }
 
 body[data-mood="sad"] h1 {
-  font-style: italic;
-  font-weight: 300;
-  font-size: 2.6rem;
-  letter-spacing: 0.12em;
-  opacity: 0.85;
+  font-weight: 400;
+  font-size: 2.7rem;
+  letter-spacing: 0.03em;
+  color: #b8c8f0;
 }
 
 body[data-mood="irritated"] {
-  --font-display: "Permanent Marker", "Ma Shan Zheng", cursive;
+  --font-display: "Bangers", "Ma Shan Zheng", cursive;
   --font-brand: "Permanent Marker", "Ma Shan Zheng", cursive;
   --font-body: "Noto Sans SC", sans-serif;
 }
 
 body[data-mood="irritated"] h1 {
   font-weight: 400;
-  font-size: 2.5rem;
-  letter-spacing: 0.02em;
+  font-size: 2.9rem;
+  letter-spacing: 0.06em;
   color: #ff8a5c;
+  text-shadow: 3px 3px 0 #3a0e08;
 }
 
 body[data-mood="irritated"] .subtitle,
@@ -93,17 +95,26 @@ body[data-mood="irritated"] label {
 }
 
 body[data-mood="tired"] {
-  --font-display: "Caveat", "Long Cang", cursive;
+  --font-display: "Sniglet", "Long Cang", cursive;
   --font-brand: "Caveat", "Long Cang", cursive;
   --font-body: "Noto Sans SC", sans-serif;
 }
 
 body[data-mood="tired"] h1 {
-  font-weight: 600;
-  font-size: 3rem;
+  font-weight: 800;
+  font-size: 2.6rem;
   letter-spacing: 0.02em;
+  color: #c8bce8;
   transform: rotate(-2deg);
   transform-origin: left center;
+}
+
+/* A little "zZ" dozing off after the title. */
+body[data-mood="tired"] h1::after {
+  content: " zZ";
+  display: inline-block;
+  font-size: 0.45em;
+  opacity: 0.7;
 }
 
 body[data-mood="tired"] .subtitle,
@@ -176,6 +187,10 @@ body[data-mood="happy"] h1 {
     animation: title-doze 6s ease-in-out infinite;
   }
 
+  body[data-mood="tired"] h1::after {
+    animation: snore 3s ease-in-out infinite;
+  }
+
   body[data-mood="excited"] h1 {
     animation: title-neon 4s infinite;
   }
@@ -228,6 +243,18 @@ body[data-mood="happy"] h1 {
   49%,
   52% {
     opacity: 0.45;
+  }
+}
+
+@keyframes snore {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 0.85;
   }
 }
 
