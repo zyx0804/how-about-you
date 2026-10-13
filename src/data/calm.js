@@ -598,7 +598,7 @@ MOOD_BRANDS.calm = [
         category: "outerwear",
         shape: "coat",
         name: { zh: "棉质风衣", en: "Cotton trench coat" },
-        colors: ["#c8b896", "#6a7a8a"],
+        colors: ["#1e2a3e", "#2e3a52"],
         why: {
           zh: "英式的从容。",
           en: "British composure.",
@@ -608,7 +608,7 @@ MOOD_BRANDS.calm = [
         category: "top",
         shape: "shirt",
         name: { zh: "白色棉衬衫", en: "White cotton shirt" },
-        colors: ["#f2efe8", "#c8c2b4"],
+        colors: ["#e8ece8", "#c8ccc8"],
         why: {
           zh: "她从衬衫起家。",
           en: "Where she began.",
@@ -618,7 +618,7 @@ MOOD_BRANDS.calm = [
         category: "bottom",
         shape: "trousers",
         name: { zh: "羊毛直筒裤", en: "Wool straight trousers" },
-        colors: ["#6a6a62", "#3a3a36"],
+        colors: ["#8a8478", "#5e5a50"],
         why: {
           zh: "耐穿的经典。",
           en: "A durable classic.",
@@ -642,6 +642,126 @@ MOOD_BRANDS.calm = [
         why: {
           zh: "一点点英式格纹。",
           en: "A touch of British check.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "藏青色宽腿裤", en: "Navy wide trousers" },
+        colors: ["#2a2a3e", "#1a1a2a"],
+        why: {
+          zh: "垂坠的藏青宽腿裤，朴素又耐穿。",
+          en: "Draping navy wide trousers: plain and lasting.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "jeans",
+        name: { zh: "做旧蓝色宽腿牛仔裤", en: "Washed blue wide jeans" },
+        colors: ["#6a86a8", "#3a5272"],
+        why: {
+          zh: "洗旧的蓝色牛仔，像穿了很多年的老朋友。",
+          en: "Washed blue denim, like an old friend worn for years.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "浅灰色打褶西裤", en: "Light gray pleated trousers" },
+        colors: ["#b8b6b0", "#8a8882"],
+        why: {
+          zh: "浅灰色打褶西裤，安静又有分寸。",
+          en: "Light gray pleated trousers: quiet and measured.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "coat",
+        name: { zh: "橄榄绿长大衣", en: "Olive long coat" },
+        colors: ["#5a5a32", "#3a3a20"],
+        why: {
+          zh: "橄榄绿的长大衣，像英国乡间的一个阴天。",
+          en: "An olive long coat, like an overcast day in the English countryside.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "橄榄绿衬衫", en: "Olive shirt" },
+        colors: ["#6a6a3a", "#4a4a28"],
+        why: {
+          zh: "柔和的橄榄绿，配什么裤子都安稳。",
+          en: "A soft olive that sits easily with any trousers.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "coat",
+        name: { zh: "藏青色牛角扣大衣", en: "Navy duffle coat" },
+        colors: ["#2a2e3e", "#c8a878"],
+        why: {
+          zh: "经典的英式牛角扣大衣，戴上帽子就很温暖。",
+          en: "The classic British duffle; pull up the hood and get warm.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "灰色短袖 Polo 衫", en: "Gray short-sleeve polo" },
+        colors: ["#8e8e8a", "#6a6a66"],
+        why: {
+          zh: "简单的灰色 Polo，夏天也很从容。",
+          en: "A simple gray polo, composed even in summer.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "墨绿色连帽派克", en: "Dark olive hooded parka" },
+        colors: ["#3a3e32", "#24261e"],
+        why: {
+          zh: "宽松的连帽派克，挡风也挡住一点心事。",
+          en: "A loose hooded parka that keeps out wind and a few worries.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "灰色拼色长袖衫", en: "Gray long sleeve with a black band" },
+        colors: ["#8a9290", "#1a1a1a"],
+        why: {
+          zh: "胸前一道黑色拼条，朴素里的一点变化。",
+          en: "A black band across the chest: a small change in a plain piece.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "黑色工装夹克", en: "Black work jacket" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "结实的工装夹克，越穿越有自己的样子。",
+          en: "A sturdy work jacket that becomes more yours with wear.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "米白色工装裤", en: "Off-white work trousers" },
+        colors: ["#e8e2d0", "#c8bea4"],
+        why: {
+          zh: "米白色的工装裤，洗旧了更好看。",
+          en: "Off-white work trousers that look better washed.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "蓝色法式工作裤", en: "Blue French work trousers" },
+        colors: ["#2a3a8a", "#1a2660"],
+        why: {
+          zh: "像法国工人穿的蓝色工作裤，结实又随性。",
+          en: "Blue work trousers like a French worker's: sturdy and relaxed.",
         },
       },
     ],
