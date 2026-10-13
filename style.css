@@ -166,8 +166,8 @@ body[data-mood="happy"] h1 {
 
 /* Title effects move only for people who have not asked for less motion.
    Every mood keeps its letters moving: raindrops sliding down (low), shaking
-   and flaring (irritated), nodding off one by one (tired), floating like a
-   slow breath (calm), popping neon (excited), and a bouncing wave (happy). */
+   and flaring (irritated), nodding off one by one (tired), swaying in a
+   breeze (calm), popping neon (excited), and a bouncing wave (happy). */
 @media (prefers-reduced-motion: no-preference) {
   body[data-mood="sad"] .title-letter {
     animation: letter-drip 4.5s ease-in-out infinite;
@@ -197,8 +197,12 @@ body[data-mood="happy"] h1 {
   }
 
   body[data-mood="calm"] .title-letter {
-    animation: letter-float 5s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.35s);
+    --sway: calc(0.15 + var(--random-a) * 0.3);
+    /* About a third of the letters get lifted by the wind (0 for the rest). */
+    --lift: clamp(0, (var(--random-b) - 0.65) * 3, 1);
+    transform-origin: 50% 100%;
+    animation: letter-breeze calc(4.5s + var(--random-b) * 3.5s) ease-in-out infinite;
+    animation-delay: calc(var(--random-a) * -8s);
   }
 
   body[data-mood="excited"] h1 {
@@ -291,13 +295,41 @@ body[data-mood="happy"] h1 {
   }
 }
 
-@keyframes letter-float {
+/* Uneven gusts: each letter bends from its base like a blade of grass, by
+   its own amount (--sway) and on its own clock, so the word never moves in
+   step. rotateX tips it slightly toward and away from the viewer, and the
+   letters with a --lift float up a little in each gust. */
+@keyframes letter-breeze {
   0%,
   100% {
-    transform: translateY(0);
+    transform: perspective(300px) rotateX(0)
+      translate(0, 0)
+      rotate(0) skewX(0);
   }
-  50% {
-    transform: translateY(-6px);
+  13% {
+    transform: perspective(300px) rotateX(calc(var(--sway) * 22deg))
+      translate(calc(var(--sway) * 1.5px), calc(var(--lift) * -4px))
+      rotate(calc(var(--sway) * 4deg)) skewX(calc(var(--sway) * -5deg));
+  }
+  27% {
+    transform: perspective(300px) rotateX(calc(var(--sway) * -12deg))
+      translate(calc(var(--sway) * -0.5px), calc(var(--lift) * -8px))
+      rotate(calc(var(--sway) * -2deg)) skewX(calc(var(--sway) * 2deg));
+  }
+  41% {
+    transform: perspective(300px) rotateX(calc(var(--sway) * 16deg))
+      translate(calc(var(--sway) * 1px), calc(var(--lift) * -6px))
+      rotate(calc(var(--sway) * 2.5deg)) skewX(calc(var(--sway) * -3deg));
+  }
+  58% {
+    transform: perspective(300px) rotateX(calc(var(--sway) * -8deg))
+      translate(0, calc(var(--lift) * -2px))
+      rotate(calc(var(--sway) * -1deg)) skewX(calc(var(--sway) * 1deg));
+  }
+  72% {
+    transform: perspective(300px) rotateX(calc(var(--sway) * 6deg))
+      translate(calc(var(--sway) * 0.5px), 0)
+      rotate(calc(var(--sway) * 1.5deg)) skewX(0);
   }
 }
 

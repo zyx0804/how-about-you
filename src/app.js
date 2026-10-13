@@ -388,6 +388,10 @@ function splitTitleIntoLetters() {
     letter.className = "title-letter";
     letter.setAttribute("aria-hidden", "true");
     letter.style.setProperty("--i", index);
+    // Two random numbers from 0 to 1 per letter, so effects like the calm
+    // breeze can give every letter its own strength and timing.
+    letter.style.setProperty("--random-a", Math.random().toFixed(2));
+    letter.style.setProperty("--random-b", Math.random().toFixed(2));
     letter.textContent = character;
     pageTitle.append(letter);
   });
