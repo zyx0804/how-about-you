@@ -59,8 +59,9 @@ main {
 
 /* Each mood has its own type: a display face for the title, a face for
    brand names, and a Chinese body face, plus a small title effect. */
-/* Low, irritated, and tired get cartoon titles: rain-soaked letters,
-   scorched letters, and a sleepy rounded face. */
+/* Every mood's title is a cartoon face: rain-soaked letters (low), scorched
+   letters (irritated), a sleepy rounded face (tired), soft round letters
+   (calm), bubble letters (excited), and a classic cartoon bold (happy). */
 body[data-mood="sad"] {
   --font-display: "Rubik Puddles", "Noto Serif SC", cursive;
   --font-brand: "Cormorant Garamond", "Noto Serif SC", serif;
@@ -129,27 +130,29 @@ body[data-mood="tired"] main {
 }
 
 body[data-mood="calm"] {
-  --font-display: "EB Garamond", "ZCOOL XiaoWei", serif;
+  --font-display: "Mochiy Pop P One", "ZCOOL XiaoWei", sans-serif;
   --font-brand: "EB Garamond", "ZCOOL XiaoWei", serif;
   --font-body: "ZCOOL XiaoWei", "Noto Serif SC", serif;
 }
 
 body[data-mood="calm"] h1 {
   font-weight: 400;
-  font-size: 2.5rem;
-  letter-spacing: 0.22em;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  color: #4f7d74;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.7);
 }
 
 body[data-mood="excited"] {
-  --font-display: "Monoton", "ZCOOL QingKe HuangYou", cursive;
+  --font-display: "Rubik Bubbles", "ZCOOL QingKe HuangYou", cursive;
   --font-brand: "Syne", "ZCOOL QingKe HuangYou", sans-serif;
   --font-body: "Noto Sans SC", sans-serif;
 }
 
 body[data-mood="excited"] h1 {
   font-weight: 400;
-  font-size: 2.3rem;
-  letter-spacing: 0.04em;
+  font-size: 2.7rem;
+  letter-spacing: 0.03em;
   color: #ffd6ec;
   text-shadow:
     0 0 6px #ff4fa0,
@@ -164,17 +167,22 @@ body[data-mood="excited"] label {
 }
 
 body[data-mood="happy"] {
-  --font-display: "Fredoka", "ZCOOL KuaiLe", sans-serif;
+  --font-display: "Luckiest Guy", "ZCOOL KuaiLe", sans-serif;
   --font-brand: "Fredoka", "ZCOOL KuaiLe", sans-serif;
   --font-body: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
 }
 
 body[data-mood="happy"] h1 {
-  font-weight: 700;
-  font-size: 2.6rem;
-  letter-spacing: 0.02em;
+  font-weight: 400;
+  font-size: 2.8rem;
+  letter-spacing: 0.04em;
   color: #ffffff;
-  text-shadow: 0 2px 0 #2f7fc0, 0 4px 14px rgba(20, 70, 120, 0.35);
+  text-shadow:
+    2px 2px 0 #2f7fc0,
+    -1px -1px 0 #2f7fc0,
+    1px -1px 0 #2f7fc0,
+    -1px 1px 0 #2f7fc0,
+    0 6px 14px rgba(20, 70, 120, 0.35);
 }
 
 /* Title effects move only for people who have not asked for less motion. */

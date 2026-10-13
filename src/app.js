@@ -311,9 +311,13 @@ function renderCalculatorText() {
   renderCalculatorScore();
 }
 
-// Labels that depend on the mood and language: meter, title, hint, floaters.
+const feelingLabel = document.querySelector('label[for="feeling-input"]');
+
+// Labels that depend on the mood and language: question, meter, title, hint, floaters.
 function renderMoodText() {
   const text = UI_TEXT[language];
+  // Each mood asks its own question; before a mood is picked, the general one.
+  feelingLabel.textContent = (currentMoodId && text.feelingQuestions[currentMoodId]) || text.feelingLabel;
   renderCalculatorText();
   MOOD_ORDER.forEach((moodId, index) => {
     meterLabels.children[index].textContent = MOODS[moodId].label[language];
