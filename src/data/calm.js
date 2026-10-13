@@ -114,7 +114,7 @@ MOOD_BRANDS.calm = [
         category: "top",
         shape: "shirt",
         name: { zh: "柔软廓形衬衫", en: "Soft relaxed shirt" },
-        colors: ["#cdbf9f", "#7d7a62"],
+        colors: ["#8a7a6e", "#5a4e44"],
         why: {
           zh: "不费力的剪裁。",
           en: "An effortless cut.",
@@ -124,7 +124,7 @@ MOOD_BRANDS.calm = [
         category: "bottom",
         shape: "trousers",
         name: { zh: "高腰打褶长裤", en: "High-waist pleated trousers" },
-        colors: ["#7d7a62", "#3d3b30"],
+        colors: ["#8a8276", "#5a544a"],
         why: {
           zh: "安静的颜色，舒服的版型。",
           en: "Quiet color, comfortable shape.",
@@ -144,10 +144,180 @@ MOOD_BRANDS.calm = [
         category: "accessory",
         shape: "minibag",
         name: { zh: "Croissant 牛角包", en: "Croissant bag" },
-        colors: ["#8a6a48", "#4a3b2c"],
+        colors: ["#9a4a32", "#6a2e20"],
         why: {
           zh: "LEMAIRE 标志性的牛角形斜挎包。",
           en: "LEMAIRE's signature croissant-shaped bag.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "cargo",
+        name: { zh: "奶油色工装裤", en: "Cream cargo trousers" },
+        colors: ["#f0e8d6", "#c8bca4"],
+        why: {
+          zh: "柔和的奶油色工装裤，口袋多但不显乱。",
+          en: "Soft cream cargos: lots of pockets, never messy.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "wide",
+        name: { zh: "黑色宽腿九分裤", en: "Black wide cropped trousers" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "宽宽的裤腿停在脚踝上方，走起来很轻松。",
+          en: "Wide legs ending above the ankle; easy to move in.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "锈红色直筒裤", en: "Rust straight trousers" },
+        colors: ["#7a3a24", "#4a2214"],
+        why: {
+          zh: "一点锈红色，平静里带着温度。",
+          en: "A touch of rust: calm, with some warmth.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "灰绿色衬衫", en: "Sage gray shirt" },
+        colors: ["#6e786c", "#4a5248"],
+        why: {
+          zh: "灰绿色像雨后的叶子，安静又舒服。",
+          en: "Sage gray like leaves after rain: quiet and easy.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "tote",
+        name: { zh: "黑色尼龙单肩包", en: "Black nylon shoulder bag" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "轻便的尼龙包，装下一天的东西。",
+          en: "A light nylon bag for everything in your day.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "黑色短袖衬衫", en: "Black short-sleeve shirt" },
+        colors: ["#1a1a1a", "#3a3a3a"],
+        why: {
+          zh: "宽松的短袖衬衫，热天也能穿得从容。",
+          en: "A loose short-sleeve shirt, composed even on hot days.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "coat",
+        name: { zh: "墨绿色连帽长大衣", en: "Dark olive hooded long coat" },
+        colors: ["#3a4032", "#24281e"],
+        why: {
+          zh: "长长的连帽大衣，像被一片安静的树林包住。",
+          en: "A long hooded coat, like being wrapped in a quiet forest.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "boots",
+        name: { zh: "黑色皮质长靴", en: "Black leather tall boots" },
+        colors: ["#141414", "#3a3a3a"],
+        why: {
+          zh: "柔软的皮革长靴，线条干净。",
+          en: "Soft leather tall boots with clean lines.",
+        },
+      },
+      {
+        category: "top",
+        shape: "shirt",
+        name: { zh: "黑色无领衬衫", en: "Black collarless shirt" },
+        colors: ["#141420", "#7a2a2a"],
+        why: {
+          zh: "去掉领子，只留下最简单的线条。",
+          en: "No collar, just the simplest line.",
+        },
+      },
+      {
+        category: "bottom",
+        shape: "trousers",
+        name: { zh: "墨绿色锥形裤", en: "Dark green tapered trousers" },
+        colors: ["#2a3428", "#1a2018"],
+        why: {
+          zh: "收窄的裤脚，深绿色很耐看。",
+          en: "Tapered at the ankle in a deep green that lasts.",
+        },
+      },
+      {
+        category: "accessory",
+        shape: "belt",
+        name: { zh: "皮质腰包", en: "Leather belt bag" },
+        colors: ["#2a1e18", "#c8a050"],
+        why: {
+          zh: "小小的皮质腰包，出门只带必需品。",
+          en: "A small leather belt bag for just the essentials.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "jacket",
+        name: { zh: "灯芯绒羊羔毛领夹克", en: "Corduroy jacket with a shearling collar" },
+        colors: ["#7a6a3a", "#c8b48a"],
+        why: {
+          zh: "旧旧的灯芯绒配一圈毛领，暖和又随性。",
+          en: "Worn-in corduroy with a shearling collar: warm and easy.",
+        },
+      },
+      {
+        category: "top",
+        shape: "knit",
+        name: { zh: "墨绿色针织上衣", en: "Dark green knit top" },
+        colors: ["#2a3a38", "#1a2422"],
+        why: {
+          zh: "简单的圆领针织，颜色像深湖水。",
+          en: "A simple crewneck knit the color of a deep lake.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "boots",
+        name: { zh: "棕色麂皮西部靴", en: "Brown suede western boots" },
+        colors: ["#8a6244", "#5a3e2a"],
+        why: {
+          zh: "柔软的麂皮西部靴，慢慢走也很好看。",
+          en: "Soft suede western boots that look good at a slow pace.",
+        },
+      },
+      {
+        category: "top",
+        shape: "tee",
+        name: { zh: "红色印花白色长袖", en: "White long sleeve with a red print" },
+        colors: ["#f4f2ee", "#b8302a"],
+        why: {
+          zh: "白底上一块红色印花，平静里一个小惊喜。",
+          en: "A red print on white: a small surprise in a calm day.",
+        },
+      },
+      {
+        category: "outerwear",
+        shape: "coat",
+        name: { zh: "藏青色系带长大衣", en: "Navy belted long coat" },
+        colors: ["#1a1e2e", "#2a3044"],
+        why: {
+          zh: "系上腰带的长大衣，从容又有型。",
+          en: "A long coat tied at the waist: unhurried and shapely.",
+        },
+      },
+      {
+        category: "shoes",
+        shape: "combat",
+        name: { zh: "黑色方头短靴", en: "Black square-toe ankle boots" },
+        colors: ["#141414", "#2a2a2a"],
+        why: {
+          zh: "方头短靴，安静又利落。",
+          en: "Square-toe ankle boots: quiet and sharp.",
         },
       },
     ],
