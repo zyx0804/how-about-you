@@ -74,11 +74,75 @@ function intensityWeight(brand, positionInRange) {
   return Math.exp(-(distance * distance) / (2 * INTENSITY_SPREAD * INTENSITY_SPREAD));
 }
 
-// Returns up to five picks, { brand, item }, each from a different brand.
-// Brands near the score are likelier, and categories not used yet are
-// preferred, so the picks mix clothes and shoes when the shelf allows.
-function pickOutfit(brands, positionInRange, seedText) {
-  const random = seededRandom(hashText(seedText));
+// ---- Coordination: which combinations look good together ----
+
+// How many candidate combinations to draw before keeping the best one.
+const CANDIDATES = 40;
+// Shapes worn in cold weather and in hot weather; a set shouldn't mix them.
+const WINTER_SHAPES = ["coat", "puffer", "beanie"];
+const SUMMER_SHAPES = ["sandals", "shorts"];
+
+// Saturation and lightness (0 to 1) of a #rrggbb color.
+function colorTone(hex) {
+  const value = parseInt(hex.slice(1), 16);
+  const [r, g, b] = [(value >> 16) & 255, (value >> 8) & 255, value & 255].map((channel) => channel / 255);
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const lightness = (max + min) / 2;
+  const saturation = max === min ? 0 : (max - min) / (1 - Math.abs(2 * lightness - 1));
+  return { saturation, lightness };
+}
+
+// A bright, saturated main color (red, pink, green, royal blue...), as
+// opposed to black, white, gray, beige, navy, brown, or olive.
+function isLoud(item) {
+  const { saturation, lightness } = colorTone(item.colors[0]);
+  return saturation > 0.45 && lightness > 0.22 && lightness < 0.8;
+}
+
+// Higher is better. One bright piece with neutrals reads as styled; two or
+// more bright pieces clash. Winter and summer pieces together look odd, and
+// a set of all mid-tones with nothing dark or light looks flat.
+function harmonyScore(items) {
+  let score = 0;
+  const loud = items.filter(isLoud).length;
+  if (loud > 1) {
+    score -= 10 * (loud - 1);
+  }
+  const hasWinter = items.some((item) => WINTER_SHAPES.includes(item.shape));
+  const hasSummer = items.some((item) => SUMMER_SHAPES.includes(item.shape));
+  if (hasWinter && hasSummer) {
+    score -= 8;
+  }
+  const lightness = items.map((item) => colorTone(item.colors[0]).lightness);
+  const spread = Math.max(...lightness) - Math.min(...lightness);
+  const anchored = lightness.some((value) => value < 0.2 || value > 0.85);
+  if (items.length >= 3 && spread < 0.12 && !anchored) {
+    score -= 2;
+  }
+  return score;
+}
+
+// Draws many candidates with the same random stream and keeps the first
+// one with the best harmony score, so results stay fixed for a given seed.
+function bestOf(draw, itemsOf, random) {
+  let best = null;
+  let bestScore = -Infinity;
+  for (let attempt = 0; attempt < CANDIDATES; attempt++) {
+    const candidate = draw(random);
+    const score = harmonyScore(itemsOf(candidate));
+    if (score > bestScore) {
+      best = candidate;
+      bestScore = score;
+    }
+  }
+  return best;
+}
+
+// One draw of up to five picks, each from a different brand. Brands near
+// the score are likelier, and categories not used yet are preferred, so the
+// picks mix clothes and shoes when the shelf allows.
+function drawOutfit(brands, positionInRange, random) {
   const usedBrands = new Set();
   const usedCategories = new Set();
   const picks = [];
@@ -101,26 +165,51 @@ function pickOutfit(brands, positionInRange, seedText) {
     usedCategories.add(item.category);
     picks.push({ brand: chosen.brand, item });
   }
-  // Show them in the usual order: outerwear, top, bottoms, shoes, accessory.
+  return picks;
+}
+
+// Today's picks: the best-coordinated of many draws, shown in the usual
+// order (outerwear, top, bottoms, shoes, accessory).
+function pickOutfit(brands, positionInRange, seedText) {
+  const random = seededRandom(hashText(seedText));
+  const picks = bestOf(
+    (stream) => drawOutfit(brands, positionInRange, stream),
+    (candidate) => candidate.map(({ item }) => item),
+    random,
+  );
   return picks.sort((a, b) => OUTFIT_CATEGORIES.indexOf(a.item.category) - OUTFIT_CATEGORIES.indexOf(b.item.category));
 }
 
 // The set a brand page shows: one item per category, with today's pick in
-// its category and the others drawn by the seed, so the set changes daily.
+// its category and the best-coordinated choice for the others, drawn by the
+// seed so the set changes daily.
 function pickBrandSet(brand, pickedItem, seedText) {
   const random = seededRandom(hashText(seedText));
-  const set = [];
-  for (const category of OUTFIT_CATEGORIES) {
-    const items = brand.items.filter((item) => item.category === category);
-    if (items.length === 0) {
-      continue;
+  const drawSet = (stream) => {
+    const set = [];
+    for (const category of OUTFIT_CATEGORIES) {
+      const items = brand.items.filter((item) => item.category === category);
+      if (items.length > 0) {
+        set.push(pickedItem.category === category ? pickedItem : items[Math.floor(stream() * items.length)]);
+      }
     }
-    set.push(pickedItem.category === category ? pickedItem : items[Math.floor(random() * items.length)]);
-  }
-  return set;
+    return set;
+  };
+  return bestOf(drawSet, (set) => set, random);
 }
 
 // Lets tests load this file in Node; browsers ignore it.
 if (typeof module !== "undefined") {
-  module.exports = { OUTFIT_CATEGORIES, seededRandom, hashText, todayKey, hasPicture, onShelf, pickOutfit, pickBrandSet };
+  module.exports = {
+    OUTFIT_CATEGORIES,
+    seededRandom,
+    hashText,
+    todayKey,
+    hasPicture,
+    onShelf,
+    isLoud,
+    harmonyScore,
+    pickOutfit,
+    pickBrandSet,
+  };
 }
