@@ -22,7 +22,7 @@ const BRAND_LOOKS = {
   VETEMENTS: { font: "Anton", pattern: "stripes" },
   "Vivienne Westwood": { font: "Playfair Display SC", pattern: "tartan" },
   "HYSTERIC GLAMOUR": { font: "Abril Fatface", pattern: "stars" },
-  "Chrome Hearts": { font: "UnifrakturMaguntia", pattern: "crosses" },
+  "Chrome Hearts": { font: "Cormorant Garamond", query: "Cormorant Garamond:wght@600", weight: 600, pattern: "crosses" },
   "Dr. Martens": { font: "Lobster Two", pattern: "stitches" },
   Supreme: { font: "Jost", query: "Jost:ital,wght@1,800", style: "italic", weight: 800, pattern: "stripes" },
   "Homme Plissé Issey Miyake": { font: "Montserrat", pattern: "pleats" },

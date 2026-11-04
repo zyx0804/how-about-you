@@ -41,3 +41,8 @@ function aiReadMood(text) {
 function aiAskStylist(question, brand, item, language) {
   return callAi("/ask", { question, brand, item, lang: language });
 }
+
+// { ok } once a good review reaches the worker's log, or null.
+function aiSendFeedback(entry) {
+  return callAi("/feedback", entry);
+}

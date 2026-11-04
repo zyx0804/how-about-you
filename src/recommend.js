@@ -199,9 +199,40 @@ function pickBrandSet(brand, pickedItem, seedText) {
 }
 
 // Lets tests load this file in Node; browsers ignore it.
+// Picks three suggested questions for the AI stylist: one about the piece's
+// category, one about the mood, and one general, in a shuffled order. Each is
+// returned as { group, index } (plus mood) so it can be shown in either
+// language, and questions in avoid (the ones on screen now) are skipped when
+// the group has others.
+function askQuestionList(questions, ref) {
+  return ref.group === "mood" ? questions.moods[ref.mood] : questions[ref.group];
+}
+
+function pickAskQuestions(questions, category, mood, avoid, random) {
+  const avoided = new Set(avoid.map((ref) => `${ref.group}|${ref.index}`));
+  const fromGroup = (ref) => {
+    const all = askQuestionList(questions, ref).map((_, index) => index);
+    const fresh = all.filter((index) => !avoided.has(`${ref.group}|${index}`));
+    const choices = fresh.length > 0 ? fresh : all;
+    const pick = { ...ref, index: choices[Math.floor(random() * choices.length)] };
+    avoided.add(`${pick.group}|${pick.index}`);
+    return pick;
+  };
+  const picks = [fromGroup({ group: category }), fromGroup({ group: "general" })];
+  // Before a mood is chosen there are no mood questions: use another general one.
+  picks.push(questions.moods[mood] ? fromGroup({ group: "mood", mood }) : fromGroup({ group: "general" }));
+  for (let i = picks.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [picks[i], picks[j]] = [picks[j], picks[i]];
+  }
+  return picks;
+}
+
 if (typeof module !== "undefined") {
   module.exports = {
     OUTFIT_CATEGORIES,
+    askQuestionList,
+    pickAskQuestions,
     seededRandom,
     hashText,
     todayKey,

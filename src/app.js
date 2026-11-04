@@ -24,6 +24,10 @@ const askSuggestions = document.getElementById("ask-suggestions");
 const askForm = document.getElementById("ask-form");
 const askInput = document.getElementById("ask-input");
 const askAnswer = document.getElementById("ask-answer");
+const feedbackSection = document.getElementById("feedback-section");
+const feedbackForm = document.getElementById("feedback-form");
+const feedbackInput = document.getElementById("feedback-input");
+const feedbackStatus = document.getElementById("feedback-status");
 const moodMeter = document.getElementById("mood-meter");
 const meterValue = document.getElementById("mood-meter-value");
 const meterLabels = document.getElementById("meter-labels");
@@ -36,6 +40,7 @@ const photoKind = document.getElementById("photo-kind");
 const photoCaption = document.getElementById("photo-caption");
 const photoAuthor = document.getElementById("photo-author");
 const photoLicense = document.getElementById("photo-license");
+const backToTop = document.getElementById("back-to-top");
 
 let language = loadLanguage();
 let currentMoodId = null;
@@ -223,6 +228,12 @@ function showPick(pickIndex) {
   openPick = currentPicks[pickIndex];
   askAnswer.hidden = true;
   askInput.value = "";
+  askRefs = [];
+  drawAskQuestions();
+  feedbackSection.hidden = !aiEnabled();
+  feedbackForm.hidden = false;
+  feedbackStatus.hidden = true;
+  feedbackInput.value = "";
   renderBrandPage();
   result.hidden = false;
   // Restart the fade-in so switching brands is visible.
@@ -469,9 +480,20 @@ feelingForm.addEventListener("submit", async (event) => {
   selectMood(moodId);
 });
 
+// The stylist's suggested questions on screen, kept as { group, index } so
+// switching language shows the same questions translated.
+let askRefs = [];
+
+function drawAskQuestions() {
+  const questions = UI_TEXT[language].askQuestions;
+  askRefs = pickAskQuestions(questions, openPick.item.category, currentMoodId, askRefs, Math.random);
+}
+
 function renderAskSuggestions() {
+  const text = UI_TEXT[language];
   askSuggestions.innerHTML = "";
-  for (const suggestion of UI_TEXT[language].askSuggestions) {
+  for (const ref of askRefs) {
+    const suggestion = askQuestionList(text.askQuestions, ref)[ref.index];
     const chip = document.createElement("button");
     chip.type = "button";
     chip.className = "ask-chip";
@@ -482,6 +504,15 @@ function renderAskSuggestions() {
     });
     askSuggestions.append(chip);
   }
+  const more = document.createElement("button");
+  more.type = "button";
+  more.className = "ask-chip ask-more";
+  more.textContent = `↻ ${text.askMore}`;
+  more.addEventListener("click", () => {
+    drawAskQuestions();
+    renderAskSuggestions();
+  });
+  askSuggestions.append(more);
 }
 
 askForm.addEventListener("submit", async (event) => {
@@ -534,6 +565,44 @@ calcApply.addEventListener("click", () => {
   moodMeter.value = scoreFromAnswers(calculatorAnswers());
   selectMood(moodForScore(Number(moodMeter.value)), true);
   todaySection.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// A good review of the piece on screen goes to the worker's log, which only
+// the app's owner can read. There is no negative option, by design.
+feedbackForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (openPick === null) {
+    return;
+  }
+  const text = UI_TEXT[language];
+  const sendButton = feedbackForm.querySelector("button");
+  sendButton.disabled = true;
+  feedbackStatus.hidden = false;
+  feedbackStatus.textContent = text.feedbackSending;
+  const reply = await aiSendFeedback({
+    liked: true,
+    text: feedbackInput.value.trim(),
+    brand: openPick.brand.brand,
+    item: openPick.item.name.en,
+    mood: currentMoodId,
+  });
+  sendButton.disabled = false;
+  if (reply && reply.ok) {
+    feedbackForm.hidden = true;
+    feedbackStatus.textContent = UI_TEXT[language].feedbackThanks;
+  } else {
+    feedbackStatus.textContent = UI_TEXT[language].feedbackError;
+  }
+});
+
+// Once the reader has scrolled about a screen down, a button takes them back
+// to the top of the page in one tap.
+function updateBackToTop() {
+  backToTop.hidden = window.scrollY < window.innerHeight * 0.8;
+}
+window.addEventListener("scroll", updateBackToTop, { passive: true });
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // If a photo fails to load (offline, or removed from Commons), hide it
