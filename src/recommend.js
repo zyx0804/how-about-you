@@ -1,5 +1,5 @@
 // Picks today's recommendation: up to five pictured items from different
-// brands of the current mood. Brands whose intensity is close to where the
+// brands and categories of the current mood. Brands whose intensity is close to where the
 // score sits inside the mood's range are more likely, and the choice is
 // seeded by the date and score, so the same day and score give the same
 // picks while a new day brings different ones.
@@ -75,62 +75,22 @@ function intensityWeight(brand, positionInRange) {
 }
 
 // ---- Coordination: which combinations look good together ----
+// (The styling rules themselves are in styling.js.)
 
 // How many candidate combinations to draw before keeping the best one.
 const CANDIDATES = 40;
-// Shapes worn in cold weather and in hot weather; a set shouldn't mix them.
-const WINTER_SHAPES = ["coat", "puffer", "beanie"];
-const SUMMER_SHAPES = ["sandals", "shorts"];
-
-// Saturation and lightness (0 to 1) of a #rrggbb color.
-function colorTone(hex) {
-  const value = parseInt(hex.slice(1), 16);
-  const [r, g, b] = [(value >> 16) & 255, (value >> 8) & 255, value & 255].map((channel) => channel / 255);
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  const lightness = (max + min) / 2;
-  const saturation = max === min ? 0 : (max - min) / (1 - Math.abs(2 * lightness - 1));
-  return { saturation, lightness };
-}
-
-// A bright, saturated main color (red, pink, green, royal blue...), as
-// opposed to black, white, gray, beige, navy, brown, or olive.
-function isLoud(item) {
-  const { saturation, lightness } = colorTone(item.colors[0]);
-  return saturation > 0.45 && lightness > 0.22 && lightness < 0.8;
-}
-
-// Higher is better. One bright piece with neutrals reads as styled; two or
-// more bright pieces clash. Winter and summer pieces together look odd, and
-// a set of all mid-tones with nothing dark or light looks flat.
-function harmonyScore(items) {
-  let score = 0;
-  const loud = items.filter(isLoud).length;
-  if (loud > 1) {
-    score -= 10 * (loud - 1);
-  }
-  const hasWinter = items.some((item) => WINTER_SHAPES.includes(item.shape));
-  const hasSummer = items.some((item) => SUMMER_SHAPES.includes(item.shape));
-  if (hasWinter && hasSummer) {
-    score -= 8;
-  }
-  const lightness = items.map((item) => colorTone(item.colors[0]).lightness);
-  const spread = Math.max(...lightness) - Math.min(...lightness);
-  const anchored = lightness.some((value) => value < 0.2 || value > 0.85);
-  if (items.length >= 3 && spread < 0.12 && !anchored) {
-    score -= 2;
-  }
-  return score;
-}
 
 // Draws many candidates with the same random stream and keeps the first
-// one with the best harmony score, so results stay fixed for a given seed.
+// one with the most pieces, then the best harmony score, so results stay
+// fixed for a given seed. (Taking a brand's shoes can leave no top from
+// anyone else, so some draws come out shorter than others.)
 function bestOf(draw, itemsOf, random) {
   let best = null;
   let bestScore = -Infinity;
   for (let attempt = 0; attempt < CANDIDATES; attempt++) {
     const candidate = draw(random);
-    const score = harmonyScore(itemsOf(candidate));
+    const items = itemsOf(candidate);
+    const score = 100 * items.length + harmonyScore(items);
     if (score > bestScore) {
       best = candidate;
       bestScore = score;
@@ -139,31 +99,32 @@ function bestOf(draw, itemsOf, random) {
   return best;
 }
 
-// One draw of up to five picks, each from a different brand. Brands near
-// the score are likelier, and categories not used yet are preferred, so the
-// picks mix clothes and shoes when the shelf allows.
+// One draw of up to five picks, each from a different brand and a different
+// category, so a shelf of mostly shoes gives one pair, not four (Yuxuan,
+// 11/10). The categories are filled in a random order, each from a brand not
+// used yet, with brands near the score likelier.
 function drawOutfit(brands, positionInRange, random) {
+  const categories = [...OUTFIT_CATEGORIES];
+  for (let i = categories.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [categories[i], categories[j]] = [categories[j], categories[i]];
+  }
   const usedBrands = new Set();
-  const usedCategories = new Set();
   const picks = [];
-  while (picks.length < OUTFIT_SIZE) {
+  for (const category of categories) {
     const candidates = [];
     for (const brand of brands) {
-      if (usedBrands.has(brand.brand)) {
-        continue;
+      const items = brand.items.filter((item) => item.category === category);
+      if (!usedBrands.has(brand.brand) && items.length > 0) {
+        candidates.push({ brand, items, weight: intensityWeight(brand, positionInRange) });
       }
-      const fresh = brand.items.filter((item) => !usedCategories.has(item.category));
-      const weight = intensityWeight(brand, positionInRange) * (fresh.length > 0 ? 1 : 0.3);
-      candidates.push({ brand, items: fresh.length > 0 ? fresh : brand.items, weight });
     }
     if (candidates.length === 0) {
-      break;
+      continue;
     }
     const chosen = pickWeighted(candidates, random);
-    const item = chosen.items[Math.floor(random() * chosen.items.length)];
     usedBrands.add(chosen.brand.brand);
-    usedCategories.add(item.category);
-    picks.push({ brand: chosen.brand, item });
+    picks.push({ brand: chosen.brand, item: chosen.items[Math.floor(random() * chosen.items.length)] });
   }
   return picks;
 }
@@ -238,8 +199,6 @@ if (typeof module !== "undefined") {
     todayKey,
     hasPicture,
     onShelf,
-    isLoud,
-    harmonyScore,
     pickOutfit,
     pickBrandSet,
   };
