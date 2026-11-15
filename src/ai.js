@@ -37,9 +37,10 @@ function aiReadMood(text) {
   return callAi("/mood", { text });
 }
 
-// { answer } from the AI, or null.
-function aiAskStylist(question, brand, item, language) {
-  return callAi("/ask", { question, brand, item, lang: language });
+// { answer } from the AI, or null. weather is { kind, low, high }, with low
+// and high null when the weather is only guessed from the month.
+function aiAskStylist(question, brand, item, language, weather) {
+  return callAi("/ask", { question, brand, item, lang: language, weather });
 }
 
 // { ok } once a good review reaches the worker's log, or null.

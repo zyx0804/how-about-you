@@ -6,6 +6,8 @@ const feelingInput = document.getElementById("feeling-input");
 const feelingForm = document.getElementById("feeling-form");
 const message = document.getElementById("message");
 const todaySection = document.getElementById("today");
+const weatherText = document.getElementById("weather-text");
+const weatherButton = document.getElementById("weather-button");
 const moodTitle = document.getElementById("mood-title");
 const hint = document.getElementById("hint");
 const result = document.getElementById("result");
@@ -325,7 +327,44 @@ function renderCalculatorText() {
 const feelingLabel = document.querySelector('label[for="feeling-input"]');
 
 // Labels that depend on the mood and language: question, meter, title, hint, floaters.
+// Today's weather: guessed from the month until the visitor shares their
+// location; status is "month", "loading", "local", or "failed".
+let todaysWeather = { kind: weatherForMonth(), low: null, high: null, status: "month" };
+
+function renderWeather() {
+  const text = UI_TEXT[language];
+  const label = text.weatherKinds[todaysWeather.kind];
+  if (todaysWeather.status === "local") {
+    weatherText.textContent = text.weatherLocal(todaysWeather.low, todaysWeather.high, label);
+  } else if (todaysWeather.status === "loading") {
+    weatherText.textContent = text.weatherLoading;
+  } else if (todaysWeather.status === "failed") {
+    weatherText.textContent = text.weatherFailed(label);
+  } else {
+    weatherText.textContent = text.weatherMonth(label);
+  }
+  weatherButton.textContent = text.weatherButton;
+  weatherButton.hidden = todaysWeather.status === "local" || todaysWeather.status === "loading";
+}
+
+// Asks for the visitor's location and today's forecast, then picks again so
+// the outfit suits it. If either fails, the month's guess stays.
+async function useLocalWeather() {
+  todaysWeather = { ...todaysWeather, status: "loading" };
+  renderWeather();
+  try {
+    todaysWeather = { ...(await fetchLocalWeather()), status: "local" };
+  } catch {
+    todaysWeather = { kind: weatherForMonth(), low: null, high: null, status: "failed" };
+  }
+  renderWeather();
+  if (currentMoodId !== null) {
+    pickAndShowOutfit();
+  }
+}
+
 function renderMoodText() {
+  renderWeather();
   const text = UI_TEXT[language];
   // Each mood asks its own question; before a mood is picked, the general one.
   feelingLabel.textContent = (currentMoodId && text.feelingQuestions[currentMoodId]) || text.feelingLabel;
@@ -355,7 +394,7 @@ function pickAndShowOutfit() {
   const rangeStart = MOOD_ORDER.indexOf(currentMoodId) * MOOD_RANGE;
   const position = Math.min(1, Math.max(0, (score - rangeStart) / MOOD_RANGE));
   // Only pictured items are on the shelf; items still waiting for a picture stay hidden.
-  currentPicks = pickOutfit(onShelf(MOOD_BRANDS[currentMoodId]), position, `${todayKey()}|${currentMoodId}|${score}`);
+  currentPicks = pickOutfit(onShelf(MOOD_BRANDS[currentMoodId], todaysWeather.kind), position, `${todayKey()}|${currentMoodId}|${score}`);
   pickedScore = score;
   result.hidden = true;
   showFloaters(
@@ -527,7 +566,11 @@ askForm.addEventListener("submit", async (event) => {
   askAnswer.hidden = false;
   askAnswer.classList.add("thinking");
   askAnswer.textContent = UI_TEXT[language].askThinking;
-  const reply = await aiAskStylist(question, brand.brand, item.name[language], language);
+  const reply = await aiAskStylist(question, brand.brand, item.name[language], language, {
+    kind: todaysWeather.kind,
+    low: todaysWeather.low,
+    high: todaysWeather.high,
+  });
   askButton.disabled = false;
   askAnswer.classList.remove("thinking");
   askAnswer.textContent = reply ? reply.answer : UI_TEXT[language].askError;
@@ -613,5 +656,17 @@ photoImage.addEventListener("error", () => {
 
 aiNote.hidden = !aiEnabled();
 setLanguage(language);
+weatherButton.addEventListener("click", useLocalWeather);
+// A visitor who already allowed location gets local weather without asking.
+if (navigator.permissions) {
+  navigator.permissions
+    .query({ name: "geolocation" })
+    .then((permission) => {
+      if (permission.state === "granted") {
+        useLocalWeather();
+      }
+    })
+    .catch(() => {});
+}
 fitTitleWhenFontsReady();
 window.addEventListener("resize", fitTitle);

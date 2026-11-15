@@ -61,12 +61,17 @@ function hasPicture(brand, item) {
   return Boolean(item.photo || images[`${brand.brand}|${item.name.en}`]);
 }
 
-// The brands of a mood with only their pictured items; brands left with
-// nothing are dropped.
-function onShelf(brands) {
-  return brands
-    .map((brand) => ({ ...brand, items: brand.items.filter((item) => hasPicture(brand, item)) }))
-    .filter((brand) => brand.items.length > 0);
+// The brands of a mood with only their pictured items that suit today's
+// weather ("cold", "mild", or "hot"; see styling.js); brands left with nothing
+// are dropped. If the weather would leave the mood with nothing at all, the
+// weather is ignored rather than showing an empty stage.
+function onShelf(brands, weather = "mild") {
+  const keep = (test) =>
+    brands
+      .map((brand) => ({ ...brand, items: brand.items.filter((item) => test(brand, item)) }))
+      .filter((brand) => brand.items.length > 0);
+  const suited = keep((brand, item) => hasPicture(brand, item) && suitsWeather(item, weather));
+  return suited.length > 0 ? suited : keep(hasPicture);
 }
 
 function intensityWeight(brand, positionInRange) {
@@ -81,7 +86,7 @@ function intensityWeight(brand, positionInRange) {
 const CANDIDATES = 40;
 
 // Draws many candidates with the same random stream and keeps the first
-// one with the most pieces, then the best harmony score, so results stay
+// one with the most pieces, then the best harmony and style scores, so results stay
 // fixed for a given seed. (Taking a brand's shoes can leave no top from
 // anyone else, so some draws come out shorter than others.)
 function bestOf(draw, itemsOf, random) {
@@ -90,7 +95,7 @@ function bestOf(draw, itemsOf, random) {
   for (let attempt = 0; attempt < CANDIDATES; attempt++) {
     const candidate = draw(random);
     const items = itemsOf(candidate);
-    const score = 100 * items.length + harmonyScore(items);
+    const score = 100 * items.length + harmonyScore(items) + styleScore(items);
     if (score > bestScore) {
       best = candidate;
       bestScore = score;

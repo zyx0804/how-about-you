@@ -714,6 +714,25 @@ button:active,
   opacity: 0.65;
 }
 
+.weather-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+
+.weather-button {
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 .floater-stage {
   position: relative;
   height: min(60vh, 460px);

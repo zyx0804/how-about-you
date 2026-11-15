@@ -79,6 +79,12 @@ const UI_TEXT = {
     emptyInput: "先写一句你现在的感受吧，或者拖动下面的心情指数。",
     unknownMood: "我没太读懂这句话的心情，换个说法，或者拖动下面的心情指数试试。",
     moodTitle: (emoji, label) => `${emoji} 此刻的你：${label}`,
+    weatherMonth: (label) => `按季节推荐：${label}`,
+    weatherLocal: (low, high, label) => `今天当地 ${low}–${high}°C：${label}`,
+    weatherLoading: "正在查当地天气…",
+    weatherFailed: (label) => `没查到当地天气，先按季节推荐：${label}`,
+    weatherButton: "用我所在地的天气",
+    weatherKinds: { cold: "天冷，不推荐凉鞋和短裤", mild: "不冷不热", hot: "天热，不推荐外套和厚衣服" },
     hint: (kind) =>
       ({
         seed: "今日穿搭藏在这些蒲公英种子里，点一个看看。",
@@ -189,6 +195,12 @@ const UI_TEXT = {
     emptyInput: "Write a line about how you feel first, or drag the mood meter below.",
     unknownMood: "I couldn't quite read the mood in that. Try saying it another way, or drag the mood meter.",
     moodTitle: (emoji, label) => `${emoji} You right now: ${label}`,
+    weatherMonth: (label) => `Picked for the season: ${label}`,
+    weatherLocal: (low, high, label) => `Today near you, ${low}–${high}°C: ${label}`,
+    weatherLoading: "Checking the weather near you…",
+    weatherFailed: (label) => `Couldn't get the weather near you, so picked for the season: ${label}`,
+    weatherButton: "Use the weather where I am",
+    weatherKinds: { cold: "cold, so no sandals or shorts", mild: "mild", hot: "hot, so no outerwear or heavy knits" },
     hint: (kind) =>
       ({
         seed: "Today's outfit rides on these dandelion seeds. Tap one.",

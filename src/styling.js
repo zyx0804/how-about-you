@@ -77,3 +77,40 @@ function harmonyScore(items) {
   }
   return score;
 }
+
+// The style rule: sporty streetwear pieces and tailored pieces can mix, but
+// a set that keeps to one side reads as one idea, so it is preferred when the
+// shelf offers the choice. Everything else (tees, jeans, knits, jackets,
+// boots, jewelry...) goes with both. A softer rule than the color ones: a mix
+// is a choice, not a clash, so it never makes a set count as clashing.
+const STREET_SHAPES = ["hoodie", "cargo", "hightop", "runner", "sneakers", "cap", "beanie", "puffer"];
+const TAILORED_SHAPES = ["shirt", "trousers", "loafers", "coat", "cardigan"];
+
+function styleOf(item) {
+  if (STREET_SHAPES.includes(item.shape)) {
+    return "street";
+  }
+  return TAILORED_SHAPES.includes(item.shape) ? "tailored" : "either";
+}
+
+// 0 for a set that keeps to one style, less for each street-tailored pair.
+function styleScore(items) {
+  const street = items.filter((item) => styleOf(item) === "street").length;
+  const tailored = items.filter((item) => styleOf(item) === "tailored").length;
+  const mixedPairs = Math.min(street, tailored);
+  return mixedPairs === 0 ? 0 : -3 * mixedPairs;
+}
+
+// The weather rule (Yuxuan, 11/14): no sandals or shorts on a cold day, and
+// on a hot day no outerwear and nothing heavy or woolly.
+const HOT_DAY_SHAPES = [...WINTER_SHAPES, "knit", "scarf", "cardigan"];
+
+function suitsWeather(item, weather) {
+  if (weather === "cold") {
+    return !SUMMER_SHAPES.includes(item.shape);
+  }
+  if (weather === "hot") {
+    return item.category !== "outerwear" && !HOT_DAY_SHAPES.includes(item.shape);
+  }
+  return true;
+}
