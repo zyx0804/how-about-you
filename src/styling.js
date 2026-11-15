@@ -78,11 +78,11 @@ function harmonyScore(items) {
   return score;
 }
 
-// The style rule: sporty streetwear pieces and tailored pieces can mix, but
-// a set that keeps to one side reads as one idea, so it is preferred when the
-// shelf offers the choice. Everything else (tees, jeans, knits, jackets,
-// boots, jewelry...) goes with both. A softer rule than the color ones: a mix
-// is a choice, not a clash, so it never makes a set count as clashing.
+// The style rule: Yuxuan likes mixing (11/14), so a set that pairs a sporty
+// streetwear piece with a tailored one (a shirt with runners, a hoodie with
+// loafers) is preferred when the shelf offers the choice. Everything else
+// (tees, jeans, knits, jackets, boots, jewelry...) goes with both. Softer than
+// the color rules, so it never overrides them.
 const STREET_SHAPES = ["hoodie", "cargo", "hightop", "runner", "sneakers", "cap", "beanie", "puffer"];
 const TAILORED_SHAPES = ["shirt", "trousers", "loafers", "coat", "cardigan"];
 
@@ -93,12 +93,12 @@ function styleOf(item) {
   return TAILORED_SHAPES.includes(item.shape) ? "tailored" : "either";
 }
 
-// 0 for a set that keeps to one style, less for each street-tailored pair.
+// 3 for a set that mixes streetwear and tailored pieces, 0 otherwise.
+const MIX_BONUS = 3;
+
 function styleScore(items) {
-  const street = items.filter((item) => styleOf(item) === "street").length;
-  const tailored = items.filter((item) => styleOf(item) === "tailored").length;
-  const mixedPairs = Math.min(street, tailored);
-  return mixedPairs === 0 ? 0 : -3 * mixedPairs;
+  const styles = new Set(items.map(styleOf));
+  return styles.has("street") && styles.has("tailored") ? MIX_BONUS : 0;
 }
 
 // The weather rule (Yuxuan, 11/14): no sandals or shorts on a cold day, and
