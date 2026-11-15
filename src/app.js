@@ -72,6 +72,7 @@ function applyTheme(theme) {
   root.setProperty("--background", theme.background);
   root.setProperty("--card", theme.card);
   root.setProperty("--accent", theme.accent);
+  root.setProperty("--on-accent", textColorOn(theme.accent));
   root.setProperty("--text", theme.text);
 }
 
@@ -131,7 +132,12 @@ function renderLogo(brand) {
     brandLogo.append(wordmark(brand));
     logoCredit.hidden = true;
   });
-  brandLogo.append(image);
+  // The logo is the brand page's heading, as the name is when there's no logo,
+  // so screen readers find the page's sections under it.
+  const heading = document.createElement("h2");
+  heading.className = "logo-heading";
+  heading.append(image);
+  brandLogo.append(heading);
   logoCredit.textContent = UI_TEXT[language].logoBy(brand.logo.license);
 }
 
@@ -243,6 +249,9 @@ function showPick(pickIndex) {
   void result.offsetWidth;
   result.classList.add("appear");
   result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  // Keyboard and screen-reader users land on the page they just opened,
+  // instead of staying among the floating pieces.
+  result.focus({ preventScroll: true });
 }
 
 function renderMeterValue() {

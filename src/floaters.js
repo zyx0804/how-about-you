@@ -140,7 +140,10 @@ function showFloaters(pieces, kind, onSelect) {
     applyBrandFont(brand, piece.brand);
     const item = document.createElement("span");
     item.className = "floater-item";
-    label.append(brand, item);
+    // The space keeps "BODE Antique quilt jacket" one phrase for screen
+    // readers and voice control, matching the button's label; the two parts
+    // are on separate lines either way.
+    label.append(brand, " ", item);
     element.append(label);
     element.addEventListener("click", () => {
       for (const other of floaters) {
