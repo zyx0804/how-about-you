@@ -689,3 +689,6 @@ if (navigator.permissions) {
 }
 fitTitleWhenFontsReady();
 window.addEventListener("resize", fitTitle);
+// The mood fonts arrive after the page shows (see index.html); a title fitted
+// before then is fitted again in its real font.
+document.querySelector('link[data-fonts="later"]')?.addEventListener("load", fitTitleWhenFontsReady);
