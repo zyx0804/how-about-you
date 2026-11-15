@@ -163,7 +163,10 @@ MOOD_BRANDS.tired = [
   },
   {
     brand: "OUR LEGACY",
-    designer: { zh: "Jockum Hallin, Cristopher Nying & Richardos Klarén", en: "Jockum Hallin, Cristopher Nying & Richardos Klarén" },
+    designer: {
+      zh: "Jockum Hallin, Cristopher Nying & Richardos Klarén",
+      en: "Jockum Hallin, Cristopher Nying & Richardos Klarén",
+    },
     intensity: 0.7,
     palette: ["#e4ddd0", "#8b8578", "#3d3a35"],
     story: {

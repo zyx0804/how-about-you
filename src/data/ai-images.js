@@ -4,48 +4,66 @@
 
 const AI_IMAGES = {
   "AURALEE|Suede loafers": "assets/items/auralee-suede-loafers.webp",
-  "Ann Demeulemeester|Black multi-buckle tall boots": "assets/items/ann-demeulemeester-black-multi-buckle-tall-boots.webp",
+  "Ann Demeulemeester|Black multi-buckle tall boots":
+    "assets/items/ann-demeulemeester-black-multi-buckle-tall-boots.webp",
   "BIRKENSTOCK|Boston suede clogs": "assets/items/birkenstock-boston-suede-clogs.webp",
   "BODE|Black strap vintage-style shoes": "assets/items/bode-black-strap-vintage-style-shoes.webp",
   "Boris Bidjan Saberi|Dark purple trail runners": "assets/items/boris-bidjan-saberi-dark-purple-trail-runners.webp",
-  "Carol Christian Poell|Aged silver-gray handmade boots": "assets/items/carol-christian-poell-aged-silver-gray-handmade-boots.webp",
+  "Carol Christian Poell|Aged silver-gray handmade boots":
+    "assets/items/carol-christian-poell-aged-silver-gray-handmade-boots.webp",
   "Chrome Hearts|Black and white trucker cap": "assets/items/chrome-hearts-black-and-white-trucker-cap.webp",
-  "Chrome Hearts|Black sweatpants with a cross patch": "assets/items/chrome-hearts-black-sweatpants-with-a-cross-patch.webp",
+  "Chrome Hearts|Black sweatpants with a cross patch":
+    "assets/items/chrome-hearts-black-sweatpants-with-a-cross-patch.webp",
   "Chrome Hearts|Black sweatpants with patches": "assets/items/chrome-hearts-black-sweatpants-with-patches.webp",
-  "Chrome Hearts|Black work pants with a cross patch": "assets/items/chrome-hearts-black-work-pants-with-a-cross-patch.webp",
+  "Chrome Hearts|Black work pants with a cross patch":
+    "assets/items/chrome-hearts-black-work-pants-with-a-cross-patch.webp",
   "Chrome Hearts|Checkered slides with red lips": "assets/items/chrome-hearts-checkered-slides-with-red-lips.webp",
   "Chrome Hearts|Engraved silver band ring": "assets/items/chrome-hearts-engraved-silver-band-ring.webp",
-  "Chrome Hearts|Gold cross pendant with green stones": "assets/items/chrome-hearts-gold-cross-pendant-with-green-stones.webp",
+  "Chrome Hearts|Gold cross pendant with green stones":
+    "assets/items/chrome-hearts-gold-cross-pendant-with-green-stones.webp",
   "Chrome Hearts|Green and white checker socks": "assets/items/chrome-hearts-green-and-white-checker-socks.webp",
   "Chrome Hearts|Green cross pendant necklace": "assets/items/chrome-hearts-green-cross-pendant-necklace.webp",
-  "Chrome Hearts|Hand-painted high-top canvas sneakers": "assets/items/chrome-hearts-hand-painted-high-top-canvas-sneakers.webp",
-  "Chrome Hearts|Leather belt with a round cross buckle": "assets/items/chrome-hearts-leather-belt-with-a-round-cross-buckle.webp",
-  "Chrome Hearts|Leather belt with an ornate cross buckle": "assets/items/chrome-hearts-leather-belt-with-an-ornate-cross-buckle.webp",
-  "Chrome Hearts|Pink knit beanie with a cross patch": "assets/items/chrome-hearts-pink-knit-beanie-with-a-cross-patch.webp",
+  "Chrome Hearts|Hand-painted high-top canvas sneakers":
+    "assets/items/chrome-hearts-hand-painted-high-top-canvas-sneakers.webp",
+  "Chrome Hearts|Leather belt with a round cross buckle":
+    "assets/items/chrome-hearts-leather-belt-with-a-round-cross-buckle.webp",
+  "Chrome Hearts|Leather belt with an ornate cross buckle":
+    "assets/items/chrome-hearts-leather-belt-with-an-ornate-cross-buckle.webp",
+  "Chrome Hearts|Pink knit beanie with a cross patch":
+    "assets/items/chrome-hearts-pink-knit-beanie-with-a-cross-patch.webp",
   "Chrome Hearts|Purple dagger pendant necklace": "assets/items/chrome-hearts-purple-dagger-pendant-necklace.webp",
   "Chrome Hearts|Red and blue trucker cap": "assets/items/chrome-hearts-red-and-blue-trucker-cap.webp",
   "Chrome Hearts|Rose gold chain necklace": "assets/items/chrome-hearts-rose-gold-chain-necklace.webp",
   "Chrome Hearts|Rose gold dagger charm": "assets/items/chrome-hearts-rose-gold-dagger-charm.webp",
-  "Chrome Hearts|Sheepskin boots with cross buttons": "assets/items/chrome-hearts-sheepskin-boots-with-cross-buttons.webp",
+  "Chrome Hearts|Sheepskin boots with cross buttons":
+    "assets/items/chrome-hearts-sheepskin-boots-with-cross-buttons.webp",
   "Chrome Hearts|Silver-buckle engineer boots": "assets/items/chrome-hearts-silver-buckle-engineer-boots.webp",
   "Chrome Hearts|Velvet slippers with red lips": "assets/items/chrome-hearts-velvet-slippers-with-red-lips.webp",
-  "Chrome Hearts|Washed black flared jeans with a cross patch": "assets/items/chrome-hearts-washed-black-flared-jeans-with-a-cross-patch.webp",
-  "Chrome Hearts|White hoodie with black lettering": "assets/items/chrome-hearts-white-hoodie-with-black-lettering.webp",
+  "Chrome Hearts|Washed black flared jeans with a cross patch":
+    "assets/items/chrome-hearts-washed-black-flared-jeans-with-a-cross-patch.webp",
+  "Chrome Hearts|White hoodie with black lettering":
+    "assets/items/chrome-hearts-white-hoodie-with-black-lettering.webp",
   "Chrome Hearts|White hoodie with pink lettering": "assets/items/chrome-hearts-white-hoodie-with-pink-lettering.webp",
-  "Chrome Hearts|White jeans with leather cross patches": "assets/items/chrome-hearts-white-jeans-with-leather-cross-patches.webp",
+  "Chrome Hearts|White jeans with leather cross patches":
+    "assets/items/chrome-hearts-white-jeans-with-leather-cross-patches.webp",
   "Chrome Hearts|White jeans with painted crosses": "assets/items/chrome-hearts-white-jeans-with-painted-crosses.webp",
-  "Chrome Hearts|White tee with multicolor crosses": "assets/items/chrome-hearts-white-tee-with-multicolor-crosses.webp",
+  "Chrome Hearts|White tee with multicolor crosses":
+    "assets/items/chrome-hearts-white-tee-with-multicolor-crosses.webp",
   "Dr. Martens|Gray suede 2976 Chelsea boots": "assets/items/dr-martens-gray-suede-2976-chelsea-boots.webp",
   "Dr. Martens|Jadon platform boots": "assets/items/dr-martens-jadon-platform-boots.webp",
-  "Enfants Riches Déprimés|Black-and-white leather shoes": "assets/items/enfants-riches-d-prim-s-black-and-white-leather-shoes.webp",
-  "Enfants Riches Déprimés|Worn gray platform derby shoes": "assets/items/enfants-riches-d-prim-s-worn-gray-platform-derby-shoes.webp",
-  "Fear of God ESSENTIALS|White retro running sneakers": "assets/items/fear-of-god-essentials-white-retro-running-sneakers.webp",
+  "Enfants Riches Déprimés|Black-and-white leather shoes":
+    "assets/items/enfants-riches-d-prim-s-black-and-white-leather-shoes.webp",
+  "Enfants Riches Déprimés|Worn gray platform derby shoes":
+    "assets/items/enfants-riches-d-prim-s-worn-gray-platform-derby-shoes.webp",
+  "Fear of God ESSENTIALS|White retro running sneakers":
+    "assets/items/fear-of-god-essentials-white-retro-running-sneakers.webp",
   "GUIDI|Black suede back-zip boots": "assets/items/guidi-black-suede-back-zip-boots.webp",
   "GUIDI|Horse-leather derby boots": "assets/items/guidi-horse-leather-derby-boots.webp",
   "HERMÈS|Oran sandals": "assets/items/herm-s-oran-sandals.webp",
   "HYSTERIC GLAMOUR|Worn cowboy boots": "assets/items/hysteric-glamour-worn-cowboy-boots.webp",
   "Helmut Lang|Metal-toe black derby shoes": "assets/items/helmut-lang-metal-toe-black-derby-shoes.webp",
-  "Homme Plissé Issey Miyake|Crossover soft-sole slides": "assets/items/homme-pliss-issey-miyake-crossover-soft-sole-slides.webp",
+  "Homme Plissé Issey Miyake|Crossover soft-sole slides":
+    "assets/items/homme-pliss-issey-miyake-crossover-soft-sole-slides.webp",
   "JIL SANDER|Black penny loafers": "assets/items/jil-sander-black-penny-loafers.webp",
   "LEMAIRE|Black collarless shirt": "assets/items/lemaire-black-collarless-shirt.webp",
   "LEMAIRE|Black leather tall boots": "assets/items/lemaire-black-leather-tall-boots.webp",
@@ -54,7 +72,8 @@ const AI_IMAGES = {
   "LEMAIRE|Black square-toe ankle boots": "assets/items/lemaire-black-square-toe-ankle-boots.webp",
   "LEMAIRE|Black wide cropped trousers": "assets/items/lemaire-black-wide-cropped-trousers.webp",
   "LEMAIRE|Brown suede western boots": "assets/items/lemaire-brown-suede-western-boots.webp",
-  "LEMAIRE|Corduroy jacket with a shearling collar": "assets/items/lemaire-corduroy-jacket-with-a-shearling-collar.webp",
+  "LEMAIRE|Corduroy jacket with a shearling collar":
+    "assets/items/lemaire-corduroy-jacket-with-a-shearling-collar.webp",
   "LEMAIRE|Cream cargo trousers": "assets/items/lemaire-cream-cargo-trousers.webp",
   "LEMAIRE|Croissant bag": "assets/items/lemaire-croissant-bag.webp",
   "LEMAIRE|Dark green knit top": "assets/items/lemaire-dark-green-knit-top.webp",
@@ -72,7 +91,8 @@ const AI_IMAGES = {
   "MARGARET HOWELL|Blue French work trousers": "assets/items/margaret-howell-blue-french-work-trousers.webp",
   "MARGARET HOWELL|Cotton trench coat": "assets/items/margaret-howell-cotton-trench-coat.webp",
   "MARGARET HOWELL|Dark olive hooded parka": "assets/items/margaret-howell-dark-olive-hooded-parka.webp",
-  "MARGARET HOWELL|Gray long sleeve with a black band": "assets/items/margaret-howell-gray-long-sleeve-with-a-black-band.webp",
+  "MARGARET HOWELL|Gray long sleeve with a black band":
+    "assets/items/margaret-howell-gray-long-sleeve-with-a-black-band.webp",
   "MARGARET HOWELL|Gray short-sleeve polo": "assets/items/margaret-howell-gray-short-sleeve-polo.webp",
   "MARGARET HOWELL|Light gray pleated trousers": "assets/items/margaret-howell-light-gray-pleated-trousers.webp",
   "MARGARET HOWELL|Navy derby shoes": "assets/items/margaret-howell-navy-derby-shoes.webp",
@@ -114,7 +134,8 @@ const AI_IMAGES = {
   "Raf Simons|Pink-and-red adidas Ozweego": "assets/items/raf-simons-pink-and-red-adidas-ozweego.webp",
   "Raf Simons|Red photo-print hoodie": "assets/items/raf-simons-red-photo-print-hoodie.webp",
   "Raf Simons|Royal blue cable knit": "assets/items/raf-simons-royal-blue-cable-knit.webp",
-  "Raf Simons|Striped long sleeve with a text patch": "assets/items/raf-simons-striped-long-sleeve-with-a-text-patch.webp",
+  "Raf Simons|Striped long sleeve with a text patch":
+    "assets/items/raf-simons-striped-long-sleeve-with-a-text-patch.webp",
   "Raf Simons|White graphic T-shirt": "assets/items/raf-simons-white-graphic-t-shirt.webp",
   "Raf Simons|White thumbhole long sleeve": "assets/items/raf-simons-white-thumbhole-long-sleeve.webp",
   "Rick Owens DRKSHDW|Ramones high-top sneakers": "assets/items/rick-owens-drkshdw-ramones-high-top-sneakers.webp",
@@ -123,7 +144,8 @@ const AI_IMAGES = {
   "THE ROW|Soft loafers": "assets/items/the-row-soft-loafers.webp",
   "UNDERCOVER|Blue GYAKUSOU running shoes": "assets/items/undercover-blue-gyakusou-running-shoes.webp",
   "VETEMENTS|Western two-tone pointed boots": "assets/items/vetements-western-two-tone-pointed-boots.webp",
-  "Vivienne Westwood|Wooden-platform Rocking Horse boots": "assets/items/vivienne-westwood-wooden-platform-rocking-horse-boots.webp",
+  "Vivienne Westwood|Wooden-platform Rocking Horse boots":
+    "assets/items/vivienne-westwood-wooden-platform-rocking-horse-boots.webp",
   "Yohji Yamamoto|Burgundy suede Y-3 sneakers": "assets/items/yohji-yamamoto-burgundy-suede-y-3-sneakers.webp",
   "visvim|Silver-gray FBT moccasins": "assets/items/visvim-silver-gray-fbt-moccasins.webp",
 };

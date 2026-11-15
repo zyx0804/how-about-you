@@ -93,7 +93,10 @@ function turnSeed(seed, step) {
 // missing: those are the seeds that flew away.
 const cornerDandelion = document.getElementById("dandelion-head");
 const cornerHairs = cornerDandelion
-  ? createHairs(cornerDandelion, sphereDirections(110).filter((_, index) => index % 9 !== 4))
+  ? createHairs(
+      cornerDandelion,
+      sphereDirections(110).filter((_, index) => index % 9 !== 4),
+    )
   : [];
 let cornerAngle = 0;
 let lastCornerTime = null;

@@ -51,9 +51,6 @@ function pickWeighted(entries, random) {
   return entries[entries.length - 1];
 }
 
-// How many items today's recommendation holds at most.
-const OUTFIT_SIZE = 5;
-
 // Only items with a picture (a licensed photo or a reference image) are on
 // the shelf; the rest stay in the data and return once they get a picture.
 function hasPicture(brand, item) {
@@ -164,7 +161,6 @@ function pickBrandSet(brand, pickedItem, seedText) {
   return bestOf(drawSet, (set) => set, random);
 }
 
-// Lets tests load this file in Node; browsers ignore it.
 // Picks three suggested questions for the AI stylist: one about the piece's
 // category, one about the mood, and one general, in a shuffled order. Each is
 // returned as { group, index } (plus mood) so it can be shown in either
@@ -194,6 +190,7 @@ function pickAskQuestions(questions, category, mood, avoid, random) {
   return picks;
 }
 
+// Lets tests load this file in Node; browsers ignore it.
 if (typeof module !== "undefined") {
   module.exports = {
     OUTFIT_CATEGORIES,

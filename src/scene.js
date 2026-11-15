@@ -165,7 +165,13 @@ const SCENES = {
   // with ash swirling up through it.
   smolder: {
     count: 45,
-    create: (w, h) => ({ x: random(0, w), y: random(0, h), size: random(0.8, 2.2), speed: random(0.3, 0.8), sway: random(0, 6) }),
+    create: (w, h) => ({
+      x: random(0, w),
+      y: random(0, h),
+      size: random(0.8, 2.2),
+      speed: random(0.3, 0.8),
+      sway: random(0, 6),
+    }),
     backdrop: (ctx, w, h, time) => {
       // Two quick beats, then a pause.
       const beat = (offset) => Math.pow(Math.max(0, Math.sin(time * 0.0035 - offset)), 12);
@@ -229,9 +235,15 @@ const SCENES = {
       ctx.lineCap = "round";
       ctx.shadowColor = "rgba(255, 110, 200, 0.95)";
       ctx.shadowBlur = 18;
-      for (const [line, width] of [[p.points, 4], [p.branch, 2.4]]) {
+      for (const [line, width] of [
+        [p.points, 4],
+        [p.branch, 2.4],
+      ]) {
         // A wide colored stroke with a thin bright core inside it.
-        for (const [strokeColor, strokeWidth] of [[`rgba(${color}, ${alpha})`, width], [`rgba(255, 245, 252, ${alpha})`, width * 0.35]]) {
+        for (const [strokeColor, strokeWidth] of [
+          [`rgba(${color}, ${alpha})`, width],
+          [`rgba(255, 245, 252, ${alpha})`, width * 0.35],
+        ]) {
           ctx.strokeStyle = strokeColor;
           ctx.lineWidth = strokeWidth;
           ctx.beginPath();

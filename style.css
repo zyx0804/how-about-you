@@ -24,7 +24,9 @@ body {
   background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
-  transition: background 1.2s ease, color 1.2s ease;
+  transition:
+    background 1.2s ease,
+    color 1.2s ease;
 }
 
 /* Mood backgrounds are gradients, which CSS can't animate, so two layers
@@ -91,7 +93,6 @@ body[data-mood="irritated"] h1 {
   text-shadow: 0 0 14px rgba(255, 90, 30, 0.55);
 }
 
-
 body[data-mood="tired"] {
   --font-display: "Sniglet", "Long Cang", cursive;
   --font-brand: "Caveat", "Long Cang", cursive;
@@ -114,7 +115,6 @@ body[data-mood="tired"] h1::after {
   font-size: 0.45em;
   opacity: 0.7;
 }
-
 
 body[data-mood="tired"] main {
   font-weight: 300;
@@ -150,7 +150,6 @@ body[data-mood="excited"] h1 {
     0 0 18px #ff4fa0,
     0 0 36px rgba(255, 79, 160, 0.6);
 }
-
 
 body[data-mood="happy"] {
   --font-display: "Luckiest Guy", "ZCOOL KuaiLe", sans-serif;
@@ -315,33 +314,29 @@ body[data-mood="happy"] h1 {
 @keyframes letter-breeze {
   0%,
   100% {
-    transform: perspective(300px) rotateX(0)
-      translate(0, 0)
-      rotate(0) skewX(0);
+    transform: perspective(300px) rotateX(0) translate(0, 0) rotate(0) skewX(0);
   }
   13% {
     transform: perspective(300px) rotateX(calc(var(--sway) * 22deg))
-      translate(calc(var(--sway) * 1.5px), calc(var(--lift) * -4px))
-      rotate(calc(var(--sway) * 4deg)) skewX(calc(var(--sway) * -5deg));
+      translate(calc(var(--sway) * 1.5px), calc(var(--lift) * -4px)) rotate(calc(var(--sway) * 4deg))
+      skewX(calc(var(--sway) * -5deg));
   }
   27% {
     transform: perspective(300px) rotateX(calc(var(--sway) * -12deg))
-      translate(calc(var(--sway) * -0.5px), calc(var(--lift) * -8px))
-      rotate(calc(var(--sway) * -2deg)) skewX(calc(var(--sway) * 2deg));
+      translate(calc(var(--sway) * -0.5px), calc(var(--lift) * -8px)) rotate(calc(var(--sway) * -2deg))
+      skewX(calc(var(--sway) * 2deg));
   }
   41% {
     transform: perspective(300px) rotateX(calc(var(--sway) * 16deg))
-      translate(calc(var(--sway) * 1px), calc(var(--lift) * -6px))
-      rotate(calc(var(--sway) * 2.5deg)) skewX(calc(var(--sway) * -3deg));
+      translate(calc(var(--sway) * 1px), calc(var(--lift) * -6px)) rotate(calc(var(--sway) * 2.5deg))
+      skewX(calc(var(--sway) * -3deg));
   }
   58% {
-    transform: perspective(300px) rotateX(calc(var(--sway) * -8deg))
-      translate(0, calc(var(--lift) * -2px))
+    transform: perspective(300px) rotateX(calc(var(--sway) * -8deg)) translate(0, calc(var(--lift) * -2px))
       rotate(calc(var(--sway) * -1deg)) skewX(calc(var(--sway) * 1deg));
   }
   72% {
-    transform: perspective(300px) rotateX(calc(var(--sway) * 6deg))
-      translate(calc(var(--sway) * 0.5px), 0)
+    transform: perspective(300px) rotateX(calc(var(--sway) * 6deg)) translate(calc(var(--sway) * 0.5px), 0)
       rotate(calc(var(--sway) * 1.5deg)) skewX(0);
   }
 }
@@ -455,7 +450,9 @@ button,
   color: var(--background);
   font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.1s ease, background 1.2s ease;
+  transition:
+    transform 0.1s ease,
+    background 1.2s ease;
 }
 
 /* The page's own action buttons: small, spaced-out capitals. */
@@ -607,7 +604,10 @@ button:active,
   line-height: 1;
   filter: grayscale(0.7);
   opacity: 0.55;
-  transition: transform 0.15s ease, opacity 0.15s ease, filter 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    filter 0.15s ease;
 }
 
 .calc-face:hover {

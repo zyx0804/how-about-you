@@ -165,8 +165,18 @@ const UI_TEXT = {
         "Open or buttoned up?",
       ],
       top: ["What bottoms go with it?", "Tucked in or left out?", "What jacket goes over it?", "How do I add layers?"],
-      bottom: ["What shoes go with these?", "How should I handle the hem?", "What top fit works?", "How do I make my legs look longer?"],
-      shoes: ["Do they run big or small?", "What trousers go with them?", "How do I break them in?", "What socks should I wear?"],
+      bottom: [
+        "What shoes go with these?",
+        "How should I handle the hem?",
+        "What top fit works?",
+        "How do I make my legs look longer?",
+      ],
+      shoes: [
+        "Do they run big or small?",
+        "What trousers go with them?",
+        "How do I break them in?",
+        "What socks should I wear?",
+      ],
       accessory: [
         "How do I wear it without trying too hard?",
         "What jewelry can I stack with it?",
@@ -174,10 +184,22 @@ const UI_TEXT = {
         "Is it too much for every day?",
       ],
       moods: {
-        sad: ["What can I wear to feel a bit better?", "How do I stay comfy but not sloppy?", "How do I wear this to feel safe?"],
+        sad: [
+          "What can I wear to feel a bit better?",
+          "How do I stay comfy but not sloppy?",
+          "How do I wear this to feel safe?",
+        ],
         irritated: ["What helps me cool down?", "How do I look more commanding?", "What colors calm the irritation?"],
-        tired: ["What's the easiest outfit when I'm tired?", "How do I look awake but stay comfy?", "How do I hide a bad night's sleep?"],
-        calm: ["How do I get a relaxed look?", "What to wear for a slow weekend stroll?", "How do I look quiet but refined?"],
+        tired: [
+          "What's the easiest outfit when I'm tired?",
+          "How do I look awake but stay comfy?",
+          "How do I hide a bad night's sleep?",
+        ],
+        calm: [
+          "How do I get a relaxed look?",
+          "What to wear for a slow weekend stroll?",
+          "How do I look quiet but refined?",
+        ],
         excited: ["What should I wear out tonight?", "How do I stand out more?", "What looks best in photos?"],
         happy: ["What should I wear on a date?", "How do I dress for a good mood?", "What to wear out with friends?"],
       },
