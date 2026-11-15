@@ -745,6 +745,17 @@ button:active,
   font-size: 0.9rem;
 }
 
+/* Why the local weather failed and what to do; stands out so a click that
+   fails is noticed. */
+.weather-problem {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--accent);
+  background: var(--card);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .weather-button {
   min-height: 44px;
   padding: 4px 12px;

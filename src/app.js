@@ -8,6 +8,7 @@ const message = document.getElementById("message");
 const todaySection = document.getElementById("today");
 const weatherText = document.getElementById("weather-text");
 const weatherButton = document.getElementById("weather-button");
+const weatherProblem = document.getElementById("weather-problem");
 const moodTitle = document.getElementById("mood-title");
 const hint = document.getElementById("hint");
 const result = document.getElementById("result");
@@ -337,8 +338,12 @@ const feelingLabel = document.querySelector('label[for="feeling-input"]');
 
 // Labels that depend on the mood and language: question, meter, title, hint, floaters.
 // Today's weather: guessed from the month until the visitor shares their
-// location; status is "month", "loading", "local", or "failed".
+// location; status is "month", "loading", "local", or "failed", and a failure
+// keeps its reason (see weatherFailureReason).
 let todaysWeather = { kind: weatherForMonth(), low: null, high: null, status: "month" };
+// The "Checking..." text stays at least this long, so a click that fails at
+// once still visibly does something (11/14: Yuxuan saw no reaction).
+const WEATHER_MIN_CHECK_MS = 700;
 
 function renderWeather() {
   const text = UI_TEXT[language];
@@ -347,12 +352,13 @@ function renderWeather() {
     weatherText.textContent = text.weatherLocal(todaysWeather.low, todaysWeather.high, label);
   } else if (todaysWeather.status === "loading") {
     weatherText.textContent = text.weatherLoading;
-  } else if (todaysWeather.status === "failed") {
-    weatherText.textContent = text.weatherFailed(label);
   } else {
     weatherText.textContent = text.weatherMonth(label);
   }
-  weatherButton.textContent = text.weatherButton;
+  const failed = todaysWeather.status === "failed";
+  weatherProblem.hidden = !failed;
+  weatherProblem.textContent = failed ? text.weatherProblems[todaysWeather.reason] : "";
+  weatherButton.textContent = failed ? text.weatherRetry : text.weatherButton;
   weatherButton.hidden = todaysWeather.status === "local" || todaysWeather.status === "loading";
 }
 
@@ -361,10 +367,20 @@ function renderWeather() {
 async function useLocalWeather() {
   todaysWeather = { ...todaysWeather, status: "loading" };
   renderWeather();
+  const minimumWait = new Promise((resolve) => setTimeout(resolve, WEATHER_MIN_CHECK_MS));
   try {
-    todaysWeather = { ...(await fetchLocalWeather()), status: "local" };
-  } catch {
-    todaysWeather = { kind: weatherForMonth(), low: null, high: null, status: "failed" };
+    const forecast = await fetchLocalWeather();
+    await minimumWait;
+    todaysWeather = { ...forecast, status: "local" };
+  } catch (error) {
+    await minimumWait;
+    todaysWeather = {
+      kind: weatherForMonth(),
+      low: null,
+      high: null,
+      status: "failed",
+      reason: weatherFailureReason(error),
+    };
   }
   renderWeather();
   if (currentMoodId !== null) {

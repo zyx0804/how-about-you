@@ -55,7 +55,7 @@ function readForecast(body) {
 function fetchLocalWeather() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject(new Error("no geolocation"));
+      reject(Object.assign(new Error("no geolocation"), { code: 2 }));
       return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -82,6 +82,21 @@ function fetchLocalWeather() {
   });
 }
 
+// Why getting the local weather failed, so the page can say what to do:
+// "denied" (the browser or the computer doesn't let this site use location),
+// "position" (location is allowed but couldn't be found), or "service" (the
+// weather service failed or didn't answer).
+function weatherFailureReason(error) {
+  // The browser's location errors carry a code: 1 denied, 2 unavailable, 3 timed out.
+  if (error && error.code === 1) {
+    return "denied";
+  }
+  if (error && (error.code === 2 || error.code === 3)) {
+    return "position";
+  }
+  return "service";
+}
+
 if (typeof module !== "undefined") {
-  module.exports = { weatherForTemperature, weatherForMonth, weatherUrl, readForecast };
+  module.exports = { weatherForTemperature, weatherForMonth, weatherUrl, readForecast, weatherFailureReason };
 }

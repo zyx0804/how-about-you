@@ -83,8 +83,14 @@ const UI_TEXT = {
     weatherMonth: (label) => `按季节推荐：${label}`,
     weatherLocal: (low, high, label) => `今天当地 ${low}–${high}°C：${label}`,
     weatherLoading: "正在查当地天气…",
-    weatherFailed: (label) => `没查到当地天气，先按季节推荐：${label}`,
     weatherButton: "用我所在地的天气",
+    weatherRetry: "再试一次",
+    weatherProblems: {
+      denied:
+        "没拿到位置：浏览器或电脑不允许这个网站定位。点地址栏左边的图标，把“位置”改成允许；还不行的话，在电脑的系统设置里打开定位服务（Windows：设置 → 隐私和安全性 → 位置）。",
+      position: "这台设备暂时定不了位，过一会儿再试试。",
+      service: "天气服务暂时没有回应，过一会儿再试试。",
+    },
     weatherKinds: { cold: "天冷，不推荐凉鞋和短裤", mild: "不冷不热", hot: "天热，不推荐外套和厚衣服" },
     hint: (kind) =>
       ({
@@ -222,8 +228,14 @@ const UI_TEXT = {
     weatherMonth: (label) => `Picked for the season: ${label}`,
     weatherLocal: (low, high, label) => `Today near you, ${low}–${high}°C: ${label}`,
     weatherLoading: "Checking the weather near you…",
-    weatherFailed: (label) => `Couldn't get the weather near you, so picked for the season: ${label}`,
     weatherButton: "Use the weather where I am",
+    weatherRetry: "Try again",
+    weatherProblems: {
+      denied:
+        "Couldn't get your location: the browser or computer doesn't let this site use it. Click the icon left of the address bar and allow Location; if that isn't enough, turn on location services in your computer's settings (Windows: Settings → Privacy & security → Location).",
+      position: "This device couldn't find its location just now. Try again in a moment.",
+      service: "The weather service didn't answer. Try again in a moment.",
+    },
     weatherKinds: { cold: "cold, so no sandals or shorts", mild: "mild", hot: "hot, so no outerwear or heavy knits" },
     hint: (kind) =>
       ({
