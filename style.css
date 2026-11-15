@@ -386,6 +386,7 @@ body[data-mood="happy"] h1 {
 }
 
 .language-button {
+  min-height: 44px;
   padding: 6px 14px;
   font-size: 0.9rem;
   background: transparent;
@@ -459,6 +460,7 @@ button,
 #feeling-submit,
 #calc-apply,
 .ask-form button {
+  min-height: 44px;
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -490,21 +492,36 @@ button:active,
 }
 
 /* The track runs through each mood's color, lowest on the left. */
+/* The meter looks like a thin line but is 44px tall, so it is easy to grab
+   on a phone; the line itself is the track. */
 #mood-meter {
+  --meter-gradient: linear-gradient(to right, #8e9bc4, #e0623c, #a99ad6, #4f7d74, #ff4fa0, #2f9be0);
+  display: block;
   width: 100%;
-  height: 4px;
-  margin: 12px 0 8px;
+  height: 44px;
+  margin: -8px 0 -12px;
   border: none;
   border-radius: 0;
   padding: 0;
   appearance: none;
-  background: linear-gradient(to right, #8e9bc4, #e0623c, #a99ad6, #4f7d74, #ff4fa0, #2f9be0);
+  background: transparent;
   cursor: pointer;
+}
+
+#mood-meter::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--meter-gradient);
+}
+
+#mood-meter::-moz-range-track {
+  height: 4px;
+  background: var(--meter-gradient);
 }
 
 #mood-meter::-webkit-slider-thumb {
   width: 22px;
   height: 22px;
+  margin-top: -9px;
   border: 3px solid #fff;
   border-radius: 50%;
   appearance: none;
@@ -567,6 +584,7 @@ button:active,
 }
 
 .calculator summary {
+  padding: 5px 0;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 500;
@@ -596,6 +614,7 @@ button:active,
 
 .calc-face {
   flex: 1;
+  min-height: 44px;
   padding: 6px 0;
   border: 1px solid transparent;
   border-radius: 0;
@@ -666,6 +685,7 @@ button:active,
 }
 
 .ask-chip {
+  min-height: 44px;
   padding: 5px 12px;
   border-radius: 0;
   background: transparent;
@@ -724,7 +744,7 @@ button:active,
 }
 
 .weather-button {
-  min-height: 36px;
+  min-height: 44px;
   padding: 4px 12px;
   border: 1px solid currentColor;
   background: transparent;
@@ -1275,7 +1295,10 @@ body:not([data-mood="happy"]) .dandelion {
   color: inherit;
 }
 
+/* The link stays small text, with an invisible margin around it that also
+   takes taps. */
 .item-link {
+  position: relative;
   align-self: flex-start;
   margin-top: 6px;
   font-family: "Noto Sans SC", system-ui, sans-serif;
@@ -1285,6 +1308,12 @@ body:not([data-mood="happy"]) .dandelion {
   text-transform: uppercase;
   text-decoration: none;
   border-bottom: 1px solid currentColor;
+}
+
+.item-link::before {
+  position: absolute;
+  inset: -14px -8px;
+  content: "";
 }
 
 .result section {

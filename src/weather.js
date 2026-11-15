@@ -7,6 +7,9 @@
 // which it counts as hot.
 const COLD_BELOW_C = 12;
 const HOT_ABOVE_C = 24;
+// How long to wait for the forecast before falling back to the month, so a
+// slow weather service can't leave "Checking the weather..." on screen forever.
+const WEATHER_TIMEOUT_MS = 10000;
 
 function weatherForTemperature(averageCelsius) {
   if (averageCelsius < COLD_BELOW_C) {
@@ -57,8 +60,10 @@ function fetchLocalWeather() {
     }
     navigator.geolocation.getCurrentPosition(
       async ({ coords }) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), WEATHER_TIMEOUT_MS);
         try {
-          const response = await fetch(weatherUrl(coords.latitude, coords.longitude));
+          const response = await fetch(weatherUrl(coords.latitude, coords.longitude), { signal: controller.signal });
           const forecast = response.ok ? readForecast(await response.json()) : null;
           if (forecast) {
             resolve(forecast);
@@ -67,10 +72,12 @@ function fetchLocalWeather() {
           }
         } catch (error) {
           reject(error);
+        } finally {
+          clearTimeout(timer);
         }
       },
       reject,
-      { timeout: 10000, maximumAge: 3600000 },
+      { timeout: WEATHER_TIMEOUT_MS, maximumAge: 3600000 },
     );
   });
 }

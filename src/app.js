@@ -561,7 +561,13 @@ function renderAskSuggestions() {
 askForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const question = askInput.value.trim();
-  if (question === "" || openPick === null) {
+  if (openPick === null) {
+    return;
+  }
+  if (question === "") {
+    askAnswer.hidden = false;
+    askAnswer.classList.remove("thinking");
+    askAnswer.textContent = UI_TEXT[language].askEmpty;
     return;
   }
   const { brand, item } = openPick;
