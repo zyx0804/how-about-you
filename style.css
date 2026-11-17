@@ -593,6 +593,78 @@ button:active,
   letter-spacing: 0.08em;
 }
 
+.search-form {
+  margin-top: 12px;
+}
+
+.search-examples {
+  margin-top: 10px;
+}
+
+.search-status {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.search-status:empty {
+  display: none;
+}
+
+/* Found pieces: small product cards, each a button that opens its brand. */
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.search-results:empty {
+  display: none;
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 8px 10px;
+  border: 1px solid rgba(28, 27, 25, 0.12);
+  background: #f7f6f3;
+  color: #1c1b19;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.search-result:hover {
+  border-color: #1c1b19;
+}
+
+.search-result .item-picture {
+  margin-bottom: 4px;
+}
+
+.search-result-brand {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #55534e;
+}
+
+.search-result-mood {
+  font-size: 0.7rem;
+  color: #55534e;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .calc-questions {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

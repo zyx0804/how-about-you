@@ -44,6 +44,11 @@ const photoCaption = document.getElementById("photo-caption");
 const photoAuthor = document.getElementById("photo-author");
 const photoLicense = document.getElementById("photo-license");
 const backToTop = document.getElementById("back-to-top");
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("search-input");
+const searchExamples = document.getElementById("search-examples");
+const searchStatus = document.getElementById("search-status");
+const searchResults = document.getElementById("search-results");
 
 let language = loadLanguage();
 let currentMoodId = null;
@@ -152,12 +157,11 @@ function newTabLink(className, href, text) {
   return link;
 }
 
-// One item: its licensed photo or a flat sketch, category, name, why it
-// was picked, and a link to real photos.
-function itemCard(brand, item, isPick) {
+// An item's picture: its licensed photo, then a reference image (labeled
+// as one), then a flat sketch. Returns the picture and the label to show,
+// or null when there is no reference image.
+function itemPicture(brand, item) {
   const text = UI_TEXT[language];
-  const card = document.createElement("div");
-  card.className = isPick ? "item-card picked" : "item-card";
   const picture = document.createElement("div");
   picture.className = "item-picture";
   // A licensed photo first, then a reference image, then a flat sketch.
@@ -179,14 +183,24 @@ function itemCard(brand, item, isPick) {
   } else {
     picture.innerHTML = drawFlat(item.shape, item.colors) || "";
   }
+  return { picture, referenceLabel: referenceImage ? referenceLabel : null };
+}
+
+// One item: its picture, category, name, why it was picked, and a link to
+// real photos. badgeText marks the piece the visitor opened.
+function itemCard(brand, item, badgeText = null) {
+  const text = UI_TEXT[language];
+  const card = document.createElement("div");
+  card.className = badgeText ? "item-card picked" : "item-card";
+  const { picture, referenceLabel } = itemPicture(brand, item);
   card.append(picture);
-  if (referenceImage) {
+  if (referenceLabel) {
     card.append(referenceLabel);
   }
-  if (isPick) {
+  if (badgeText) {
     const badge = document.createElement("span");
     badge.className = "item-badge";
-    badge.textContent = text.todayPick;
+    badge.textContent = badgeText;
     card.append(badge);
   }
   const category = document.createElement("span");
@@ -228,13 +242,16 @@ function renderBrandPage() {
   // Only today's set from this brand, today's pick first; it changes daily.
   const set = pickBrandSet(brand, pickedItem, `${todayKey()}|${brand.brand}`);
   const items = [pickedItem, ...set.filter((item) => item !== pickedItem)];
+  const badgeText = openPick.found ? UI_TEXT[language].searchedPick : UI_TEXT[language].todayPick;
   for (const item of items) {
-    itemGrid.append(itemCard(brand, item, item === pickedItem));
+    itemGrid.append(itemCard(brand, item, item === pickedItem ? badgeText : null));
   }
 }
 
-function showPick(pickIndex) {
-  openPick = currentPicks[pickIndex];
+// Opens a piece's brand page: { brand, item, moodId }, plus found: true when
+// it came from the interest search rather than today's floating picks.
+function openPiece(piece) {
+  openPick = piece;
   askAnswer.hidden = true;
   askInput.value = "";
   askRefs = [];
@@ -253,6 +270,10 @@ function showPick(pickIndex) {
   // Keyboard and screen-reader users land on the page they just opened,
   // instead of staying among the floating pieces.
   result.focus({ preventScroll: true });
+}
+
+function showPick(pickIndex) {
+  openPiece({ ...currentPicks[pickIndex], moodId: currentMoodId });
 }
 
 function renderMeterValue() {
@@ -509,6 +530,10 @@ function setLanguage(newLanguage) {
   if (currentMessageKey !== null) {
     showMessage(currentMessageKey);
   }
+  renderSearchExamples();
+  if (searchedQuery !== null) {
+    runSearch();
+  }
 }
 
 function showAiReply(text) {
@@ -554,7 +579,7 @@ let askRefs = [];
 
 function drawAskQuestions() {
   const questions = UI_TEXT[language].askQuestions;
-  askRefs = pickAskQuestions(questions, openPick.item.category, currentMoodId, askRefs, Math.random);
+  askRefs = pickAskQuestions(questions, openPick.item.category, openPick.moodId, askRefs, Math.random);
 }
 
 function renderAskSuggestions() {
@@ -662,7 +687,7 @@ feedbackForm.addEventListener("submit", async (event) => {
     text: feedbackInput.value.trim(),
     brand: openPick.brand.brand,
     item: openPick.item.name.en,
-    mood: currentMoodId,
+    mood: openPick.moodId,
   });
   sendButton.disabled = false;
   if (reply && reply.ok) {
@@ -672,6 +697,76 @@ feedbackForm.addEventListener("submit", async (event) => {
     feedbackStatus.textContent = UI_TEXT[language].feedbackError;
   }
 });
+
+// ---- Interest search ----
+
+// Built once: every pictured piece of every mood (see search.js).
+const searchable = searchablePieces(MOOD_BRANDS, MOOD_ORDER, MOODS);
+let searchedQuery = null;
+
+function searchResultCard(piece) {
+  const { brand, item, moodId } = piece;
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "search-result";
+  const brandName = document.createElement("span");
+  brandName.className = "search-result-brand";
+  brandName.textContent = brand.brand;
+  const name = document.createElement("strong");
+  name.textContent = item.name[language];
+  const mood = document.createElement("span");
+  mood.className = "search-result-mood";
+  mood.textContent = `${MOODS[moodId].emoji} ${MOODS[moodId].label[language]}`;
+  // The name is written on the card, so the picture adds nothing to read aloud.
+  const { picture } = itemPicture(brand, item);
+  picture.querySelector("img")?.setAttribute("alt", "");
+  card.append(picture, brandName, name, mood);
+  card.addEventListener("click", () => openPiece({ brand, item, moodId, found: true }));
+  return card;
+}
+
+// Shows the pieces matching the search box, or says why there are none.
+// Typing searches as you go; pressing Find with nothing typed asks for a word.
+function runSearch(fromButton = false) {
+  const text = UI_TEXT[language];
+  const query = searchInput.value.trim();
+  searchResults.innerHTML = "";
+  searchedQuery = query;
+  const found = searchPieces(searchable, query);
+  if (found.empty) {
+    searchStatus.textContent = fromButton ? text.searchEmpty : "";
+    return;
+  }
+  if (found.total === 0) {
+    searchStatus.textContent = text.searchNone(query);
+    return;
+  }
+  searchStatus.textContent = text.searchFound(found.pieces.length, found.total);
+  for (const piece of found.pieces) {
+    searchResults.append(searchResultCard(piece));
+  }
+}
+
+function renderSearchExamples() {
+  searchExamples.innerHTML = "";
+  for (const example of UI_TEXT[language].searchExamples) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "ask-chip";
+    chip.textContent = example;
+    chip.addEventListener("click", () => {
+      searchInput.value = example;
+      runSearch(true);
+    });
+    searchExamples.append(chip);
+  }
+}
+
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  runSearch(true);
+});
+searchInput.addEventListener("input", () => runSearch());
 
 // Once the reader has scrolled about a screen down, a button takes them back
 // to the top of the page in one tap.

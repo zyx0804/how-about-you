@@ -109,6 +109,18 @@ const UI_TEXT = {
     brandItems: "这个品牌的今日一套",
     backToTop: "↑ 返回顶部",
     todayPick: "今日推荐",
+    searchedPick: "你找的这件",
+    searchTitle: "🔍 不看心情，按兴趣找单品",
+    searchLabel: "按兴趣找单品",
+    searchPlaceholder: "比如：黑色靴子、Raf 卫衣、街头",
+    searchSend: "找",
+    searchExamples: ["黑色靴子", "街头卫衣", "乐福鞋", "Chrome Hearts", "牛仔裤", "银饰"],
+    searchEmpty: "先写一个你感兴趣的词：颜色、单品、品牌或风格都可以。",
+    searchNone: (query) => `没找到和“${query}”有关的单品。换个词试试，比如颜色（黑色）、单品（靴子）或品牌（Raf）。`,
+    searchFound: (shown, total) =>
+      shown < total
+        ? `找到 ${total} 件，先显示 ${shown} 件；加一个词可以缩小范围。`
+        : `找到 ${total} 件，点一件看它的品牌。`,
     referenceImage: "参考图",
     categories: { outerwear: "外套", top: "上衣", bottom: "下装", shoes: "鞋子", accessory: "配饰" },
     logoBy: (license) => `标志来自 Wikimedia Commons · ${license}`,
@@ -254,6 +266,19 @@ const UI_TEXT = {
     brandItems: "Today's set from this brand",
     backToTop: "↑ Back to top",
     todayPick: "Today's pick",
+    searchedPick: "Your find",
+    searchTitle: "🔍 Skip the mood: find pieces by what you're into",
+    searchLabel: "Find pieces by interest",
+    searchPlaceholder: "e.g. black boots, Raf hoodie, streetwear",
+    searchSend: "Find",
+    searchExamples: ["black boots", "street hoodie", "loafers", "Chrome Hearts", "jeans", "silver"],
+    searchEmpty: "Write a word you're into first: a color, a piece, a brand, or a style.",
+    searchNone: (query) =>
+      `Nothing found for “${query}”. Try another word: a color (black), a piece (boots), or a brand (Raf).`,
+    searchFound: (shown, total) =>
+      shown < total
+        ? `${total} pieces found, showing ${shown}; add a word to narrow it down.`
+        : `${total} ${total === 1 ? "piece" : "pieces"} found. Tap one to see its brand.`,
     referenceImage: "Reference",
     categories: { outerwear: "Outerwear", top: "Top", bottom: "Bottoms", shoes: "Shoes", accessory: "Accessory" },
     logoBy: (license) => `Logo from Wikimedia Commons · ${license}`,
