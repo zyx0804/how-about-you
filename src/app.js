@@ -49,6 +49,9 @@ const searchInput = document.getElementById("search-input");
 const searchExamples = document.getElementById("search-examples");
 const searchStatus = document.getElementById("search-status");
 const searchResults = document.getElementById("search-results");
+const savedTitle = document.getElementById("saved-title");
+const savedStatus = document.getElementById("saved-status");
+const savedList = document.getElementById("saved-list");
 
 let language = loadLanguage();
 let currentMoodId = null;
@@ -222,8 +225,40 @@ function itemCard(brand, item, badgeText = null) {
     credit.append(author, " · ", license);
     card.append(credit);
   }
-  card.append(newTabLink("item-link", imageSearchUrl(brand, item), text.seeReal));
+  card.append(saveButton(brand, item), newTabLink("item-link", imageSearchUrl(brand, item), text.seeReal));
   return card;
+}
+
+// ---- Saved pieces (see favorites.js) ----
+
+let favoriteKeys = loadFavoriteKeys();
+let savingBlocked = false;
+
+function renderSaveButton(button, key, itemName) {
+  const text = UI_TEXT[language];
+  const isSaved = favoriteKeys.includes(key);
+  // The piece's name is read aloud after the visible text but not shown.
+  const hiddenName = document.createElement("span");
+  hiddenName.className = "visually-hidden";
+  hiddenName.textContent = ` ${itemName}`;
+  button.replaceChildren(isSaved ? text.saved : text.save, hiddenName);
+  button.setAttribute("aria-pressed", String(isSaved));
+}
+
+// "♡ Save" under a piece; tapping again removes it.
+function saveButton(brand, item) {
+  const key = pieceKey(brand, item);
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "save-button";
+  renderSaveButton(button, key, item.name[language]);
+  button.addEventListener("click", () => {
+    favoriteKeys = toggleFavorite(favoriteKeys, key);
+    savingBlocked = !saveFavoriteKeys(favoriteKeys);
+    renderSaveButton(button, key, item.name[language]);
+    renderSaved();
+  });
+  return button;
 }
 
 // The brand page: logo, designer, photo, story, and all of the brand's
@@ -242,14 +277,14 @@ function renderBrandPage() {
   // Only today's set from this brand, today's pick first; it changes daily.
   const set = pickBrandSet(brand, pickedItem, `${todayKey()}|${brand.brand}`);
   const items = [pickedItem, ...set.filter((item) => item !== pickedItem)];
-  const badgeText = openPick.found ? UI_TEXT[language].searchedPick : UI_TEXT[language].todayPick;
+  const badgeText = UI_TEXT[language][openPick.badgeKey];
   for (const item of items) {
     itemGrid.append(itemCard(brand, item, item === pickedItem ? badgeText : null));
   }
 }
 
-// Opens a piece's brand page: { brand, item, moodId }, plus found: true when
-// it came from the interest search rather than today's floating picks.
+// Opens a piece's brand page: { brand, item, moodId }, plus badgeKey, the
+// label on the opened piece: today's pick, a search find, or a saved piece.
 function openPiece(piece) {
   openPick = piece;
   askAnswer.hidden = true;
@@ -273,7 +308,7 @@ function openPiece(piece) {
 }
 
 function showPick(pickIndex) {
-  openPiece({ ...currentPicks[pickIndex], moodId: currentMoodId });
+  openPiece({ ...currentPicks[pickIndex], moodId: currentMoodId, badgeKey: "todayPick" });
 }
 
 function renderMeterValue() {
@@ -531,6 +566,7 @@ function setLanguage(newLanguage) {
     showMessage(currentMessageKey);
   }
   renderSearchExamples();
+  renderSaved();
   if (searchedQuery !== null) {
     runSearch();
   }
@@ -704,7 +740,9 @@ feedbackForm.addEventListener("submit", async (event) => {
 const searchable = searchablePieces(MOOD_BRANDS, MOOD_ORDER, MOODS);
 let searchedQuery = null;
 
-function searchResultCard(piece) {
+// A small card for a found or saved piece; tapping it opens the brand page
+// with the piece labeled by badgeKey.
+function pieceCard(piece, badgeKey) {
   const { brand, item, moodId } = piece;
   const card = document.createElement("button");
   card.type = "button";
@@ -721,7 +759,7 @@ function searchResultCard(piece) {
   const { picture } = itemPicture(brand, item);
   picture.querySelector("img")?.setAttribute("alt", "");
   card.append(picture, brandName, name, mood);
-  card.addEventListener("click", () => openPiece({ brand, item, moodId, found: true }));
+  card.addEventListener("click", () => openPiece({ brand, item, moodId, badgeKey }));
   return card;
 }
 
@@ -743,7 +781,7 @@ function runSearch(fromButton = false) {
   }
   searchStatus.textContent = text.searchFound(found.pieces.length, found.total);
   for (const piece of found.pieces) {
-    searchResults.append(searchResultCard(piece));
+    searchResults.append(pieceCard(piece, "searchedPick"));
   }
 }
 
@@ -767,6 +805,22 @@ searchForm.addEventListener("submit", (event) => {
   runSearch(true);
 });
 searchInput.addEventListener("input", () => runSearch());
+
+// The saved list, newest first, with its count in the title.
+function renderSaved() {
+  const text = UI_TEXT[language];
+  const pieces = favoritePieces(favoriteKeys, searchable);
+  savedTitle.textContent = text.savedTitle(pieces.length);
+  savedList.innerHTML = "";
+  if (savingBlocked) {
+    savedStatus.textContent = text.savedBlocked;
+  } else {
+    savedStatus.textContent = pieces.length === 0 ? text.savedEmpty : text.savedHint;
+  }
+  for (const piece of pieces) {
+    savedList.append(pieceCard(piece, "savedPick"));
+  }
+}
 
 // Once the reader has scrolled about a screen down, a button takes them back
 // to the top of the page in one tap.

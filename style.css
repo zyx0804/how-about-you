@@ -656,6 +656,25 @@ button:active,
   color: #55534e;
 }
 
+/* "♡ Save" under a piece on the brand page. */
+.save-button {
+  align-self: flex-start;
+  min-height: 44px;
+  margin-top: 6px;
+  padding: 6px 14px;
+  border: 1px solid #1c1b19;
+  background: transparent;
+  color: #1c1b19;
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.save-button[aria-pressed="true"] {
+  background: #1c1b19;
+  color: #ffffff;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
