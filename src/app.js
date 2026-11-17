@@ -52,6 +52,8 @@ const searchResults = document.getElementById("search-results");
 const savedTitle = document.getElementById("saved-title");
 const savedStatus = document.getElementById("saved-status");
 const savedList = document.getElementById("saved-list");
+const savedOutfit = document.getElementById("saved-outfit");
+const savedOutfitList = document.getElementById("saved-outfit-list");
 
 let language = loadLanguage();
 let currentMoodId = null;
@@ -819,6 +821,12 @@ function renderSaved() {
   }
   for (const piece of pieces) {
     savedList.append(pieceCard(piece, "savedPick"));
+  }
+  const outfit = outfitFromSaved(pieces, `${todayKey()}|saved`);
+  savedOutfit.hidden = outfit.length === 0;
+  savedOutfitList.innerHTML = "";
+  for (const piece of outfit) {
+    savedOutfitList.append(pieceCard(piece, "savedPick"));
   }
 }
 

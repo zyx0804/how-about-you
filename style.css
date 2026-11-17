@@ -656,6 +656,19 @@ button:active,
   color: #55534e;
 }
 
+.saved-outfit {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.saved-outfit h3 {
+  margin: 0 0 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
 /* "♡ Save" under a piece on the brand page. */
 .save-button {
   align-self: flex-start;

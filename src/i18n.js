@@ -111,6 +111,8 @@ const UI_TEXT = {
     todayPick: "今日推荐",
     searchedPick: "你找的这件",
     savedPick: "你收藏的",
+    savedOutfitTitle: "用你的收藏搭一套",
+    savedOutfitHint: "按和今日推荐一样的搭配规则，从你的收藏里每类挑一件；每天换一套。",
     save: "♡ 收藏",
     saved: "♥ 已收藏",
     savedTitle: (count) => (count > 0 ? `♥ 我的收藏 · ${count} 件` : "♡ 我的收藏"),
@@ -275,6 +277,9 @@ const UI_TEXT = {
     todayPick: "Today's pick",
     searchedPick: "Your find",
     savedPick: "Saved",
+    savedOutfitTitle: "An outfit from your saved pieces",
+    savedOutfitHint:
+      "One piece per category from what you saved, by the same styling rules as today's picks; a new one each day.",
     save: "♡ Save",
     saved: "♥ Saved",
     savedTitle: (count) => (count > 0 ? `♥ Saved pieces · ${count}` : "♡ Saved pieces"),

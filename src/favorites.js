@@ -56,7 +56,19 @@ function favoritePieces(keys, pieces) {
   return keys.filter((key) => byKey.has(key)).map((key) => byKey.get(key));
 }
 
+// Today's outfit from saved pieces: one per category, chosen by the same
+// styling rules as the daily picks (recommend.js), changing day by day. Two
+// saved pieces from one brand may both be worn, so each piece stands alone.
+// Returns nothing until the saved pieces cover at least two categories.
+function outfitFromSaved(pieces, seedText) {
+  if (new Set(pieces.map(({ item }) => item.category)).size < 2) {
+    return [];
+  }
+  const shelf = pieces.map((piece, index) => ({ brand: String(index), intensity: 0.5, items: [piece.item] }));
+  return pickOutfit(shelf, 0.5, seedText).map(({ brand }) => pieces[Number(brand.brand)]);
+}
+
 // Lets tests load this file in Node; browsers ignore it.
 if (typeof module !== "undefined") {
-  module.exports = { pieceKey, readFavoriteKeys, toggleFavorite, favoritePieces };
+  module.exports = { pieceKey, readFavoriteKeys, toggleFavorite, favoritePieces, outfitFromSaved };
 }
