@@ -33,14 +33,17 @@ const SEARCH_WORDS = [
   // Kinds of piece
   { zh: ["大衣", "风衣"], en: ["coat", "trench"], shapes: ["coat"] },
   { zh: ["夹克", "机车"], en: ["jacket", "biker"], shapes: ["jacket", "biker"] },
+  { zh: ["皮衣", "皮夹克"], en: ["leather jacket"], shapes: ["biker"] },
+  { zh: ["马甲", "背心"], en: ["vest", "gilet"], shapes: ["vest"] },
   { zh: ["羽绒", "棉服"], en: ["puffer", "down"], shapes: ["puffer"] },
-  { zh: ["衬衫"], en: ["shirt"], shapes: ["shirt"] },
+  { zh: ["衬衫", "衬衣"], en: ["shirt"], shapes: ["shirt"] },
   { zh: ["短袖"], en: ["tee"], shapes: ["tee"] },
   { zh: ["卫衣", "帽衫", "连帽"], en: ["hoodie", "sweatshirt"], shapes: ["hoodie"] },
   { zh: ["毛衣", "针织"], en: ["knit", "sweater", "jumper"], shapes: ["knit", "cardigan"] },
   { zh: ["开衫"], en: ["cardigan"], shapes: ["cardigan"] },
   { zh: ["裤"], en: ["trousers", "pants", "jeans", "shorts"], categories: ["bottom"] },
   { zh: ["西裤"], en: ["tailored trousers", "pleated trousers"] },
+  { zh: ["阔腿", "宽腿"], en: ["wide"], shapes: ["wide"] },
   { zh: ["牛仔"], en: ["jeans", "denim"], shapes: ["jeans"] },
   { zh: ["工装"], en: ["cargo", "work pants", "work trousers"], shapes: ["cargo"] },
   { zh: ["短裤"], en: ["shorts"], shapes: ["shorts"] },
@@ -52,10 +55,16 @@ const SEARCH_WORDS = [
     shapes: ["sneakers", "runner", "hightop"],
   },
   { zh: ["高帮"], en: ["high-top", "hi-top"], shapes: ["hightop"] },
+  { zh: ["老爹鞋"], en: ["dad shoe"], shapes: ["runner"] },
   { zh: ["乐福", "便鞋"], en: ["loafer"], shapes: ["loafers"] },
   { zh: ["凉鞋", "拖鞋"], en: ["sandal", "slide", "slipper"], shapes: ["sandals"] },
-  { zh: ["包"], en: ["bag", "tote"], shapes: ["tote", "minibag"], zhInNames: false },
-  { zh: ["帽子", "棒球帽", "针织帽", "鸭舌帽", "渔夫帽"], en: ["cap", "hat", "beanie"], shapes: ["cap", "beanie"] },
+  { zh: ["包", "托特"], en: ["bag", "tote"], shapes: ["tote", "minibag"], zhInNames: false },
+  {
+    zh: ["帽子", "棒球帽", "针织帽", "鸭舌帽", "渔夫帽", "毛线帽", "冷帽"],
+    en: ["cap", "hat", "beanie"],
+    shapes: ["cap", "beanie"],
+  },
+  { zh: ["首饰", "珠宝", "银饰"], en: ["jewelry", "jewellery"], shapes: ["necklace", "ring"] },
   { zh: ["项链", "吊坠"], en: ["necklace", "pendant"], shapes: ["necklace"] },
   { zh: ["戒指"], en: ["ring"], shapes: ["ring"] },
   { zh: ["围巾"], en: ["scarf"], shapes: ["scarf"] },
@@ -66,10 +75,37 @@ const SEARCH_WORDS = [
   { zh: ["麂皮"], en: ["suede"] },
   { zh: ["羊毛", "毛呢"], en: ["wool"] },
   { zh: ["丝绒"], en: ["velvet"] },
+  { zh: ["亚麻"], en: ["linen"] },
+  { zh: ["羊绒"], en: ["cashmere"] },
+  // Seasons (the shapes weather.js and styling.js treat as cold or hot)
+  {
+    zh: ["冬", "秋冬", "保暖"],
+    en: ["winter", "warm"],
+    shapes: ["coat", "puffer", "beanie", "knit", "cardigan", "scarf"],
+  },
+  { zh: ["夏", "清凉"], en: ["summer"], shapes: ["sandals", "shorts", "tee"] },
   // Styles (see styleOf in styling.js)
   { zh: ["街头", "潮牌"], en: ["street", "streetwear"], styles: ["street"] },
-  { zh: ["正装", "通勤", "西装", "剪裁"], en: ["tailored", "smart", "formal"], styles: ["tailored"] },
+  { zh: ["正装", "通勤", "西装", "西服", "剪裁"], en: ["tailored", "smart", "formal"], styles: ["tailored"] },
 ];
+
+// What people call some brands, so "克罗心" or "马吉拉" finds them too.
+const BRAND_NICKNAMES = {
+  "Chrome Hearts": "克罗心",
+  "Dr. Martens": "马丁 doc martens",
+  "Maison Margiela": "马吉拉 margiela",
+  "Rick Owens DRKSHDW": "瑞克",
+  "Raf Simons": "拉夫",
+  "Vivienne Westwood": "西太后 薇薇安",
+  "New Balance": "新百伦 nb",
+  Converse: "匡威",
+  HERMÈS: "爱马仕",
+  BIRKENSTOCK: "勃肯",
+  "Yohji Yamamoto": "山本 y-3",
+  "Homme Plissé Issey Miyake": "三宅 褶皱",
+  "JIL SANDER": "吉尔桑达",
+  VETEMENTS: "唯特萌",
+};
 
 // Characters that carry no meaning in a search ("黑色的靴子" is "黑 靴").
 const SEARCH_FILLER = /[的色子款件双条个只和与配一些想要找]/g;
@@ -77,7 +113,8 @@ const SEARCH_FILLER = /[的色子款件双条个只和与配一些想要找]/g;
 // Up to this many pieces are shown; a longer list asks for a narrower word.
 const SEARCH_LIMIT = 24;
 
-const lower = (text) => text.toLowerCase();
+// Lowercase without accents, so "hermes" finds HERMÈS.
+const lower = (text) => text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 // An English spelling matches as a whole word, plural or not, so "red" does
 // not match "tailored" and "ring" does not match "earring".
@@ -116,12 +153,11 @@ function searchablePieces(moodBrands, moodOrder, moods) {
           brand.designer.en,
           item.name.zh,
           item.name.en,
+          BRAND_NICKNAMES[brand.brand] || "",
           moods[moodId].label.zh,
           moods[moodId].label.en,
-        ]
-          .join(" ")
-          .toLowerCase();
-        pieces.push({ moodId, brand, item, text, style: styleOf(item) });
+        ].join(" ");
+        pieces.push({ moodId, brand, item, text: lower(text), style: styleOf(item) });
       }
     }
   }
