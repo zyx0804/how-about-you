@@ -456,6 +456,8 @@ async function useLocalWeather() {
     };
   }
   renderWeather();
+  // The outfit from saved pieces follows the weather too.
+  renderSaved();
   if (currentMoodId !== null) {
     pickAndShowOutfit();
   }
@@ -929,7 +931,7 @@ function renderSaved() {
   for (const piece of pieces) {
     savedList.append(pieceCard(piece, "savedPick"));
   }
-  const outfit = outfitFromSaved(pieces, `${todayKey()}|saved`);
+  const outfit = outfitFromSaved(pieces, `${todayKey()}|saved`, todaysWeather.kind);
   savedOutfit.hidden = outfit.length === 0;
   savedOutfitList.innerHTML = "";
   for (const piece of outfit) {

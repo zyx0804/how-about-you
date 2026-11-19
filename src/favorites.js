@@ -59,9 +59,14 @@ function favoritePieces(keys, pieces) {
 // Today's outfit from saved pieces: one per category, chosen by the same
 // styling rules as the daily picks (recommend.js), changing day by day. Two
 // saved pieces from one brand may both be worn, so each piece stands alone.
-// Returns nothing until the saved pieces cover at least two categories.
-function outfitFromSaved(pieces, seedText) {
-  if (new Set(pieces.map(({ item }) => item.category)).size < 2) {
+// Pieces that don't suit today's weather ("cold", "mild", or "hot"; see
+// styling.js) are left out, unless that would leave too little to dress in.
+// Returns nothing until the pieces cover at least two categories.
+function outfitFromSaved(savedPieces, seedText, weather = "mild") {
+  const coversTwo = (list) => new Set(list.map(({ item }) => item.category)).size >= 2;
+  const suited = savedPieces.filter(({ item }) => suitsWeather(item, weather));
+  const pieces = coversTwo(suited) ? suited : savedPieces;
+  if (!coversTwo(pieces)) {
     return [];
   }
   const shelf = pieces.map((piece, index) => ({ brand: String(index), intensity: 0.5, items: [piece.item] }));
