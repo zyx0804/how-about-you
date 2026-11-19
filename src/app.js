@@ -56,6 +56,8 @@ const savedList = document.getElementById("saved-list");
 const logSummary = document.getElementById("log-summary");
 const logDays = document.getElementById("log-days");
 const logClear = document.getElementById("log-clear");
+const soundButton = document.getElementById("sound-button");
+const soundProblem = document.getElementById("sound-problem");
 const logReminder = document.getElementById("log-reminder");
 const logReminderText = document.getElementById("log-reminder-text");
 const logResume = document.getElementById("log-resume");
@@ -524,6 +526,9 @@ function selectMood(moodId, fromMeter = false) {
   document.body.dataset.mood = moodId;
   fitTitleWhenFontsReady();
   todaySection.hidden = false;
+  if (soundOn) {
+    playMoodSound(moodId);
+  }
   pickAndShowOutfit();
 }
 
@@ -586,6 +591,7 @@ function setLanguage(newLanguage) {
     showMessage(currentMessageKey);
   }
   renderSearchExamples();
+  renderSoundButton();
   renderSaved();
   renderMoodLog();
   if (searchedQuery !== null) {
@@ -760,6 +766,27 @@ feedbackForm.addEventListener("submit", async (event) => {
   } else {
     feedbackStatus.textContent = UI_TEXT[language].feedbackError;
   }
+});
+
+// ---- Mood sound (see sound.js) ----
+
+let soundOn = false;
+
+function renderSoundButton() {
+  const text = UI_TEXT[language];
+  soundButton.textContent = soundOn ? text.soundOn : text.soundOff;
+  soundButton.setAttribute("aria-pressed", String(soundOn));
+}
+
+soundButton.addEventListener("click", () => {
+  const wanted = !soundOn;
+  if (setSoundOn(wanted, currentMoodId)) {
+    soundOn = wanted;
+    soundProblem.textContent = "";
+  } else {
+    soundProblem.textContent = UI_TEXT[language].soundMissing;
+  }
+  renderSoundButton();
 });
 
 // ---- Mood record (see mood-log.js) ----

@@ -669,6 +669,18 @@ button:active,
   letter-spacing: 0.08em;
 }
 
+.sound-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 0;
+}
+
+.sound-problem:empty {
+  display: none;
+}
+
 .log-reminder {
   display: flex;
   flex-wrap: wrap;
