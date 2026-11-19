@@ -120,6 +120,15 @@ const UI_TEXT = {
     todayPick: "今日推荐",
     searchedPick: "你找的这件",
     savedPick: "你收藏的",
+    logTitle: "📅 我的心情记录",
+    logEmpty: "还没有记录。选一次心情，今天就会记下来；每天记最后选的那个（只存在这个浏览器里）。",
+    logWeek: (label, days) => `最近 7 天里，${label}最多（${days} 天）。每天记最后选的心情。`,
+    logBlocked: "这个浏览器不让网页保存东西（可能是无痕模式），所以心情记不下来。",
+    logDay: (month, day) => `${month}/${day}`,
+    logDayLabel: (month, day, label, score) =>
+      label ? `${month}月${day}日：${label} ${score}` : `${month}月${day}日：没有记录`,
+    logClear: "清空记录",
+    logClearConfirm: "确定清空全部心情记录吗？清空后找不回来。",
     savedOutfitTitle: "用你的收藏搭一套",
     savedOutfitHint: "按和今日推荐一样的搭配规则，从你的收藏里每类挑一件；每天换一套。",
     save: "♡ 收藏",
@@ -295,6 +304,17 @@ const UI_TEXT = {
     todayPick: "Today's pick",
     searchedPick: "Your find",
     savedPick: "Saved",
+    logTitle: "📅 My mood record",
+    logEmpty:
+      "Nothing recorded yet. Pick a mood and today is noted; each day keeps the last mood picked (in this browser only).",
+    logWeek: (label, days) =>
+      `Over the last 7 days, ${label} came up most (${days} ${days === 1 ? "day" : "days"}). Each day keeps the last mood picked.`,
+    logBlocked: "This browser won't let pages store anything (maybe a private window), so moods can't be recorded.",
+    logDay: (month, day) => `${month}/${day}`,
+    logDayLabel: (month, day, label, score) =>
+      label ? `${month}/${day}: ${label} ${score}` : `${month}/${day}: nothing recorded`,
+    logClear: "Clear the record",
+    logClearConfirm: "Clear your whole mood record? It can't be brought back.",
     savedOutfitTitle: "An outfit from your saved pieces",
     savedOutfitHint:
       "One piece per category from what you saved, by the same styling rules as today's picks; a new one each day.",

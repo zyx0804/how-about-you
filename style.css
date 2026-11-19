@@ -669,6 +669,49 @@ button:active,
   letter-spacing: 0.08em;
 }
 
+/* The mood record: two weeks, seven days a row, today outlined. */
+.log-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.log-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  font-size: 0.7rem;
+}
+
+.log-today {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.log-mood {
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.log-empty .log-mood {
+  opacity: 0.4;
+}
+
+.log-score {
+  min-height: 1em;
+  font-weight: 600;
+}
+
+.log-clear {
+  margin-top: 12px;
+}
+
 /* "♡ Save" under a piece on the brand page. */
 .save-button {
   align-self: flex-start;

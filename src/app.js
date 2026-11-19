@@ -53,6 +53,9 @@ const searchResults = document.getElementById("search-results");
 const savedTitle = document.getElementById("saved-title");
 const savedStatus = document.getElementById("saved-status");
 const savedList = document.getElementById("saved-list");
+const logSummary = document.getElementById("log-summary");
+const logDays = document.getElementById("log-days");
+const logClear = document.getElementById("log-clear");
 const savedOutfit = document.getElementById("saved-outfit");
 const savedOutfitList = document.getElementById("saved-outfit-list");
 
@@ -492,6 +495,7 @@ function pickAndShowOutfit() {
     `${todayKey()}|${currentMoodId}|${score}`,
   );
   pickedScore = score;
+  rememberMood(score);
   result.hidden = true;
   showFloaters(
     currentPicks.map(({ brand, item }) => ({ brand: brand.brand, palette: item.colors })),
@@ -578,6 +582,7 @@ function setLanguage(newLanguage) {
   }
   renderSearchExamples();
   renderSaved();
+  renderMoodLog();
   if (searchedQuery !== null) {
     runSearch();
   }
@@ -742,6 +747,66 @@ feedbackForm.addEventListener("submit", async (event) => {
     feedbackStatus.textContent = UI_TEXT[language].feedbackThanks;
   } else {
     feedbackStatus.textContent = UI_TEXT[language].feedbackError;
+  }
+});
+
+// ---- Mood record (see mood-log.js) ----
+
+let moodLog = loadMoodLog(MOOD_ORDER);
+let moodLogBlocked = false;
+
+// Notes today's mood; a later pick today replaces it.
+function rememberMood(score) {
+  moodLog = recordMood(moodLog, todayKey(), currentMoodId, score);
+  moodLogBlocked = !saveMoodLog(moodLog);
+  renderMoodLog();
+}
+
+function renderMoodLog() {
+  const text = UI_TEXT[language];
+  const today = todayKey();
+  const top = weekSummary(moodLog, today);
+  if (moodLogBlocked) {
+    logSummary.textContent = text.logBlocked;
+  } else if (top) {
+    logSummary.textContent = text.logWeek(`${MOODS[top.mood].emoji} ${MOODS[top.mood].label[language]}`, top.days);
+  } else {
+    logSummary.textContent = text.logEmpty;
+  }
+  logDays.innerHTML = "";
+  for (const { date, entry } of recentDays(moodLog, today)) {
+    const [, month, day] = date.split("-").map(Number);
+    const cell = document.createElement("li");
+    cell.className = entry ? `log-day log-${entry.mood}` : "log-day log-empty";
+    if (date === today) {
+      cell.classList.add("log-today");
+    }
+    const label = entry ? MOODS[entry.mood].label[language] : null;
+    cell.setAttribute("aria-label", text.logDayLabel(month, day, label, entry?.score));
+    const dateText = document.createElement("span");
+    dateText.className = "log-date";
+    dateText.textContent = text.logDay(month, day);
+    const moodText = document.createElement("span");
+    moodText.className = "log-mood";
+    moodText.textContent = entry ? MOODS[entry.mood].emoji : "·";
+    const scoreText = document.createElement("span");
+    scoreText.className = "log-score";
+    scoreText.textContent = entry ? String(entry.score) : "";
+    // The label above says it all; the parts would be read out one by one.
+    for (const part of [dateText, moodText, scoreText]) {
+      part.setAttribute("aria-hidden", "true");
+    }
+    cell.append(dateText, moodText, scoreText);
+    logDays.append(cell);
+  }
+  logClear.hidden = moodLog.length === 0;
+}
+
+logClear.addEventListener("click", () => {
+  if (window.confirm(UI_TEXT[language].logClearConfirm)) {
+    clearMoodLog();
+    moodLog = [];
+    renderMoodLog();
   }
 });
 
