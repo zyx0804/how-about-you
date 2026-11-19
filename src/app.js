@@ -17,6 +17,7 @@ const logoCredit = document.getElementById("logo-credit");
 const designerName = document.getElementById("designer-name");
 const storyText = document.getElementById("story");
 const moodLinkText = document.getElementById("mood-link");
+const moodLinkTitle = document.getElementById("mood-link-title");
 const itemGrid = document.getElementById("item-grid");
 const languageButton = document.getElementById("language-button");
 const feelingSubmit = document.getElementById("feeling-submit");
@@ -231,6 +232,14 @@ function renderBrandPage() {
   designerName.textContent = UI_TEXT[language].designer(brand.designer[language]);
   renderBrandPhoto(brand);
   storyText.textContent = brand.story[language];
+  // A piece found by search or saved may belong to a mood other than the
+  // visitor's (or they picked none), so the heading names its own mood.
+  const text = UI_TEXT[language];
+  const pieceMood = MOODS[openPick.moodId];
+  moodLinkTitle.textContent =
+    openPick.moodId === currentMoodId
+      ? text.moodLink
+      : text.moodLinkOther(`${pieceMood.emoji} ${pieceMood.label[language]}`);
   moodLinkText.textContent = brand.moodLink[language];
   askSection.hidden = !aiEnabled();
   renderAskSuggestions();
