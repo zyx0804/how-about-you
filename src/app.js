@@ -260,6 +260,9 @@ function saveButton(brand, item) {
     savingBlocked = !saveFavoriteKeys(favoriteKeys);
     renderSaveButton(button, key, item.name[language]);
     renderSaved();
+    if (searchedQuery !== null) {
+      runSearch();
+    }
   });
   return button;
 }
@@ -763,6 +766,10 @@ function pieceCard(piece, badgeKey) {
   const mood = document.createElement("span");
   mood.className = "search-result-mood";
   mood.textContent = `${MOODS[moodId].emoji} ${MOODS[moodId].label[language]}`;
+  // In search results, a saved piece says so (the saved list doesn't need to).
+  if (badgeKey !== "savedPick" && favoriteKeys.includes(pieceKey(brand, item))) {
+    mood.textContent += ` · ${UI_TEXT[language].saved}`;
+  }
   // The name is written on the card, so the picture adds nothing to read aloud.
   const { picture } = itemPicture(brand, item);
   picture.querySelector("img")?.setAttribute("alt", "");

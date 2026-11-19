@@ -75,7 +75,7 @@ const UI_TEXT = {
       social: ["想出门、想见人吗", "只想一个人", "很想"],
       busy: ["今天的事情多吗？", "一件都没有", "忙不过来"],
     },
-    calcScore: (total, score, label) => `总分 ${total}/25 → 心情指数 ${score} · ${label}`,
+    calcScore: (total, score, label) => `${label} · 心情指数 ${score}（五题总分 ${total}/25）`,
     calcReasons: {
       energy: { low: "没什么精力", high: "精力充沛" },
       stress: { low: "很轻松", high: "压力很大" },
@@ -250,7 +250,7 @@ const UI_TEXT = {
       social: ["Want to go out and see people?", "Alone, please", "Very much"],
       busy: ["How busy was today?", "Nothing to do", "Swamped"],
     },
-    calcScore: (total, score, label) => `Total ${total}/25 → mood score ${score} · ${label}`,
+    calcScore: (total, score, label) => `${label} · mood score ${score} (five-question total ${total}/25)`,
     calcReasons: {
       energy: { low: "low on energy", high: "full of energy" },
       stress: { low: "relaxed", high: "very stressed" },
