@@ -221,8 +221,10 @@ function scoreForMood(moodId) {
 
 // The mood calculator: five answers from 0 to 10 become a meter score.
 // "Feeling" mixes a light day, low stress, and sleep; "energy" mixes energy
-// and wanting to see people. Together they choose a mood, and where the
-// answers sit decides the score inside that mood's range.
+// and wanting to see people; stress also counts on its own, since it is what
+// tells an irritated day from a sad one. The mood is the one whose typical
+// day (MOOD_CENTERS) the answers are closest to, and how good the day was
+// overall decides the score inside that mood's range.
 const CALCULATOR_QUESTIONS = ["energy", "stress", "sleep", "social", "busy"];
 
 // Each question is answered with one of five faces, from the low end of the
@@ -256,20 +258,70 @@ function clamp01(value) {
   return Math.min(1, Math.max(0, value));
 }
 
-function scoreFromAnswers(answers) {
-  const feeling = (10 - answers.busy + (10 - answers.stress) + answers.sleep) / 30;
-  const energy = (answers.energy + answers.social) / 20;
-  let moodId;
-  if (feeling < 0.4) {
-    moodId = answers.stress >= 6 ? "irritated" : "sad";
-  } else if (energy < 0.4) {
-    moodId = feeling < 0.7 ? "tired" : "calm";
-  } else if (energy < 0.7) {
-    moodId = feeling < 0.75 ? "calm" : "happy";
-  } else {
-    moodId = feeling < 0.8 ? "excited" : "happy";
+// A typical day for each mood as { feeling, energy, stress }, each 0 to 1.
+const MOOD_CENTERS = {
+  sad: { feeling: 0.25, energy: 0.25, stress: 0.45 },
+  irritated: { feeling: 0.2, energy: 0.6, stress: 1 },
+  tired: { feeling: 0.55, energy: 0.2, stress: 0.45 },
+  calm: { feeling: 0.65, energy: 0.5, stress: 0.3 },
+  excited: { feeling: 0.65, energy: 0.9, stress: 0.45 },
+  happy: { feeling: 0.9, energy: 0.65, stress: 0.1 },
+};
+
+function dayFromAnswers(answers) {
+  return {
+    feeling: (10 - answers.busy + (10 - answers.stress) + answers.sleep) / 30,
+    energy: (answers.energy + answers.social) / 20,
+    stress: answers.stress / 10,
+  };
+}
+
+function closestMood(day) {
+  let closest = null;
+  let closestDistance = Infinity;
+  for (const moodId of MOOD_ORDER) {
+    const center = MOOD_CENTERS[moodId];
+    const distance =
+      (day.feeling - center.feeling) ** 2 + (day.energy - center.energy) ** 2 + (day.stress - center.stress) ** 2;
+    if (distance < closestDistance) {
+      closest = moodId;
+      closestDistance = distance;
+    }
   }
-  const position = clamp01((feeling + energy) / 2);
+  return closest;
+}
+
+// How good the day was, 0 to 1, from all five answers (stress and busy
+// count backward), the same thing the calculator's total shows.
+function goodness(answers) {
+  return (answers.energy + (10 - answers.stress) + answers.sleep + answers.social + (10 - answers.busy)) / 50;
+}
+
+// For each mood, the least and most good days among every way of answering
+// the five questions that lands in it, so the best of those days reaches the
+// top of the mood's range and the worst the bottom.
+const GOODNESS_SPAN = (() => {
+  const span = Object.fromEntries(MOOD_ORDER.map((moodId) => [moodId, { low: 1, high: 0 }]));
+  const levels = [1, 2, 3, 4, 5];
+  for (const energy of levels)
+    for (const stress of levels)
+      for (const sleep of levels)
+        for (const social of levels)
+          for (const busy of levels) {
+            const answers = Object.fromEntries(
+              Object.entries({ energy, stress, sleep, social, busy }).map(([id, level]) => [id, (level - 1) * 2.5]),
+            );
+            const moodSpan = span[closestMood(dayFromAnswers(answers))];
+            moodSpan.low = Math.min(moodSpan.low, goodness(answers));
+            moodSpan.high = Math.max(moodSpan.high, goodness(answers));
+          }
+  return span;
+})();
+
+function scoreFromAnswers(answers) {
+  const moodId = closestMood(dayFromAnswers(answers));
+  const { low, high } = GOODNESS_SPAN[moodId];
+  const position = high > low ? clamp01((goodness(answers) - low) / (high - low)) : 0.5;
   const rangeStart = MOOD_ORDER.indexOf(moodId) * MOOD_RANGE;
   // Stay just inside the range so the score always maps back to this mood.
   return Math.round(rangeStart + 1 + position * (MOOD_RANGE - 2));
