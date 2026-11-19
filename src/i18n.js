@@ -121,6 +121,9 @@ const UI_TEXT = {
     searchedPick: "你找的这件",
     savedPick: "你收藏的",
     logTitle: "📅 我的心情记录",
+    logToday: (label, score) => `今天你选过 ${label} ${score}。`,
+    logLast: (month, day, label) => `上次（${month}/${day}）你是 ${label}。今天呢？`,
+    logResume: "接着看今天的推荐",
     logEmpty: "还没有记录。选一次心情，今天就会记下来；每天记最后选的那个（只存在这个浏览器里）。",
     logWeek: (label, days) => `最近 7 天里，${label}最多（${days} 天）。每天记最后选的心情。`,
     logBlocked: "这个浏览器不让网页保存东西（可能是无痕模式），所以心情记不下来。",
@@ -305,6 +308,9 @@ const UI_TEXT = {
     searchedPick: "Your find",
     savedPick: "Saved",
     logTitle: "📅 My mood record",
+    logToday: (label, score) => `Earlier today you picked ${label} ${score}.`,
+    logLast: (month, day, label) => `Last time (${month}/${day}) you were ${label}. How about today?`,
+    logResume: "Back to today's picks",
     logEmpty:
       "Nothing recorded yet. Pick a mood and today is noted; each day keeps the last mood picked (in this browser only).",
     logWeek: (label, days) =>

@@ -14,7 +14,7 @@
          text uses the system's own Chinese font. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&amp;family=Cormorant+Garamond:ital,wght@1,300;1,500&amp;family=EB+Garamond:ital,wght@0,400;1,400&amp;family=Fredoka:wght@500;700&amp;family=Long+Cang&amp;family=Ma+Shan+Zheng&amp;family=Luckiest+Guy&amp;family=Mochiy+Pop+P+One&amp;family=Noto+Sans+SC:wght@300;400;700&amp;family=Noto+Serif+SC:wght@300;500&amp;family=Permanent+Marker&amp;family=Rubik+Bubbles&amp;family=Rubik+Burned&amp;family=Rubik+Puddles&amp;family=Sniglet:wght@800&amp;family=ZCOOL+KuaiLe&amp;family=ZCOOL+QingKe+HuangYou&amp;family=ZCOOL+XiaoWei&amp;display=swap" media="print" onload="this.media='all'" data-fonts="later" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&amp;family=Cormorant+Garamond:ital,wght@1,300;1,500&amp;family=EB+Garamond:ital,wght@0,400;1,400&amp;family=Fredoka:wght@500;700&amp;family=Long+Cang&amp;family=Ma+Shan+Zheng&amp;family=Luckiest+Guy&amp;family=Mochiy+Pop+P+One&amp;family=Noto+Sans+SC:wght@300;400;700&amp;family=Noto+Serif+SC:wght@300;500&amp;family=Permanent+Marker&amp;family=Rubik+Bubbles&amp;family=Rubik+Burned&amp;family=Rubik+Puddles&amp;family=Sniglet:wght@800&amp;family=ZCOOL+KuaiLe&amp;family=ZCOOL+QingKe+HuangYou&amp;family=ZCOOL+XiaoWei&amp;display=swap" /></noscript>
-    <link rel="stylesheet" href="style.css?v=9f5c942" />
+    <link rel="stylesheet" href="style.css?v=1f52baa" />
   </head>
   <body>
     <!-- Two background layers that crossfade when the mood changes. -->
@@ -74,6 +74,11 @@
 
       <p class="step-label" data-i18n="step1"></p>
       <p class="step-hint" data-i18n="step1Hint"></p>
+      <!-- On a return visit: today's mood again in one tap, or the last one recorded. -->
+      <p id="log-reminder" class="log-reminder" hidden>
+        <span id="log-reminder-text"></span>
+        <button id="log-resume" type="button" class="ask-chip" data-i18n="logResume" hidden></button>
+      </p>
       <form id="feeling-form">
         <label for="feeling-input" data-i18n="feelingLabel"></label>
         <div class="input-row">
@@ -204,28 +209,28 @@
       <button id="back-to-top" type="button" class="back-to-top" data-i18n="backToTop" hidden></button>
     </main>
 
-    <script src="src/moods.js?v=9f5c942"></script>
-    <script src="src/data/sad.js?v=9f5c942"></script>
-    <script src="src/data/irritated.js?v=9f5c942"></script>
-    <script src="src/data/tired.js?v=9f5c942"></script>
-    <script src="src/data/calm.js?v=9f5c942"></script>
-    <script src="src/data/excited.js?v=9f5c942"></script>
-    <script src="src/data/happy.js?v=9f5c942"></script>
-    <script src="src/data/ai-images.js?v=9f5c942"></script>
-    <script src="src/i18n.js?v=9f5c942"></script>
-    <script src="src/contrast.js?v=9f5c942"></script>
-    <script src="src/weather.js?v=9f5c942"></script>
-    <script src="src/styling.js?v=9f5c942"></script>
-    <script src="src/recommend.js?v=9f5c942"></script>
-    <script src="src/search.js?v=9f5c942"></script>
-    <script src="src/favorites.js?v=9f5c942"></script>
-    <script src="src/mood-log.js?v=9f5c942"></script>
-    <script src="src/flats.js?v=9f5c942"></script>
-    <script src="src/brand-looks.js?v=9f5c942"></script>
-    <script src="src/ai.js?v=9f5c942"></script>
-    <script src="src/scene.js?v=9f5c942"></script>
-    <script src="src/dandelion.js?v=9f5c942"></script>
-    <script src="src/floaters.js?v=9f5c942"></script>
-    <script src="src/app.js?v=9f5c942"></script>
+    <script src="src/moods.js?v=1f52baa"></script>
+    <script src="src/data/sad.js?v=1f52baa"></script>
+    <script src="src/data/irritated.js?v=1f52baa"></script>
+    <script src="src/data/tired.js?v=1f52baa"></script>
+    <script src="src/data/calm.js?v=1f52baa"></script>
+    <script src="src/data/excited.js?v=1f52baa"></script>
+    <script src="src/data/happy.js?v=1f52baa"></script>
+    <script src="src/data/ai-images.js?v=1f52baa"></script>
+    <script src="src/i18n.js?v=1f52baa"></script>
+    <script src="src/contrast.js?v=1f52baa"></script>
+    <script src="src/weather.js?v=1f52baa"></script>
+    <script src="src/styling.js?v=1f52baa"></script>
+    <script src="src/recommend.js?v=1f52baa"></script>
+    <script src="src/search.js?v=1f52baa"></script>
+    <script src="src/favorites.js?v=1f52baa"></script>
+    <script src="src/mood-log.js?v=1f52baa"></script>
+    <script src="src/flats.js?v=1f52baa"></script>
+    <script src="src/brand-looks.js?v=1f52baa"></script>
+    <script src="src/ai.js?v=1f52baa"></script>
+    <script src="src/scene.js?v=1f52baa"></script>
+    <script src="src/dandelion.js?v=1f52baa"></script>
+    <script src="src/floaters.js?v=1f52baa"></script>
+    <script src="src/app.js?v=1f52baa"></script>
   </body>
 </html>

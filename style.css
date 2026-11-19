@@ -669,6 +669,15 @@ button:active,
   letter-spacing: 0.08em;
 }
 
+.log-reminder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin: 4px 0 14px;
+  font-size: 0.9rem;
+}
+
 /* The mood record: two weeks, seven days a row, today outlined. */
 .log-days {
   display: grid;

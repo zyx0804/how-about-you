@@ -114,7 +114,18 @@ function weekSummary(log, today) {
   return top;
 }
 
+// What to remind a returning visitor of: today's entry if there is one
+// ({ entry, today: true }), else the latest entry of the past week
+// ({ entry, today: false }), else null.
+function moodReminder(log, today) {
+  const latest = log[log.length - 1];
+  if (!latest || latest.date > today || latest.date < daysBefore(today, 7)) {
+    return null;
+  }
+  return { entry: latest, today: latest.date === today };
+}
+
 // Lets tests load this file in Node; browsers ignore it.
 if (typeof module !== "undefined") {
-  module.exports = { readMoodLog, recordMood, daysBefore, recentDays, weekSummary };
+  module.exports = { readMoodLog, recordMood, daysBefore, recentDays, weekSummary, moodReminder };
 }

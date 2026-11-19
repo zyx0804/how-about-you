@@ -56,6 +56,9 @@ const savedList = document.getElementById("saved-list");
 const logSummary = document.getElementById("log-summary");
 const logDays = document.getElementById("log-days");
 const logClear = document.getElementById("log-clear");
+const logReminder = document.getElementById("log-reminder");
+const logReminderText = document.getElementById("log-reminder-text");
+const logResume = document.getElementById("log-resume");
 const savedOutfit = document.getElementById("saved-outfit");
 const savedOutfitList = document.getElementById("saved-outfit-list");
 
@@ -800,7 +803,33 @@ function renderMoodLog() {
     logDays.append(cell);
   }
   logClear.hidden = moodLog.length === 0;
+  renderMoodReminder();
 }
+
+// Shown until a mood is picked on this visit.
+function renderMoodReminder() {
+  const reminder = currentMoodId === null ? moodReminder(moodLog, todayKey()) : null;
+  logReminder.hidden = reminder === null;
+  if (reminder === null) {
+    return;
+  }
+  const text = UI_TEXT[language];
+  const { entry } = reminder;
+  const label = `${MOODS[entry.mood].emoji} ${MOODS[entry.mood].label[language]}`;
+  const [, month, day] = entry.date.split("-").map(Number);
+  logReminderText.textContent = reminder.today ? text.logToday(label, entry.score) : text.logLast(month, day, label);
+  logResume.hidden = !reminder.today;
+}
+
+// Picks today's mood again at the same score, as if the meter were dragged there.
+logResume.addEventListener("click", () => {
+  const reminder = moodReminder(moodLog, todayKey());
+  if (reminder?.today) {
+    moodMeter.value = reminder.entry.score;
+    selectMood(moodForScore(reminder.entry.score), true);
+    todaySection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+});
 
 logClear.addEventListener("click", () => {
   if (window.confirm(UI_TEXT[language].logClearConfirm)) {
