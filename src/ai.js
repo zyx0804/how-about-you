@@ -38,9 +38,10 @@ function aiReadMood(text) {
 }
 
 // { answer } from the AI, or null. weather is { kind, low, high }, with low
-// and high null when the weather is only guessed from the month.
-function aiAskStylist(question, brand, item, language, weather) {
-  return callAi("/ask", { question, brand, item, lang: language, weather });
+// and high null when the weather is only guessed from the month; mood is the
+// piece's mood id, so the stylist dresses that mood.
+function aiAskStylist(question, brand, item, language, weather, mood) {
+  return callAi("/ask", { question, brand, item, lang: language, weather, mood });
 }
 
 // { ok } once a good review reaches the worker's log, or null.

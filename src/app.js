@@ -683,11 +683,18 @@ askForm.addEventListener("submit", async (event) => {
   askAnswer.hidden = false;
   askAnswer.classList.add("thinking");
   askAnswer.textContent = UI_TEXT[language].askThinking;
-  const reply = await aiAskStylist(question, brand.brand, item.name[language], language, {
-    kind: todaysWeather.kind,
-    low: todaysWeather.low,
-    high: todaysWeather.high,
-  });
+  const reply = await aiAskStylist(
+    question,
+    brand.brand,
+    item.name[language],
+    language,
+    {
+      kind: todaysWeather.kind,
+      low: todaysWeather.low,
+      high: todaysWeather.high,
+    },
+    openPick.moodId,
+  );
   askButton.disabled = false;
   askAnswer.classList.remove("thinking");
   askAnswer.textContent = reply ? reply.answer : UI_TEXT[language].askError;
