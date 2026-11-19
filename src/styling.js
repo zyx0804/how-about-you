@@ -86,7 +86,32 @@ function harmonyScore(items) {
 const STREET_SHAPES = ["hoodie", "cargo", "hightop", "runner", "sneakers", "cap", "beanie", "puffer"];
 const TAILORED_SHAPES = ["shirt", "trousers", "loafers", "coat", "cardigan"];
 
+// Some pieces' names say more than their shape (11/18): sweatpants are drawn
+// as trousers, derbies as boots, a blazer as a jacket, and clogs as loafers.
+// A word in the English name settles the style first.
+const STREET_NAME_WORDS = ["sweatpants", "jogger", "track", "sport", "ripped", "trucker"];
+const TAILORED_NAME_WORDS = ["derby", "blazer", "tailored", "pleated"];
+const EITHER_NAME_WORDS = ["clog", "mule", "slipper", "moccasin", "work trousers", "polo", "fringed"];
+
+function nameHas(item, words) {
+  const name = item.name.en.toLowerCase();
+  return words.some((word) => new RegExp(`(^|[^a-z])${word}(e?s)?([^a-z]|$)`).test(name));
+}
+
 function styleOf(item) {
+  if (item.name && nameHas(item, STREET_NAME_WORDS)) {
+    return "street";
+  }
+  if (item.name && nameHas(item, TAILORED_NAME_WORDS)) {
+    return "tailored";
+  }
+  if (item.name && nameHas(item, EITHER_NAME_WORDS)) {
+    return "either";
+  }
+  // Wide-leg trousers are tailored; wide jeans are not.
+  if (item.shape === "wide" && item.name && nameHas(item, ["trousers"])) {
+    return "tailored";
+  }
   if (STREET_SHAPES.includes(item.shape)) {
     return "street";
   }
