@@ -87,6 +87,57 @@ const SEARCH_WORDS = [
   // Styles (see styleOf in styling.js)
   { zh: ["街头", "潮牌"], en: ["street", "streetwear"], styles: ["street"] },
   { zh: ["正装", "通勤", "西装", "西服", "剪裁"], en: ["tailored", "smart", "formal"], styles: ["tailored"] },
+  // Scenes Yuxuan asked for (11/19, "都加入"). Who counts is Claude's first
+  // guess, for Yuxuan to correct: avant-garde and Japanese go by brand,
+  // techwear and outdoor by what the piece is.
+  {
+    zh: ["先锋", "暗黑", "解构"],
+    en: ["avant-garde", "avant garde", "avantgarde"],
+    brands: [
+      "Rick Owens DRKSHDW",
+      "Ann Demeulemeester",
+      "Carol Christian Poell",
+      "Boris Bidjan Saberi",
+      "GUIDI",
+      "Yohji Yamamoto",
+      "Maison Margiela",
+      "Raf Simons",
+      "Helmut Lang",
+      "Walter Van Beirendonck",
+      "Kiko Kostadinov",
+    ],
+  },
+  {
+    zh: ["日系", "日本"],
+    en: ["japanese"],
+    brands: [
+      "Yohji Yamamoto",
+      "Homme Plissé Issey Miyake",
+      "UNDERCOVER",
+      "Number (N)ine",
+      "HYSTERIC GLAMOUR",
+      "AURALEE",
+      "COMOLI",
+      "visvim",
+      "A BATHING APE",
+      "Comme des Garçons PLAY",
+      "KAPITAL",
+    ],
+  },
+  {
+    zh: ["机能", "功能"],
+    en: ["techwear", "technical", "functional"],
+    nameWords: ["trail", "nylon", "parka", "cargo", "gyakusou", "backpack", "gore-tex", "utility"],
+    shapes: ["puffer"],
+    brands: ["Salomon"],
+  },
+  {
+    zh: ["户外", "登山", "徒步", "露营"],
+    en: ["outdoor", "outdoors", "hiking", "gorpcore"],
+    nameWords: ["trail", "hiking", "parka", "fleece", "mountain"],
+    shapes: ["puffer"],
+    brands: ["Salomon"],
+  },
 ];
 
 // What people call some brands, so "克罗心" or "马吉拉" finds them too.
@@ -130,7 +181,9 @@ function pieceHasWord(entry, word) {
     word.en.some((spelling) => hasEnglishWord(lower(item.name.en), spelling)) ||
     (word.shapes || []).includes(item.shape) ||
     (word.categories || []).includes(item.category) ||
-    (word.styles || []).includes(entry.style)
+    (word.styles || []).includes(entry.style) ||
+    (word.brands || []).includes(entry.brand.brand) ||
+    (word.nameWords || []).some((nameWord) => hasEnglishWord(lower(item.name.en), nameWord))
   );
 }
 
