@@ -763,6 +763,13 @@ button:active,
   margin-top: 14px;
 }
 
+.calc-reason {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
 .calc-score {
   font-weight: 600;
   color: var(--accent);

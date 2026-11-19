@@ -254,6 +254,27 @@ function totalPoints(levels) {
   );
 }
 
+// Moods where the day went badly; for these, the hard answers explain the
+// mood, and for the others the good ones do.
+const HARD_MOODS = ["sad", "irritated", "tired"];
+
+// Why the calculator chose a mood: up to two answers away from the middle
+// face, as [question, "low" or "high"]. Answers on the mood's side (a hard
+// answer for a hard mood, a good one otherwise) come first, then the
+// furthest from the middle; none when every answer is the middle face.
+function calculatorReasons(levels, moodId) {
+  const wantHard = HARD_MOODS.includes(moodId);
+  return CALCULATOR_QUESTIONS.filter((id) => levels[id] !== 3)
+    .map((id) => {
+      const high = levels[id] > 3;
+      const hard = REVERSED_QUESTIONS.includes(id) ? high : !high;
+      return { id, side: high ? "high" : "low", agrees: hard === wantHard, strength: Math.abs(levels[id] - 3) };
+    })
+    .sort((a, b) => b.agrees - a.agrees || b.strength - a.strength)
+    .slice(0, 2)
+    .map(({ id, side }) => [id, side]);
+}
+
 function clamp01(value) {
   return Math.min(1, Math.max(0, value));
 }

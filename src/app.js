@@ -37,6 +37,7 @@ const meterLabels = document.getElementById("meter-labels");
 const calcQuestions = document.getElementById("calc-questions");
 const calcScore = document.getElementById("calc-score");
 const calcApply = document.getElementById("calc-apply");
+const calcReason = document.getElementById("calc-reason");
 const photoFigure = document.getElementById("photo");
 const photoImage = document.getElementById("photo-image");
 const photoKind = document.getElementById("photo-kind");
@@ -338,6 +339,11 @@ function renderCalculatorScore() {
     score,
     `${mood.emoji} ${mood.label[language]}`,
   );
+  const text = UI_TEXT[language];
+  const reasons = calculatorReasons(calculatorLevels, moodForScore(score)).map(
+    ([id, side]) => text.calcReasons[id][side],
+  );
+  calcReason.textContent = reasons.length > 0 ? text.calcBecause(reasons) : text.calcBalanced;
 }
 
 // Builds a row of five face buttons per question; labels come from
